@@ -13,9 +13,7 @@
       "type": "main-account",
       "settings": {
         "padding_top": 36,
-        "padding_bottom": 36,
-        "track-url": "https://lafoli.proship.in/",
-        "return-url": "https://returns.wearlafoli.com/"
+        "padding_bottom": 36
       }
     }
   },

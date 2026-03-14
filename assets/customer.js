@@ -1,4 +1,3 @@
-window.Shopify = window.Shopify || {};
 const selectors = {
   customerAddresses: '[data-customer-addresses]',
   addressCountrySelect: '[data-address-country-select]',
@@ -37,7 +36,6 @@ class CustomerAddresses {
 
   _setupCountries() {
     if (Shopify && Shopify.CountryProvinceSelector) {
-      console.log(Shopify.CountryProvinceSelector, 'CountryProvinceSelector');
       // eslint-disable-next-line no-new
       new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
         hideElement: 'AddressProvinceContainerNew',
@@ -84,19 +82,4 @@ class CustomerAddresses {
       });
     }
   };
- 
-}
-function deleteAddress(url) {
-  const form = document.createElement('form');
-  form.method = 'post';
-  form.action = url;
-
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = '_method';
-  input.value = 'delete';
-
-  form.appendChild(input);
-  document.body.appendChild(form);
-  form.submit();
 }
