@@ -186,7 +186,6 @@
             type="button"
             aria-label="{{ 'customer.addresses.delete' | t }} {{ forloop.index }}"
             data-target="{{ address.url }}"
-            onclick="deleteAddress(this.dataset.target)"
             data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
           >
             {{ 'customer.addresses.delete' | t }}
