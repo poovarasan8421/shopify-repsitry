@@ -1,0 +1,288 @@
+<!-- SECTION -->
+<div class="icon-feature-section">
+  <div class="icon-feature-grid">
+{% assign widths = '165, 360, 535, 750, 1070, 1500' %}
+{% for block in section.blocks %}
+  <div class="icon-feature-block">
+    {% if block.settings.icon != blank %}
+      {{
+        block.settings.icon
+        | image_url: width: 900
+        | image_tag:
+          width: block.settings.icon.width,
+          height: block.settings.icon.height,
+          class: 'image-fill',
+          sizes: '(max-width: 749px) 100vw, 50vw',
+          widths: widths,
+          alt: block.settings.title | escape
+      }}
+    {% endif %}
+    <h3>{{ block.settings.title }}</h3>
+    <p>{{ block.settings.text }}</p>
+  </div>
+{% endfor %}
+
+  </div>
+</div>
+
+<!-- STYLES -->
+{% style %}
+#shopify-section-{{ section.id }} .icon-feature-section {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+
+#shopify-section-{{ section.id }} .icon-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: {{ section.settings.gap_desktop }}px;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 45px;
+}
+
+#shopify-section-{{ section.id }} .icon-feature-block img {
+  width: 28px;
+  height: 30px;
+  margin: 0 auto 15px;
+  object-fit: contain;
+}
+
+#shopify-section-{{ section.id }} .icon-feature-block h3 {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.5px !important;
+  margin:0;
+  padding:0;
+  /* padding-top: {{ section.settings.heading_padding_top }}px !important;
+  padding-bottom: {{ section.settings.heading_padding_bottom }}px !important; */
+}
+
+#shopify-section-{{ section.id }} .icon-feature-block p {
+  font-size: 14px;
+  color: #000000;
+  letter-spacing: 0.5px;
+  line-height: 18px;
+  font-weight: 500;
+  max-width: 300px;
+  margin: 0 auto;
+  padding-top: 5px;
+}
+
+@media screen and (max-width: 1028px) {
+  #shopify-section-{{ section.id }} .icon-feature-block h3 {
+    font-size: 19px !important;
+  }
+}
+
+@media screen and (max-width: 951px) {
+  #shopify-section-{{ section.id }} .icon-feature-block h3 {
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 873px) {
+  #shopify-section-{{ section.id }} .icon-feature-block h3 {
+    font-size: 16px !important;
+  }
+}
+
+@media screen and (max-width: 797px){
+   #shopify-section-{{ section.id }} .icon-feature-block h3 {
+    font-size: 15px !important;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  #shopify-section-{{ section.id }} .icon-feature-grid {
+    gap: {{ section.settings.gap_mobile }}px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #shopify-section-{{ section.id }} .icon-feature-section {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .icon-feature-grid {
+    grid-template-columns: 1fr;
+    padding: 0 25px;
+    gap: {{ section.settings.gap_mobile }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .icon-feature-block h3 {
+    font-size: 14px !important;
+    padding-top: {{ section.settings.heading_padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.heading_padding_bottom_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .icon-feature-block p {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.6px;
+  }
+}
+{% endstyle %}
+
+<!-- SCHEMA -->
+{% schema %}
+{
+  "name": "Custom Icon & Text",
+  "tag": "section",
+  "class": "icon-feature-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "gap "
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "gap desktop",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "gap mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "heading_padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "heading_padding_top_mobile",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_padding_bottom_mobile",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "default": 5,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon/Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Description or detail about this feature."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Custom Icon & Text",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" }
+      ]
+    }
+  ]
+}
+{% endschema %}

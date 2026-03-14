@@ -1,0 +1,1474 @@
+<div class="career__tab_section section" id="section-{{ section.id }}">
+    <div class="section__width">
+        {%- if section.settings.heading != blank or section.settings.content != blank -%}
+        <div class="section_container">
+            {%- if section.settings.heading != blank -%}
+            <h2 class="section__heading">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if section.settings.content != blank -%}
+            <p class="section_content">{{ section.settings.content }}</p>
+            {%- endif -%}
+        </div>
+        {%- endif -%}
+        <section id="wrapper">
+            <div class="content">
+                <!-- Tab links -->
+                <div class="tabs">
+                    {%- for block in section.blocks -%}
+                    <p class="tablinks" data-country="tab-{{ forloop.index }}" dd="{{ forloop.index }}">{{ block.settings.tab_btn1 }}</p>
+                    {%- endfor -%}
+                </div>
+
+                <!-- Tab content -->
+                <div class="wrapper_tabcontent">
+                    {%- for block in section.blocks -%}
+                    <div id="tab-{{ forloop.index }}" class="tabcontent">
+                        {% comment %} <p>{{ block.settings.accordion_content1 }}</p> {% endcomment %}
+                         
+                        {%- if block.settings.role1 != blank or block.settings.content1 != blank or block.settings.btn_link1 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role1 != blank -%}
+                                <p class="job_role">{{ block.settings.role1 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content1 != blank -%}
+                                <p class="block_content">{{ block.settings.content1 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode1 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode1 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time1 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time1 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience1 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience1 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link1 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link1 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt1 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role2 != blank or block.settings.content2 != blank or block.settings.btn_link2 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role2 != blank -%}
+                                <p class="job_role">{{ block.settings.role2 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content2 != blank -%}
+                                <p class="block_content">{{ block.settings.content2 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode2 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode2 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time2 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time2 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience2 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience2 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link2 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link2 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt2 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role3 != blank or block.settings.content3 != blank or block.settings.btn_link3 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role3 != blank -%}
+                                <p class="job_role">{{ block.settings.role3 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content3 != blank -%}
+                                <p class="block_content">{{ block.settings.content3 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode3 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode3 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time3 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time3 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience3 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience3 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link3 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link3 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt3 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role4 != blank or block.settings.content4 != blank or block.settings.btn_link4 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role4 != blank -%}
+                                <p class="job_role">{{ block.settings.role4 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content4 != blank -%}
+                                <p class="block_content">{{ block.settings.content4 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode4 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode4 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time4 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time4 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience4 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience4 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link4 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link4 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt4 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role5 != blank or block.settings.content5 != blank or block.settings.btn_link5 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role5 != blank -%}
+                                <p class="job_role">{{ block.settings.role5 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content5 != blank -%}
+                                <p class="block_content">{{ block.settings.content5 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode5 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode5 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time5 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time5 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience5 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience5 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link5 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link5 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt5 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role6 != blank or block.settings.content6 != blank or block.settings.btn_link6 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role6 != blank -%}
+                                <p class="job_role">{{ block.settings.role6 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content6 != blank -%}
+                                <p class="block_content">{{ block.settings.content6 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode6 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode6 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time6 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time6 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience6 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience6 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link6 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link6 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt6 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role7 != blank or block.settings.content7 != blank or block.settings.btn_link7 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role7 != blank -%}
+                                <p class="job_role">{{ block.settings.role7 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content7 != blank -%}
+                                <p class="block_content">{{ block.settings.content7 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode7 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode7 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time7 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time7 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience7 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience7 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link7 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link7 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt7 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role8 != blank or block.settings.content8 != blank or block.settings.btn_link8 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role8 != blank -%}
+                                <p class="job_role">{{ block.settings.role8 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content8 != blank -%}
+                                <p class="block_content">{{ block.settings.content8 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode8 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode8 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time8 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time8 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience8 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience8 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link8 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link8 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt8 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role9 != blank or block.settings.content9 != blank or block.settings.btn_link9 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role9 != blank -%}
+                                <p class="job_role">{{ block.settings.role9 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content9 != blank -%}
+                                <p class="block_content">{{ block.settings.content9 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode9 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode9 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time9 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time9 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience9 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience9 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link9 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link9 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt9 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role10 != blank or block.settings.content10 != blank or block.settings.btn_link10 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role10 != blank -%}
+                                <p class="job_role">{{ block.settings.role10 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content10 != blank -%}
+                                <p class="block_content">{{ block.settings.content10 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode10 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode10 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time10 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time10 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience10 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience10 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link10 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link10 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt10 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role11 != blank or block.settings.content11 != blank or block.settings.btn_link11 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role11 != blank -%}
+                                <p class="job_role">{{ block.settings.role11 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content11 != blank -%}
+                                <p class="block_content">{{ block.settings.content11 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode11 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode11 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time11 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time11 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience11 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience11 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link11 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link11 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt11 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role12 != blank or block.settings.content12 != blank or block.settings.btn_link12 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role12 != blank -%}
+                                <p class="job_role">{{ block.settings.role12 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content12 != blank -%}
+                                <p class="block_content">{{ block.settings.content12 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode12 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode12 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time12 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time12 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience12 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience12 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link12 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link12 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt12 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role13 != blank or block.settings.content13 != blank or block.settings.btn_link13 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role13 != blank -%}
+                                <p class="job_role">{{ block.settings.role13 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content13 != blank -%}
+                                <p class="block_content">{{ block.settings.content13 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode13 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode13 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time13 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time13 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience13 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience13 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link13 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link13 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt13 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role14 != blank or block.settings.content14 != blank or block.settings.btn_link14 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role14 != blank -%}
+                                <p class="job_role">{{ block.settings.role14 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content14 != blank -%}
+                                <p class="block_content">{{ block.settings.content14 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode14 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode14 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time14 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time14 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience14 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience14 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link14 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link14 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt14 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+                         
+                        {%- if block.settings.role15 != blank or block.settings.content15 != blank or block.settings.btn_link15 != blank -%}
+                        <div class="job_opening">
+                            <div class="contenttz">
+                                {%- if block.settings.role15 != blank -%}
+                                <p class="job_role">{{ block.settings.role15 }}</p>
+                                {%- endif -%}
+                                {%- if block.settings.content15 != blank -%}
+                                <p class="block_content">{{ block.settings.content15 }}</p>
+                                {%- endif -%}
+                                <div class="bottom_content">
+                                    {%- if block.settings.work_mode15 != blank -%}
+                                    <p class="work_details">{% render 'map-pin-svg' %}{{ block.settings.work_mode15 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.time15 != blank -%}
+                                    <p class="work_details">{% render 'clock-svg' %}{{ block.settings.time15 }}</p>
+                                    {%- endif -%}
+                                    {%- if block.settings.experience15 != blank -%}
+                                    <p class="work_details">{% render 'brief-case-svg' %}{{ block.settings.experience15 }}</p>
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="button__side">
+                                {%- if block.settings.btn_link15 != blank -%}
+                                <a class="apply_btn" href="{{ block.settings.btn_link15 }}" target="_blank" aria-label="Click to Button"><span>{{ block.settings.btn_txt15 }}</span>{% render 'arrow-up-right-svg' %}</a>
+                                {%- endif -%}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    {%- endfor -%}
+                </div>
+                
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+
+<style>
+#section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.Section_bg_clr }};
+}
+
+#shopify-section-{{ section.id }} .section__width {
+    max-width: 740px;
+    width: 100%;
+    margin: auto;
+}
+#shopify-section-{{ section.id }} .section_container {
+    text-align: center;
+}
+#shopify-section-{{ section.id }} .section__heading {
+    font-family: 'Outfit';
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 500;
+    letter-spacing: 0.5PX;
+    color: {{ section.settings.heading_clr }};
+    margin: 0 0 21px;
+    padding:0;
+}
+#shopify-section-{{ section.id }} .section_content {
+    font-family: 'Helvetica-Neue';
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    color: {{ section.settings.content_clr }};
+    margin: 0 0 37px;
+}
+#shopify-section-{{ section.id }} .tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    gap: 26px;
+    margin: 0 0 36px;
+    padding: 0px;
+}
+#shopify-section-{{ section.id }} .tablinks {
+    font-family:'Outfit' !important;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    font-family: var(--font-h2--family);
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 0;
+    color: {{ section.settings.tab_btn_clr }};
+    opacity: 0.5;
+    white-space: nowrap;
+}
+#shopify-section-{{ section.id }} .tablinks.active {
+    opacity: 1;
+    border-bottom: 2px solid #00000091;
+}
+#shopify-section-{{ section.id }} .tabcontent {
+    display: none;
+}
+#shopify-section-{{ section.id }} .tabcontent.active {
+    transition: all 1s ease;
+    display: block;
+}
+#shopify-section-{{ section.id }} .job_opening {
+    border-top: 1px solid #d9d9d9;
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#shopify-section-{{ section.id }} .job_opening:last-child {
+    border-bottom: 1px solid #d9d9d9;
+}
+#shopify-section-{{ section.id }} .job_role {
+    font-family:'Outfit' !important;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0;
+    {% comment %} font-family: var(--font-h2--family); {% endcomment %}
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 0 21px;
+    color: {{ section.settings.tab_cnt_clr }};
+}
+#shopify-section-{{ section.id }} .block_content {
+    font-family: 'Helvetica-Neue';
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    margin: 0 0 19px;
+    color: {{ section.settings.tab_cnt_clr }};
+}
+#shopify-section-{{ section.id }} .bottom_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#shopify-section-{{ section.id }} .bottom_content .work_details {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0;
+    font-weight: 300;
+    color: {{ section.settings.tab_cnt_clr }};
+    opacity: 0.5;
+}
+#shopify-section-{{ section.id }} .bottom_content .work_details svg {
+    margin: 0 5px 0 0;
+}
+#shopify-section-{{ section.id }} .apply_btn {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: var(--font-h2--family);
+    font-weight: 400;
+    color: {{ section.settings.tab_cnt_clr }};
+    display: flex;
+    align-items: center;
+}
+#shopify-section-{{ section.id }} .apply_btn span {
+    text-decoration: underline;
+}
+#shopify-section-{{ section.id }} .apply_btn .arrow-up-svg {
+    margin: 0 0 0 1px;
+}
+#shopify-section-{{ section.id }} .job_opening .contenttz {
+    width: 67%;
+}
+#shopify-section-{{ section.id }} .tabs:before, 
+#shopify-section-{{ section.id }} .tabs:after {
+    content: '';
+    flex: 1 1 auto;
+}
+
+
+@media (max-width: 749px){
+#section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+}
+
+#shopify-section-{{ section.id }} .section__heading {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0 0 9px;
+}
+#shopify-section-{{ section.id }} .section_content {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 0 25px;
+    font-weight: 300;
+}
+#shopify-section-{{ section.id }} .tablinks {
+    font-size: 14px;
+    line-height: 16px;
+}
+#shopify-section-{{ section.id }} .job_role {
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0 0 10px;
+
+}
+
+#shopify-section-{{ section.id }} .block_content {
+    font-size: 11px;
+    line-height: 16px;
+    padding-right: 40px;
+    font-weight:300;
+    letter-spacing:0.6px;
+}
+#shopify-section-{{ section.id }} .job_opening .contenttz {
+    width: 100%;
+    margin: 0 0 16px;
+}
+#shopify-section-{{ section.id }} .bottom_content .work_details {
+    font-size: 11px;
+    line-height: 16px;
+}
+#shopify-section-{{ section.id }} .apply_btn {
+    font-size: 14px;
+    line-height: 16px;
+}
+#shopify-section-{{ section.id }} .tabs {
+    margin: 0 0 27px;
+}
+#shopify-section-{{ section.id }} .job_opening {
+    padding: 21px 0;
+}
+.job_opening:last-child {
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 25px !important;
+}
+}
+</style>
+
+<script>
+
+var tabLinks = document.querySelectorAll("#shopify-section-{{ section.id }} .tablinks");
+var tabContent = document.querySelectorAll("#shopify-section-{{ section.id }} .tabcontent");
+
+tabLinks.forEach(function(el) {
+   el.addEventListener("click", openTabs);
+});
+
+function openTabs(el) {
+   var btnTarget = el.currentTarget;
+   var country = btnTarget.dataset.country;
+
+   tabContent.forEach(function(el) {
+      el.classList.remove("active");
+   });
+
+   tabLinks.forEach(function(el) {
+      el.classList.remove("active");
+   });
+
+   document.querySelector("#" + country).classList.add("active");
+   btnTarget.classList.add("active");
+}
+
+// ✅ Set first tab active on page load
+if (tabLinks.length > 0 && tabContent.length > 0) {
+   tabLinks[0].classList.add("active");
+   tabContent[0].classList.add("active");
+}
+
+</script>
+
+{% schema %}
+  {
+    "name": "Career Tab Section",
+    "settings": [
+        {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+        },
+        {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content"
+        },
+        {
+        "type": "header",
+        "content":"Colour"
+        },
+        {
+        "type": "color",
+        "id": "Section_bg_clr",
+        "label": "Section Background Colour",
+        "default":"#ffffff"
+        },
+        {
+        "type": "color",
+        "id": "heading_clr",
+        "label": "Heading Colour",
+        "default":"#000000"
+        },
+        {
+        "type": "color",
+        "id": "content_clr",
+        "label": "Content Colour",
+        "default":"#000000"
+        },
+        {
+        "type": "color",
+        "id": "tab_btn_clr",
+        "label": "Tab Button Colour",
+        "default":"#000000"
+        },
+        {
+        "type": "color",
+        "id": "tab_cnt_clr",
+        "label": "Tab Content Colour",
+        "default":"#000000"
+        },
+        {
+        "type":"header",
+        "content":"Desktop Padding"
+        },
+        {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+        },
+        {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+        },
+        {
+        "type":"header",
+        "content":"Mobile Padding"
+        },
+        {
+        "type": "range",
+        "id": "padding_top_mob",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 0
+        },
+        {
+        "type": "range",
+        "id": "padding_bottom_mob",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 0
+        }
+    ],
+  "blocks": [
+      {
+    "type": "tab",
+    "name": "Tab",
+    "settings": [
+        {
+        "type": "text",
+        "id": "tab_btn1",
+        "label": "Tab Button",
+        },
+        {
+        "type": "header",
+        "content":"Job Opening1"
+        },
+        {
+        "type": "text",
+        "id": "role1",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content1",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode1",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time1",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience1",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt1",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link1",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening2"
+        },
+        {
+        "type": "text",
+        "id": "role2",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content2",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode2",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time2",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience2",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt2",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link2",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening3"
+        },
+        {
+        "type": "text",
+        "id": "role3",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content3",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode3",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time3",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience3",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt3",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link3",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening4"
+        },
+        {
+        "type": "text",
+        "id": "role4",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content4",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode4",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time4",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience4",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt4",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link4",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening5"
+        },
+        {
+        "type": "text",
+        "id": "role5",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content5",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode5",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time5",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience5",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt5",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link5",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening6"
+        },
+        {
+        "type": "text",
+        "id": "role6",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content6",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode6",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time6",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience6",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt6",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link6",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening7"
+        },
+        {
+        "type": "text",
+        "id": "role7",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content7",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode7",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time7",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience7",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt7",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link7",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening8"
+        },
+        {
+        "type": "text",
+        "id": "role8",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content8",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode8",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time8",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience8",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt8",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link8",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening9"
+        },
+        {
+        "type": "text",
+        "id": "role9",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content9",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode9",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time9",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience9",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt9",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link9",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening10"
+        },
+        {
+        "type": "text",
+        "id": "role10",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content10",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode10",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time10",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience10",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt10",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link10",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening11"
+        },
+        {
+        "type": "text",
+        "id": "role11",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content11",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode11",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time11",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience11",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt11",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link11",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening12"
+        },
+        {
+        "type": "text",
+        "id": "role12",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content12",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode12",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time12",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience12",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt12",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link12",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening13"
+        },
+        {
+        "type": "text",
+        "id": "role13",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content13",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode13",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time13",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience13",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt13",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link13",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening14"
+        },
+        {
+        "type": "text",
+        "id": "role14",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content14",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode14",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time14",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience14",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt14",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link14",
+        "label": "Button Link"
+        },
+        {
+        "type": "header",
+        "content":"Job Opening15"
+        },
+        {
+        "type": "text",
+        "id": "role15",
+        "label": "Job Role"
+        },
+        {
+        "type": "textarea",
+        "id": "content15",
+        "label": "Content"
+        },
+        {
+        "type": "text",
+        "id": "work_mode15",
+        "label": "Work Mode",
+        "default": "100% Remote"
+        },
+        {
+        "type": "text",
+        "id": "time15",
+        "label": "Work time",
+        "default": "Full Time"
+        },
+        {
+        "type": "text",
+        "id": "experience15",
+        "label": "Work Experience",
+        "default": "3-4 years"
+        },
+        {
+        "type": "text",
+        "id": "btn_txt15",
+        "label": "Button Text",
+        "default": "apply"
+        },
+        {
+        "type": "url",
+        "id": "btn_link15",
+        "label": "Button Link"
+        }
+    ]
+    }
+    ],
+"presets":[
+    {
+      "name": "Career Tab Section"
+    }
+  ]
+  }
+{% endschema %}

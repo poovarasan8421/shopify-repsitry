@@ -1,0 +1,633 @@
+<div class="custom__footer" id="section-{{ section.id }}">
+<div
+    class="
+      section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}
+      {% if section.settings.section_height != "" %} {{ section.settings.section_height | prepend: "section--height-" }}{% endif %}
+    "
+  >
+  
+    <div class="footer__sec_middle">
+      <div class="footer__left">
+        <div class="footer__cont_container">
+          <h3 class="footer_title">{{ section.settings.footer_heading }}</h3>
+          <div class="footer_social">
+            {% if section.settings.whatsapp != blank %}
+            <div class="foot_social_devidez">
+              {% render 'whatsapp-svg' %}
+              {{ section.settings.whatsapp }}
+            </div>
+            {% endif %}
+            {% if section.settings.email != blank %}
+            <div class="foot_social_devidez">
+              {% render 'email-svg' %}
+              {{ section.settings.email }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="footer_email_signup">
+          {% if section.settings.news_content != blank %}
+          <p class="newsletter_heading">{{ section.settings.news_content }}</p>
+          {% endif %}
+      {% comment %}
+          {% content_for 'block', type: 'email-signup', id: 'email-signup' %}
+      {% endcomment %}
+          {% render 'email-signup' %}
+        </div>
+  
+        <div class="footer__social_media">
+          <div class="social__container">
+            {% if section.settings.socialmedia_heading != blank %}
+            <h3 class="social__heading">{{ section.settings.socialmedia_heading }}</h3>
+            {% endif %}
+            <div class="social__devidex">
+              {% if section.settings.instagram_link != blank %}
+              <a href="{{ section.settings.instagram_link }}" aria-label="instagram">{% render 'instagram-svg' %}</a>
+              {% endif %}
+              {% if section.settings.facebook_link != blank %}
+              <a href="{{ section.settings.facebook_link }}" aria-label="facebook">{% render 'facebook-svg' %}</a>
+              {% endif %}
+              {% if section.settings.indeed_link != blank %}
+              <a href="{{ section.settings.indeed_link }}" aria-label="indeed">{% render 'indeed-svg' %}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% comment %}
+          {% content_for 'block', type: '_footer-copyright', id: 'copyright' %}
+      {% endcomment %}
+        <div class="footer_custom_copyrights content__desk">
+          {% render 'footer-copyright' %}
+        </div>
+      </div>
+  
+      <div class="footer__right">
+        <div class="footer__blocks-wrapper">
+          {%- for block in section.blocks -%}
+            <div class="footer-block_custom">
+  
+              {%- case block.type -%}
+                
+                {%- when 'link_list' -%}
+                {% if block.settings.heading != blank %}
+                <h3 class="menu__heading">{{ block.settings.heading }}</h3>
+                {% endif %}
+                {%- if block.settings.menu != blank -%}
+                  <ul class="footer-block__details-content Footer__accordion_content list-unstyled">
+                   
+                      
+
+                    {%- for link in block.settings.menu.links -%}
+                    
+                      <li>
+                       {% # Kwikpass changes - [Starts] %}
+                          {% if link.title == 'My Account' %}
+                          <a href="javascript:void(0);" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}" onclick="kpHandleLogin('/account');">{{ link.title }}</a>
+                          {% else %}
+                          <a
+                          href="{{ link.url }}"
+                          class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                        >
+                          {{ link.title }}
+                        </a>
+                          {% endif %}
+                        {% # Kwikpass changes - [Ends] %}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+                
+                
+                {%- when 'address' -%}
+                <div class="footer__address">
+                  {% if block.settings.add_heading != blank %}
+                    <h3 class="menu__heading address_heading">{% render 'location-svg' %}{{ block.settings.add_heading }}</h3>
+                  {% endif %}
+                  {% if block.settings.address != blank %}
+                  <p class="footer__address_cont">{{ block.settings.address }}</p>
+                  {% endif %}
+                </div>
+                
+              {% endcase %}
+              
+            </div>
+          {% endfor %}
+        </div>
+      
+        <div class="footer_custom_copyrights content__mob">
+          {% render 'footer-copyright' %}
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  {% if section.settings.bg-image != blank %}
+  <div class="footer__bg_image">
+     {{
+      section.settings.bg-image
+      | image_url: width: 2000
+      | image_tag:
+        width: section.settings.bg-image.width,
+        height: section.settings.bg-image.height,
+        class: 'cust_bg_img img__desk',
+        alt: 'footer-background-img',
+        widths: '400, 600, 700, 800, 1000, 1400, 1800, 2000',
+        sizes: '(min-width: 769px) 50vw'
+      }}
+    
+      {% if section.settings.bg-image-mob != blank %}
+       {{
+        section.settings.bg-image-mob
+        | image_url: width: 780
+        | image_tag:
+          width: section.settings.bg-image-mob.width,
+          height: section.settings.bg-image-mob.height,
+          class: 'cust_bg_img img__mob',
+          alt: 'footer-background-img',
+          widths: '320, 480, 500, 640, 800, 1000, 1200',
+          sizes: '(max-width: 768px) 100vw'
+        }}
+      {% else %}
+       {{
+        section.settings.bg-image
+        | image_url: width: 780
+        | image_tag:
+          width: section.settings.bg-image.width,
+          height: section.settings.bg-image.height,
+          class: 'cust_bg_img img__mob',
+          alt: 'footer-background-img',
+          widths: '400, 600, 700, 800, 1000, 1400, 1800, 2000',
+          sizes: '(min-width: 769px) 50vw'
+        }}
+      {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+<style>
+#section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  background-color: {{ section.settings.sec_bg_color }};
+}
+  
+#shopify-section-{{ section.id }} .custom__footer {
+    position: relative;
+    z-index: 0;
+}
+#shopify-section-{{ section.id }} .footer__bg_image {
+    {% comment %} max-width: 350px; {% endcomment %}
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+#shopify-section-{{ section.id }} .section {
+    display: block;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 18px;
+}
+#shopify-section-{{ section.id }} .footer__cont_container .footer_title {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 300 !important;
+    text-transform: uppercase !important;
+    color: {{ section.settings.sec_txt_color }}!important;
+    letter-spacing: 0.05em !important;
+    margin: 0 0 22px !important;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez {
+    display: flex;
+    align-items: center;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez:first-child {
+    margin: 0 0 18px;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez svg {
+    margin-right: 8px;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez p {
+    margin: 0;
+    font-size: 12px !important;
+    line-height: 12px !important;
+    color: {{ section.settings.sec_txt_color }} !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.05em !important;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez a {
+    text-decoration: none;
+    color: {{ section.settings.sec_txt_color }};
+    {% comment %} font-family: 'Outfit', sans-serif !important; {% endcomment %}
+    letter-spacing: 0.05em;
+    line-height: 14px;
+    font-weight: 300;
+    font-family: 'Helvetica-Neue';
+    font-size: 11px;
+
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__input {
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    padding: 0 0 15px;
+    color: {{ section.settings.sec_txt_color }};
+    font-size: 14px !important;
+    line-height: 18px !important;
+    letter-spacing: 1px !important;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__input::placeholder {
+    color: {{ section.settings.sec_txt_color }};
+    opacity: 0.6;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__button {
+    border: none;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__input-group {
+    border-bottom: 1px solid #E8E8E8;
+    grid-template-columns: 1fr auto;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__input:focus-visible {
+    outline-offset: 0;
+    outline: 0;
+}
+#shopify-section-{{ section.id }} .footer__cont_container {
+    margin: 0 0 50px;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .newsletter_heading {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 300 !important;
+    text-transform: uppercase;
+    color: {{ section.settings.sec_txt_color }};
+    {% comment %} font-family: 'Outfit', sans-serif; {% endcomment %}
+    margin: 0 0 20px;
+    letter-spacing: 0.05em;
+}
+#shopify-section-{{ section.id }} .footer__sec_middle {
+    display: flex;
+    {% comment %} gap: 135px; {% endcomment %}
+    gap: 22%;
+}
+#shopify-section-{{ section.id }} .footer__sec_middle .footer__left,
+#shopify-section-{{ section.id }} .footer__sec_middle .footer__right {
+    width: 50%;
+    max-width: 420px;
+}
+#shopify-section-{{ section.id }} .footer__right .menu__heading {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 300 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em !important;
+    color: {{ section.settings.sec_txt_color }};
+}
+#shopify-section-{{ section.id }} .footer-block_custom {
+    margin: 0 0 52px;
+}
+#shopify-section-{{ section.id }} .footer-block__details-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    row-gap: 12px;
+}
+#shopify-section-{{ section.id }} .footer-block__details-content li {
+    font-size: 12px !important;
+    line-height: 14px !important;
+    letter-spacing: 0.05em !important;
+    font-weight: 300 !important;
+    color: {{ section.settings.sec_txt_color }};
+}
+#shopify-section-{{ section.id }} .footer-block__details-content li a {
+    color: {{ section.settings.sec_txt_color }};
+    font-family: 'Helvetica-Neue' !important;
+    font-weight:300;
+}
+#shopify-section-{{ section.id }} .address_heading {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+#shopify-section-{{ section.id }} .footer__address .footer__address_cont {
+    font-size: 11px !important;
+    line-height: 14px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.05em;
+    margin: 0 0 0 24px;
+    color: {{ section.settings.sec_txt_color }};
+    {% comment %} font-family: 'Outfit', sans-serif !important; {% endcomment %}
+}
+#shopify-section-{{ section.id }} .footer_email_signup {
+    margin: 0 0 50px;
+}
+#shopify-section-{{ section.id }} .footer__social_media .social__heading {
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 300 !important;
+    text-transform: uppercase;
+    color: {{ section.settings.sec_txt_color }};
+    letter-spacing: 0.05em !important;
+}
+#shopify-section-{{ section.id }} .footer__social_media .social__devidex {
+    display: flex;
+    gap: 35px;
+}
+#shopify-section-{{ section.id }} .footer__social_media {
+    margin: 0 0 45px;
+}
+#shopify-section-{{ section.id }} .footer_custom_copyrights .footer-utilities__text {
+    font-size: 12px !important;
+    line-height: 14px !important;
+    {% comment %} font-family: 'Outfit', sans-serif; {% endcomment %}
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: {{ section.settings.sec_txt_color }};
+}
+
+@media screen and (max-width: 750px) {
+#section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top_mob }}px;
+  padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+}
+  
+#shopify-section-{{ section.id }} .footer__sec_middle {
+    flex-wrap: wrap;
+    gap: 0;
+}
+#shopify-section-{{ section.id }} .footer__sec_middle .footer__left, 
+#shopify-section-{{ section.id }} .footer__sec_middle .footer__right {
+    width: 100%;
+    max-width: unset;
+}
+#shopify-section-{{ section.id }} .img__desk,
+#shopify-section-{{ section.id }} .content__desk {
+    display: none;
+}
+
+#shopify-section-{{ section.id }} .footer__cont_container .footer_title,
+#shopify-section-{{ section.id }} .footer_email_signup .newsletter_heading,
+#shopify-section-{{ section.id }} .footer__social_media .social__heading,
+#shopify-section-{{ section.id }} .footer__right .menu__heading {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 300;
+    margin: 0 0 17px;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez:first-child {
+    margin: 0 0 14px;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez p,
+#shopify-section-{{ section.id }} .footer-block__details-content li {
+    font-size: 12px !important;
+    line-height: 16px;
+    font-weight: 500;
+}
+#shopify-section-{{ section.id }} .footer__cont_container, 
+#shopify-section-{{ section.id }} .footer-block_custom {
+    margin: 0 0 23px;
+    padding: 0 18px 23px;
+    border-bottom: 1px solid #4c4c4c;
+}
+#shopify-section-{{ section.id }} .footer-block_custom:last-child {
+    margin: 0 0 18px;
+}
+#shopify-section-{{ section.id }} .footer_custom_copyrights .footer-utilities__text {
+    font-size: 10px !important;
+    line-height: 12px !important;
+    font-weight: 400;
+}
+#shopify-section-{{ section.id }} .foot_social_devidez svg {
+    width: 17px;
+}
+#shopify-section-{{ section.id }} .section {
+    padding: 0;
+}
+#shopify-section-{{ section.id }} .footer_email_signup,
+#shopify-section-{{ section.id }} .footer__social_media {
+    margin: 0 0 23px;
+    padding: 0 18px 23px;
+    border-bottom: 1px solid #4c4c4c;
+}
+#shopify-section-{{ section.id }} .footer_email_signup .email-signup__input {
+    font-size: 12px !important;
+    line-height: 16px !important;
+}
+#shopify-section-{{ section.id }} .footer__social_media .social__devidex {
+    gap: 30px;
+}
+#shopify-section-{{ section.id }} .footer__social_media .social__devidex svg {
+    width: 17px;
+    height: 17px;
+}
+#shopify-section-{{ section.id }} .footer_custom_copyrights {
+    padding: 0 18px;
+}
+}
+
+@media screen and (min-width: 1500px) {
+#shopify-section-{{ section.id }} .section {
+    padding: 0 18px 110px;
+}
+}
+
+@media screen and (min-width: 751px) {
+#shopify-section-{{ section.id }} .img__mob,
+#shopify-section-{{ section.id }} .content__mob {
+    display: none;
+}
+}
+
+@media (min-width: 750px) and (max-width: 1100px) {
+{% if section.settings.bg-image != blank %}
+#shopify-section-{{ section.id }} .section {
+    padding: 0 18px 100px;
+}
+{% comment %} #shopify-section-{{ section.id }} .footer__bg_image {
+    max-width: 250px;
+} {% endcomment %}
+{% endif %}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Footer",
+  "class": "section-wrapper",
+  "tag": "footer",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Quick links",
+          "label": "Menu Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "menu",
+        }
+      ]
+    },
+    {
+      "type": "address",
+      "name":"Address",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "add_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg-image",
+      "label": "Footer Background Image Desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg-image-mob",
+      "label": "Footer Background Image Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Footer Content"
+    },
+    {
+    "type": "text",
+    "id": "footer_heading",
+    "label": "Footer Heading"
+    },
+    {
+    "type": "richtext",
+    "id": "whatsapp",
+    "label": "Whatsapp Content"
+    },
+    {
+    "type": "richtext",
+    "id": "email",
+    "label": "Email Content"
+    },
+    {
+    "type": "textarea",
+    "id": "news_content",
+    "label": "Newsletter Content"
+    },
+    {
+      "type": "header",
+      "content": "Social Media"
+    },
+    {
+      "type": "text",
+      "id": "socialmedia_heading",
+      "label": "Social Icon Heading"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instgram Url"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook Url"
+    },
+    {
+      "type": "url",
+      "id": "indeed_link",
+      "label": "Indeed Url"
+    },
+    {
+      "type": "header",
+      "content": "Section Colour"
+    },
+    {
+      "type": "color",
+      "id": "sec_bg_color",
+      "label": "Section Background Colour",
+      "default": "#1C1C1C"
+    },
+    {
+      "type": "color",
+      "id": "sec_txt_color",
+      "label": "Section Text Colour",
+      "default": "#E8E8E8"
+    },
+    {
+      "type":"header",
+      "content":"Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type":"header",
+      "content":"Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Footer"
+    }
+  ]
+}
+{% endschema %}

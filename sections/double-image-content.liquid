@@ -1,0 +1,355 @@
+<div class-"double__image_content_sec" id="section-{{ section.id }}">
+    <div class="section section--full-width">
+        <div class="section_devider">
+            <div class="section_leftside">
+                {%- if section.settings.section-heading != blank -%}
+                <h2 class="section_heading">{{ section.settings.section-heading }}</h2>
+                {%- endif -%}
+
+                {% if section.settings.left-image-desk != blank or section.settings.left-image-mob != blank %}
+                <div class="left_box_img">
+                    {% assign widths = '200, 400, 600, 800, 900, 1200, 1600, 1800, 2000' %}
+                    {% if section.settings.left-image-desk != blank %}
+                    {{
+                    section.settings.left-image-desk
+                    | image_url: width: 900
+                    | image_tag:
+                        width: section.settings.left-image-desk.width,
+                        height: section.settings.left-image-desk.height,
+                        class: 'cust_bg_img img__desk',
+                        alt: section.settings.left-image-desk.alt
+                    }}
+                    {% endif %}
+                    {% if section.settings.left-image-mob != blank %}
+                    {{
+                    section.settings.left-image-mob
+                    | image_url: width: 800
+                    | image_tag:
+                    width: section.settings.left-image-mob.width,
+                    height: section.settings.left-image-mob.height,
+                    class: 'cust_bg_img img__mob',
+                    alt: section.settings.left-image-mob.alt
+                    }}
+                    {% endif %}
+                </div>
+                {% endif %}
+
+            </div>
+            <div class="section_rightside">
+                {% if section.settings.right-first-content != blank %}
+                <p class="right-first-content">{{ section.settings.right-first-content }}</p>
+                {% endif %}
+                <div class="right_btm_container">
+                    {% if section.settings.right-second-content != blank %}
+                    <p class="right_second_content content__desk">{{ section.settings.right-second-content }}</p>
+                    {% endif %}
+
+                {% if section.settings.right-image-desk != blank or section.settings.right-image-mob != blank %}
+                    {% if section.settings.right-image-desk != blank %}
+                    {% assign widths = '200, 400, 600, 800, 900, 1200, 1600, 1800, 2000' %}
+                    {{
+                    section.settings.right-image-desk
+                    | image_url: width: 800
+                    | image_tag:
+                        widths: widths,
+                        height: section.settings.right-image-desk.height,
+                        class: 'cust_bg_img img__desk',
+                        alt: section.settings.right-image-desk.alt
+                    }}
+                    {% endif %}
+                    {% if section.settings.right-image-mob != blank %}
+                    {{
+                    section.settings.right-image-mob
+                    | image_url: width: 800
+                    | image_tag:
+                    width: section.settings.right-image-mob.width,
+                    height: section.settings.right-image-mob.height,
+                    class: 'cust_bg_img img__mob',
+                    alt: section.settings.right-image-mob.alt
+                    }}
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% if section.settings.right-second-content != blank %}
+                <p class="right_second_content content__mob">{{ section.settings.right-second-content }}</p>
+                {% endif %}
+
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+#section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  background-color: {{ section.settings.sec_bg_color }};
+}
+
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 90px;
+    line-height: 110%;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: {{ section.settings.sec_hd_color }};
+    max-width: 540px;
+    padding: 0 20px;
+    margin: 0 auto 85px;
+}
+#shopify-section-{{ section.id }} .section_heading span {
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+#shopify-section-{{ section.id }} .section_devider {
+    display: flex;
+    flex-wrap: wrap;
+}
+#shopify-section-{{ section.id }} .section_devider .section_leftside {
+    width: 50%;
+}
+#shopify-section-{{ section.id }} .section_devider .section_rightside {
+    margin-left: 20px;
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#shopify-section-{{ section.id }} .right-first-content {
+    max-width: 400px;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 46px 0 0;
+    color: {{ section.settings.sec_cnt_color }};
+    letter-spacing:0.05em;
+    font-weight:400;
+}
+#shopify-section-{{ section.id }} .section_rightside .right_btm_container {
+    max-width: 600px;
+    margin-left: auto;
+}
+#shopify-section-{{ section.id }} .right_second_content {
+    max-width: 400px;
+    font-size: 14px;
+    line-height: 20px;
+    color: {{ section.settings.sec_cnt_color }};
+    letter-spacing:0.05em;
+    font-weight:400;
+}
+
+@media screen and (max-width: 1200px) {
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 80px;
+    margin: 0 auto 60px;
+}
+}
+
+@media screen and (max-width: 950px) {
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 70px;
+}
+}
+
+@media screen and (max-width: 800px) {
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 60px;
+}
+}
+
+@media screen and (max-width: 749px) {
+#section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top_mob }}px;
+  padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+}
+  
+#shopify-section-{{ section.id }} .section_devider .section_leftside,
+#shopify-section-{{ section.id }} .section_devider .section_rightside {
+    width: 100%;
+}
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 48px;
+    max-width: 100%;
+    text-align: center;
+    margin: 0 0 24px;
+    padding: 0 15px;
+    font-weight:500;
+}
+#shopify-section-{{ section.id }} .section_heading br {
+    display: none;
+}
+#shopify-section-{{ section.id }} .section_heading span {
+    text-align: unset;
+    display: unset;
+}
+#shopify-section-{{ section.id }} .section_devider .section_leftside {
+    margin: 0 0 20px;
+}
+#shopify-section-{{ section.id }} .section_devider .section_rightside {
+    margin: 0;
+}
+#shopify-section-{{ section.id }} .section_rightside .right_btm_container{
+    max-width: 100%;
+}
+#shopify-section-{{ section.id }} .right-first-content,
+#shopify-section-{{ section.id }} .right_second_content {
+    max-width: 100%;
+    padding: 0 15px;
+    font-size: 11px;
+    line-height: 18px;
+    font-weight:300;
+}
+#shopify-section-{{ section.id }} .right-first-content {
+    margin: 0 0 24px;
+}
+#shopify-section-{{ section.id }} .img__desk,
+#shopify-section-{{ section.id }} .content__desk {
+    display: none;
+}
+#shopify-section-{{ section.id }} .right-first-content {
+    font-size: 11px;
+    
+}
+}
+
+@media screen and (max-width: 350px) {
+#shopify-section-{{ section.id }} .section_heading {
+    font-size: 40px;
+}
+}
+
+@media screen and (min-width: 750px) {
+#shopify-section-{{ section.id }} .img__mob,
+#shopify-section-{{ section.id }} .content__mob {
+    display: none;
+}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Double Image Content",
+  "settings": [
+    {
+    "type": "textarea",
+    "id": "section-heading",
+    "label": "Section Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "left-image-desk",
+      "label": "Left Image Desktop",
+      "info": "Recommended Size: 1100 x 1200"
+    },
+    {
+      "type": "image_picker",
+      "id": "left-image-mob",
+      "label": "Left Image Mobile",
+      "info": "Recommended Size: 900 x 920"
+    },
+    {
+      "type": "header",
+      "content": "Footer Content"
+    },
+    {
+    "type": "textarea",
+    "id": "right-first-content",
+    "label": "Right First Content"
+    },
+    {
+    "type": "textarea",
+    "id": "right-second-content",
+    "label": "Right Second Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "right-image-desk",
+      "label": "Right Image Desktop",
+      "info": "Recommended Size: 900 x 750"
+    },
+    {
+      "type": "image_picker",
+      "id": "right-image-mob",
+      "label": "Right Image Mobile",
+      "info": "Recommended Size: 900 x 920"
+    },
+    {
+      "type": "header",
+      "content": "Section Colour"
+    },
+    {
+      "type": "color",
+      "id": "sec_bg_color",
+      "label": "Section Background Colour"
+    },
+    {
+      "type": "color",
+      "id": "sec_hd_color",
+      "label": "Section Heading Colour",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "sec_cnt_color",
+      "label": "Section Content Colour",
+      "default": "#000000"
+    },
+    {
+      "type":"header",
+      "content":"Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type":"header",
+      "content":"Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Double Image Content"
+    }
+  ]
+}
+{% endschema %}

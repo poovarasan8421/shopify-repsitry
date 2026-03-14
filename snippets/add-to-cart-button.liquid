@@ -1,0 +1,265 @@
+{%- doc -%}
+  Renders an "Add to cart" button with dynamic text and state. It shows different text based on whether the product can be added to the cart and provides visual feedback when an item is added.
+
+  @param {boolean} can_add_to_cart - Whether the product can be added to the cart.
+  @param {string} add_to_cart_text - The text to display on the button.
+  @param {object} product - The product object to be added to the cart.
+  @param {boolean} [icon_only_on_mobile] - If `true`, only the icon is shown on mobile devices.
+  @param {string} [class] - Additional CSS classes to apply to the button.
+  @param {string} [id] - The ID attribute for the button.
+  @param {string} grid - The text to display on the button.
+  @param {string} ref - The text to display on the button.
+{%- enddoc -%}
+
+{%- liquid
+  assign default_add_to_cart_text = 'actions.add_to_cart' | t
+  assign product_variant_media = product.selected_or_first_available_variant.featured_media.preview_image | image_url: width: 100
+  if product.selected_or_first_available_variant.featured_media.preview_image == blank
+    assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
+  endif
+-%}
+
+{% if ref == 'cart_drawer' %}
+<add-to-cart-component
+  ref="addToCartButtonContainer"
+  data-product-variant-media="{{ product_variant_media }}"
+  data-add-to-cart-animation ="{{ settings.add_to_cart_animation }}"
+>
+   <button
+    type="submit"
+    name="add"
+    ref="addToCartButton"
+    on:click="/handleClick"
+    class="button {{ class }}"
+    aria-label="Add to cart"
+    {% unless can_add_to_cart %}
+      disabled
+    {% endunless %}
+  > 
+
+  {% comment %}
+    <button
+    type="submit"
+    name="add"
+    ref="addToCartButton"
+    class="button {{ class }}"
+    {% unless can_add_to_cart %}
+      disabled
+    {% endunless %}
+  >{% endcomment %}
+    <span
+      class="add-to-cart-text"
+    >
+      {% if can_add_to_cart %}
+        {% if grid contains 'grid-svg' %}
+        <span class="svg-wrapper add-to-cart-icon">
+           {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <g opacity="0.3" clip-path="url(#clip0_1914_72)">
+                <path d="M12 7.05884V16.9412" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.05859 12H16.9409" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="11.375" stroke="black" stroke-width="1.25"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_1914_72">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg> {% endcomment %}
+              Add to cart
+         {% comment %}
+           {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+         {% endcomment %} 
+        </span>
+         {% endif %}
+      {% endif %}
+      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
+        {% comment %} {{- add_to_cart_text | default: default_add_to_cart_text -}} {% endcomment %}
+       
+      </span>
+    </span>
+    <span
+      aria-hidden="true"
+      class="add-to-cart-text--added"
+    >
+    {% comment %}  <span class="svg-wrapper add-to-cart-icon--added">
+        {{- 'icon-checkmark.svg' | inline_asset_content -}}
+      </span>
+      <span class="{% if icon_only_on_mobile %}is-visually-hidden-mobile{% endif %}">
+         {{- 'actions.added' | t -}} 
+      </span>{% endcomment %}
+    </span>
+    
+  </button>
+</add-to-cart-component>
+{% else %}
+<add-to-cart-component
+  ref="addToCartButtonContainer"
+  data-product-variant-media="{{ product_variant_media }}"
+  data-add-to-cart-animation ="{{ settings.add_to_cart_animation }}"
+>
+   <button
+    id="{{ id }}"
+    type="submit"
+    name="add"
+    ref="addToCartButton"
+    on:click="/handleClick"
+    class="button {{ class }}"
+    aria-label="Add to cart"
+    {% unless can_add_to_cart %}
+      disabled
+    {% endunless %}
+  > 
+    {% comment %} <button
+    id="{{ id }}"
+    type="submit"
+    name="add"
+    ref="addToCartButton"
+    class="button {{ class }}"
+    {% unless can_add_to_cart %}
+      disabled
+    {% endunless %} 
+  >{% endcomment %}
+
+    <span
+      class="add-to-cart-text"
+    >
+      {% if can_add_to_cart %}
+        {% if grid contains 'grid-svg' %}
+        <span class="svg-wrapper add-to-cart-icon">
+          
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <g opacity="0.3" clip-path="url(#clip0_1914_72)">
+                <path d="M12 7.05884V16.9412" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.05859 12H16.9409" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="11.375" stroke="black" stroke-width="1.25"/>
+                </g>
+                <defs>
+               <clipPath id="clip0_1914_72">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath> 
+                </defs>
+                </svg>
+           
+         {% comment %}
+           {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+         {% endcomment %} 
+        </span>
+         {% endif %}
+      {% endif %}
+      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
+       <span>
+        {{- add_to_cart_text | default: default_add_to_cart_text -}}
+        </span>
+        {% comment %} <span class="add-cart-price-txt">{{ product.selected_or_first_available_variant.price | money | replace: ',', '' | remove:".00" }}
+          <span class="mrp-txt">MRP</span>
+        </span> {% endcomment %}
+      </span>
+    </span>
+    <span
+      aria-hidden="true"
+      class="add-to-cart-text--added"
+    >
+      {% comment %}<span class="svg-wrapper add-to-cart-icon--added">
+        {{- 'icon-checkmark.svg' | inline_asset_content -}}
+      </span>
+      <span class="{% if icon_only_on_mobile %}is-visually-hidden-mobile{% endif %}">
+         {{- 'actions.added' | t -}} 
+      </span>{% endcomment %}
+    </span>
+    <span
+      class="ripple-effect"
+    >
+      </span>
+  </button>
+</add-to-cart-component>
+{% endif %}
+
+ {% if template.suffix == 'drop'  %}
+<style>
+ {% if product.metafields.custom.add_to_cart_button_background_color != blank and product.metafields.custom.add_to_cart_button_text_color != blank  %}
+  .product-information__grid .button[id^=BuyButtons-ProductSubmitButton-]{
+    background-color: {{ product.metafields.custom.add_to_cart_button_background_color }} !important;
+    color:{{ product.metafields.custom.add_to_cart_button_text_color  }} !important;
+  }
+  .product-information__grid .button[id^=BuyButtons-ProductSubmitButton-].atc-added{
+     background-color: {{ product.metafields.custom.add_to_cart_button_background_color }} !important;
+     color:{{ product.metafields.custom.add_to_cart_button_text_color  }} !important;
+     opacity:0.5;
+  }
+  .product-information__grid .button[id^=BuyButtons-ProductSubmitButton-].atc-added .ripple-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0; /* start from 0 width */
+  background: {{ product.metafields.custom.add_to_cart_button_background_color }}; /* highlight color */
+  animation: slide-ripple 0.60s ease-out forwards;
+}
+
+@keyframes slide-ripple {
+  to {
+    width: 100%;   /* expands fully */
+    opacity: 0;    /* fades out */
+  }
+}
+  {% endif %}
+</style>
+{% endif %}
+{% stylesheet %}
+  .add-to-cart-text {
+    display: flex;
+    gap: var(--gap-2xs);
+    align-items: center;
+    justify-content: center;
+    animation-duration: var(--animation-speed);
+    animation-timing-function: var(--animation-easing);
+    animation-fill-mode: forwards;
+    transition: opacity var(--animation-speed) var(--animation-easing);
+  }
+  
+  /* .atc-added .add-to-cart-text {
+    animation-name: atc-slide-out;
+  } */
+
+  .add-to-cart-text--added {
+    position: absolute;
+    inset: 0;
+    animation-duration: var(--animation-speed);
+    animation-timing-function: var(--animation-easing);
+    animation-fill-mode: forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: width var(--animation-speed) var(--animation-easing),
+      opacity var(--animation-speed) var(--animation-easing);
+  }
+
+  .atc-added .add-to-cart-text--added {
+    animation-name: atc-slide-in;
+  }
+
+  @keyframes atc-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.5em);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes atc-slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    to {
+      transform: translateY(-1em);
+      opacity: 0;
+    }
+  }
+{% endstylesheet %}

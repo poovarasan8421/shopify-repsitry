@@ -1,0 +1,949 @@
+{% comment %} <section class="two-image-section">
+  {% for block in section.blocks %}
+    <div class="image-block">
+      {% assign desktop_image = block.settings.desktop_image %}
+      {% assign mobile_image = block.settings.mobile_image %}
+      <picture>
+        {% if mobile_image != blank %}
+          <source media="(max-width: 768px)" srcset="{{ mobile_image | image_url: width: 800 }}">
+        {% endif %}
+        {{
+          desktop_image
+          | image_url: width: 700
+          | image_tag:
+              width: desktop_image.width,
+              height: desktop_image.height,
+              class: 'image-fill',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              widths: '400, 600, 800',
+              alt: block.settings.heading | escape
+        }}
+      </picture>
+
+    <div class="text-overlay block-{{ block.id }}"
+    style="padding-left: {{ block.settings.padding_left }}px; 
+            padding-bottom: {{ block.settings.padding_bottom }}px;">
+    <h2 style="margin-bottom: {{ block.settings.text_gap }}px;">{{ block.settings.heading }}</h2>
+    <p>{{ block.settings.text }}</p>
+    </div>
+
+<style>
+  .block-{{ block.id }} .text-overlay h2{
+    font-weight:400 !important;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .block-{{ block.id }} {
+      padding-left: 40px !important;
+      padding-bottom: 40px !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .block-{{ block.id }} {
+      padding-left: 35px !important;
+      padding-bottom: 35px !important;
+    }
+    .block-{{ block.id }} .text-overlay {
+      font-size: 19px !important;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .block-{{ block.id }} {
+      padding-left: 33px !important;
+      padding-bottom: 33px !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .block-{{ block.id }} {
+      padding-left: {{ block.settings.mobile_padding_left }}px !important;
+      padding-bottom: {{ block.settings.mobile_padding_bottom }}px !important;
+    }
+    .block-{{ block.id }} .text-overlay h2{
+      font-size: 18px !important;
+      line-height: 22px !important;
+      font-weight:400 !important;
+    }
+    .block-{{ block.id }} .text-overlay p {
+     font-size: 12px !important; 
+      margin: 6px 0 0 0 !important;
+      line-height: 16px !important;
+      letter-spacing: 0.6px !important;
+      font-weight: 500 !important;
+      max-width: 100% !important;
+      padding-bottom:25px;
+    }
+  }
+ @media screen and (max-width:600px){
+   .block-{{ block.id }} {
+      padding-left: 27px !important;
+      padding-bottom: 20px !important;
+    }
+    
+    .block-{{ block.id }} .text-overlay p {
+     font-size: 13px !important;
+      line-height:19px !important; 
+      margin: 10px 0 0 0;
+      
+    }
+ }
+    @media screen and (max-width:500px){
+   .block-{{ block.id }} {
+      padding-left: 23px !important;
+      padding-bottom: 30px !important;
+    }
+    
+    {% comment %} .text-overlay h2{
+      font-size: 16px !important;
+    } {% endcomment %}
+    
+    
+ }
+  @media screen and (max-width: 400px){
+    .block-{{ block.id }} {
+      padding-left: 20px !important;
+      {% comment %} padding-bottom: 11px !important;
+    } {% endcomment %}
+    
+    .block-{{ block.id }} .text-overlay h2{
+      font-size: 14px !important;
+    }
+    
+    .text-overlay p {
+    font-size: 12px !important;
+    line-height:18px !important; 
+    margin: 5px 0 0 0;
+   
+    }
+  }
+</style>
+
+    </div>
+  {% endfor %}
+</section>
+
+<style>
+#shopify-section-{{ section.id }}{
+  padding-top:{{ section.settings.padding_desk_top }}px;
+  padding-bottom:{{ section.settings.padding_desk_bottom }}px;
+}
+ #shopify-section-{{ section.id }} .two-image-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ #shopify-section-{{ section.id }} .image-block {
+  position: relative;
+  flex: 1 1 50%;
+  overflow: hidden;
+}
+
+ #shopify-section-{{ section.id }} .image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+ #shopify-section-{{ section.id }} .text-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  max-width: 85%;
+}
+
+  #shopify-section-{{ section.id }} .text-overlay h2 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 22px;
+  padding-bottom:0;
+
+}
+#shopify-section-{{ section.id }} .image-block {
+     display: block; 
+    justify-content: var(--horizontal-alignment, "inline-start");
+}
+ #shopify-section-{{ section.id }} .text-overlay p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  font-family: 'Helvetica-Neue';
+  max-width: 83%;
+ }
+  
+@media screen and (max-width: 768px) {
+  #shopify-section-{{ section.id }}{
+  padding-top:{{ section.settings.padding-mob-top }}px;
+  padding-bottom:{{ section.settings.padding-mob-bottom }}px;
+}
+  #shopify-section-{{ section.id }} .two-image-section {
+    flex-direction: column;
+  }
+  #shopify-section-{{ section.id }} .text-overlay h2 {
+    font-weight: 400;
+     font-size: 14px;
+     line-height: 16px;
+  }
+  #shopify-section-{{ section.id }} .image-block {
+    flex: 1 1 100%;
+  }
+
+  #shopify-section-{{ section.id }} .text-overlay {
+    max-width: 90%;
+  }
+  #shopify-section-{{ section.id }} .text-overlay p {
+    max-width: 100%;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight:300;
+  }
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "custom image",
+  "max_blocks": 2,
+   "settings": [
+      {
+          "type": "header",
+          "content": "padding desktop"
+        },
+        {
+          "type": "range",
+          "id": "padding_desk_top",
+          "label": "top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding_desk_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "padding mobile"
+        },
+        {
+          "type": "range",
+          "id": "padding-mob-top",
+          "label": "top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding-mob-bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        }
+   ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading goes here"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Description text goes here."
+        },
+        {
+          "type": "header",
+          "content": "gap"
+        },
+        {
+          "type": "range",
+          "id": "text_gap",
+          "label": "gap",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 10
+        },
+        {
+          "type": "header",
+          "content": "padding desktop"
+        },
+        {
+          "type": "range",
+          "id": "padding_left",
+          "label": "Left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "padding mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_left",
+          "label": "Left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "custom image",
+      "blocks": [
+        { "type": "image_block" },
+        { "type": "image_block" }
+      ]
+    }
+  ]
+}
+{% endschema %} {% endcomment %}
+
+
+
+<section class="two-image-section">
+  {% for block in section.blocks %}
+    
+    <div class="image-block position-{{ block.settings.position }} align-{{ block.settings.alignment }} mob-align-{{ block.settings.mobile_alignment }} mob_position-{{ block.settings.mobile_position }}" id="blockid-{{ block.id }}">
+      {% if block.settings.url %}
+      <a href="{{ block.settings.url }}">
+    {% endif %} 
+      {% assign desktop_image = block.settings.desktop_image %}
+      {% assign mobile_image = block.settings.mobile_image %}
+      {% if block.settings.desktop_image != blank -%}
+        
+      <picture>
+       
+        {% if mobile_image != blank %}
+          <source media="(max-width: 768px)" srcset="{{ block.settings.mobile_image | image_url: width: 800 }}">
+        {% endif %}
+        {{
+          block.settings.desktop_image
+          | image_url: width: 700
+          | image_tag:
+              width: block.settings.desktop_image.width,
+              height: block.settings.desktop_image.height,
+              class: 'image-fill',
+              sizes: '(max-width: 749px) 100vw, 50vw',
+              widths: '400, 600, 800',
+              alt: block.settings.heading | escape
+        }}
+     
+      </picture>
+         
+      {% endif %}
+    <div class="content-wrapper-banner">
+    <div class="text-overlay block-{{ block.id }}"
+    >
+    <h2 style="margin-bottom: {{ block.settings.text_gap }}px;">{{ block.settings.heading }}</h2>
+    <p>{{ block.settings.text }}</p>
+    {% if block.settings.url != blank %}
+      <span class="anchor-text">{{ block.settings.url-name }}</span>
+    {% endif %}
+    </div>
+  </div>
+
+  
+<style>
+  #blockid-{{ block.id }} .text-overlay h2{
+    font-weight:400 !important;
+    text-align: {{ block.settings.alignment}};
+    color:{{ block.settings.head-color }}
+  }
+  #blockid-{{ block.id }}.align-right .text-overlay{
+     align-items:end !important;
+  }
+  #blockid-{{ block.id }} .text-overlay p {
+    text-align: {{ block.settings.alignment}};
+     color:{{ block.settings.text-color }}
+  }
+  #blockid-{{ block.id }} .text-overlay .anchor-text {
+    text-align: {{ block.settings.alignment}};
+    color:{{ block.settings.url-color }};
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: underline;
+    margin-top: 15px;
+    max-width:73%;
+    cursor:pointer;
+  }
+  #blockid-{{ block.id }}.image-block{
+    Background:{{ block.settings.bg-clr }};
+  }
+#blockid-{{ block.id }} .content-wrapper-banner{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    color: white;
+     text-align: 
+    box-sizing: border-box;
+    {% comment %} padding-left: 60px;
+    padding-right: 60px; {% endcomment %}
+}
+#blockid-{{ block.id }}.position-top-left .content-wrapper-banner { 
+  align-items: flex-start; 
+  justify-content: flex-start;
+  
+ }
+#blockid-{{ block.id }}.position-top-center .content-wrapper-banner { align-items: flex-start; justify-content: center; }
+#blockid-{{ block.id }}.position-top-center.align-center .text-overlay{
+  align-items: center;
+}
+#blockid-{{ block.id }}.position-top-right .content-wrapper-banner { align-items: flex-start; justify-content: flex-start; }
+#blockid-{{ block.id }}.position-top-right.align-right .text-overlay{
+  align-items: end;
+}
+
+/* Middle */
+#blockid-{{ block.id }}.position-middle-left .content-wrapper-banner { align-items: center; justify-content: flex-start; }
+#blockid-{{ block.id }}.position-middle-center.align-left .text-overlay{
+  align-items: start;
+}
+#blockid-{{ block.id }}.position-middle-center .content-wrapper-banner { align-items: center; justify-content: center; }
+#blockid-{{ block.id }}.position-middle-center.align-center .text-overlay{
+  align-items: center;
+}
+#blockid-{{ block.id }}.position-middle-right .content-wrapper-banner { align-items: center; justify-content: flex-end; }
+#blockid-{{ block.id }}.position-middle-right.align-right .text-overlay{
+  align-items: end;
+}
+
+/*bottom*/
+#blockid-{{ block.id }}.position-bottom-left .content-wrapper-banner { align-items: flex-end; justify-content: flex-start; }
+#blockid-{{ block.id }}.position-bottom-center .content-wrapper-banner { align-items: flex-end; justify-content: center; }
+#blockid-{{ block.id }}.position-bottom-center .text-overlay{
+  align-items: center;
+}
+#blockid-{{ block.id }}.position-bottom-right .content-wrapper-banner { align-items: flex-end; justify-content: flex-end; }
+#blockid-{{ block.id }}.position-bottom-right .text-overlay{
+  align-items: end;
+}
+
+  {% comment %} @media screen and (max-width: 1000px) {
+    .block-{{ block.id }} {
+      padding-left: 40px !important;
+      padding-bottom: 40px !important;
+    }
+  } {% endcomment %}
+
+  {% comment %} @media screen and (max-width: 900px) {
+    .block-{{ block.id }} {
+      padding-left: 35px !important;
+      padding-bottom: 35px !important;
+    }
+    .block-{{ block.id }} .text-overlay {
+      font-size: 19px !important;
+    }
+  } {% endcomment %}
+
+  {% comment %} @media screen and (max-width: 800px) {
+    .block-{{ block.id }} {
+      padding-left: 33px !important;
+      padding-bottom: 33px !important;
+    }
+  } {% endcomment %}
+
+  @media screen and (max-width: 768px) {
+    {% comment %} .block-{{ block.id }} {
+      padding-left: {{ block.settings.mobile_padding_left }}px !important;
+      padding-bottom: {{ block.settings.mobile_padding_bottom }}px !important;
+    } {% endcomment %}
+    .block-{{ block.id }} .text-overlay h2{
+      {% comment %} font-size: 18px !important;
+      line-height: 22px !important;
+      font-weight:400 !important; {% endcomment %}
+      text-align: {{ block.settings.mobile_alignment}};
+    }
+    .block-{{ block.id }} .text-overlay p {
+     {% comment %} font-size: 12px !important; 
+      margin: 6px 0 0 0 !important;
+      line-height: 16px !important;
+      letter-spacing: 0.6px !important;
+      font-weight: 500 !important;
+      max-width: 100% !important;
+      padding-bottom:25px; {% endcomment %}
+      text-align: {{ block.settings.mobile_alignment}};
+    }
+    #blockid-{{ block.id }} .text-overlay .anchor-text {
+    font-size: 13px;
+    line-height: 17px;
+    margin-top: 12px;
+  }
+    #blockid-{{ block.id }}.mob_position-top-center .content-wrapper-banner { align-items: flex-start; justify-content: center; }
+    #blockid-{{ block.id }}.mob_position-middle-center .content-wrapper-banner { align-items: center; justify-content: center; }
+    #blockid-{{ block.id }}.mob_position-bottom-center .content-wrapper-banner{ align-items: flex-end; justify-content: center; }
+  }
+ @media screen and (max-width:600px){
+   {% comment %} .block-{{ block.id }} {
+      padding-left: 27px !important;
+      padding-bottom: 20px !important;
+    } {% endcomment %}
+    
+    {% comment %} .block-{{ block.id }} .text-overlay p {
+     font-size: 13px !important;
+      line-height:19px !important; 
+      margin: 10px 0 0 0;
+      
+    } {% endcomment %}
+ }
+    {% comment %} @media screen and (max-width:500px){
+   .block-{{ block.id }} {
+      padding-left: 23px !important;
+      padding-bottom: 30px !important;
+    }
+    
+    {% comment %} .text-overlay h2{
+      font-size: 16px !important;
+    } {% endcomment %}
+    
+    
+ } {% endcomment %}
+  @media screen and (max-width: 400px){
+    .block-{{ block.id }} {
+      {% comment %} padding-left: 20px !important; {% endcomment %}
+      {% comment %} padding-bottom: 11px !important;
+    } {% endcomment %}
+    
+    .block-{{ block.id }} .text-overlay h2{
+      font-size: 14px !important;
+    }
+    
+    .text-overlay p {
+    font-size: 12px !important;
+    line-height:18px !important; 
+    margin: 5px 0 0 0;
+   
+    }
+  }
+</style>
+ {% if block.settings.url %}
+        </a>
+{% endif %}
+    </div>
+   
+  {% endfor %}
+</section>
+
+<style>
+#shopify-section-{{ section.id }}{
+  padding-top:{{ section.settings.padding_desk_top }}px;
+  padding-bottom:{{ section.settings.padding_desk_bottom }}px;
+}
+ #shopify-section-{{ section.id }} .two-image-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ #shopify-section-{{ section.id }} .image-block {
+  position: relative;
+  flex: 1 1 50%;
+  overflow: hidden;
+}
+#shopify-section-{{ section.id }} .content-wrapper-banner{
+  padding:55px 40px;
+}
+  
+ #shopify-section-{{ section.id }} .image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+ #shopify-section-{{ section.id }} .text-overlay {
+  {% comment %} position: absolute;
+  bottom: 0;
+  left: 0; {% endcomment %}
+  color: white;
+  display:flex;
+  flex-direction:column;
+  {% comment %} align-items:center; {% endcomment %}
+  {% comment %} max-width: 85%; {% endcomment %}
+}
+
+  #shopify-section-{{ section.id }} .text-overlay h2 {
+  {% comment %} font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px; {% endcomment %}
+  text-transform: uppercase;
+  line-height: 22px;
+  padding-bottom:0;
+  max-width:73%;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: 0.01em;
+  {% comment %} color: #FFFFFF; {% endcomment %}
+
+}
+#shopify-section-{{ section.id }} .image-block {
+     display: block; 
+    justify-content: var(--horizontal-alignment, "inline-start");
+}
+ #shopify-section-{{ section.id }} .text-overlay p {
+  {% comment %} font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  font-family: 'Helvetica-Neue'; {% endcomment %}
+  max-width: 73%;
+  margin-top: 9px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 33px;
+  letter-spacing: 0.01em;
+  margin-bottom:0;
+  {% comment %} color: #FFFFFF; {% endcomment %}
+
+
+ }
+ @media screen and (max-width: 1050px) { 
+  #shopify-section-{{ section.id }} .text-overlay h2{
+    font-size: 30px;
+    line-height: 40px;
+  }
+  #shopify-section-{{ section.id }} .text-overlay p {
+    font-size: 18px;
+    line-height: 26px;
+  }
+ }
+@media screen and (max-width: 768px) {
+  #shopify-section-{{ section.id }}{
+  padding-top:{{ section.settings.padding-mob-top }}px;
+  padding-bottom:{{ section.settings.padding-mob-bottom }}px;
+}
+  #shopify-section-{{ section.id }} .two-image-section {
+    flex-direction: column;
+  }
+  #shopify-section-{{ section.id }} .content-wrapper-banner{
+  padding:30px 23px;
+}
+{% comment %} #shopify-section-{{ section.id }} .text-overlay{
+  align-items:center;
+} {% endcomment %}
+#shopify-section-{{ section.id }} .text-overlay h2 {
+    font-weight: 600;
+    font-size: 20.4031px;
+    line-height: 26px;
+    letter-spacing: 0.01em;
+ 
+}
+  #shopify-section-{{ section.id }} .image-block {
+    flex: 1 1 100%;
+  }
+
+  {% comment %} #shopify-section-{{ section.id }} .text-overlay {
+    max-width: 90%;
+  } {% endcomment %}
+#shopify-section-{{ section.id }} .text-overlay p {
+    font-size: 13.262px;
+    line-height: 17px;
+    letter-spacing: 0.01em;
+  }
+}
+
+</style>
+
+{% schema %}
+{
+  "name": "custom image",
+  "max_blocks": 2,
+   "settings": [
+      {
+          "type": "header",
+          "content": "padding desktop"
+        },
+        {
+          "type": "range",
+          "id": "padding_desk_top",
+          "label": "top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding_desk_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "padding mobile"
+        },
+        {
+          "type": "range",
+          "id": "padding-mob-top",
+          "label": "top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding-mob-bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        }
+   ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "settings": [
+      /*  {
+          "type": "color",
+           "id": "bg-clr",
+           "label": "Background",
+           "default":"#8A1D41"
+        },*/
+        {
+          "type": "header",
+          "content": "image"
+        },
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading goes here"
+        },
+        {
+          "type": "color",
+          "id": "head-color",
+          "label": "heading color"
+          },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Description text goes here."
+        },
+        {
+          "type": "color",
+          "id": "text-color",
+          "label": "Text color"
+        },
+        {
+          "type": "url",
+           "id": "url",
+           "label":"link"
+        },
+
+        {
+          "type": "text",
+          "id": "url-name",
+          "label": "Link name"
+        },
+        {
+          "type": "color",
+          "id": "url-color",
+          "label": "Link text color"
+        },
+        
+        {
+          "type": "header",
+          "content": "gap"
+        },
+        {
+          "type": "range",
+          "id": "text_gap",
+          "label": "gap",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 10
+        },
+      {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+      {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "default": "bottom-center",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top center" },
+        { "value": "top-right", "label": "Top right" },
+
+        { "value": "middle-left", "label": "Middle left" },
+        { "value": "middle-center", "label": "Middle center" },
+        { "value": "middle-right", "label": "Middle right" },
+
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom center" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ]
+    },
+      
+   /* {
+      "type": "select",
+      "id": "mobile_position",
+      "label": "mobile Position",
+      "default": "middle-center",
+      "options": [
+        { "value": "top-center", "label": "Top " },
+        { "value": "middle-center", "label": "Center" },
+        { "value": "bottom-center", "label": "Bottom" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },*/
+        {
+          "type": "header",
+          "content": "padding desktop"
+        },
+        {
+          "type": "range",
+          "id": "padding_left",
+          "label": "Left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "header",
+          "content": "padding mobile"
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_left",
+          "label": "Left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "mobile_padding_bottom",
+          "label": "Bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "custom image",
+      "blocks": [
+        { "type": "image_block" },
+        { "type": "image_block" }
+      ]
+    }
+  ]
+}
+{% endschema %}

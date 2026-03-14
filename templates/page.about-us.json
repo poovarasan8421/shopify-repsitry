@@ -1,0 +1,472 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "custom_hero_4jBrtt": {
+      "type": "custom-hero",
+      "name": "Custom Hero",
+      "settings": {
+        "overlay_padding_bottom": 0,
+        "overlay_padding_bottom_mobile": 0,
+        "gradient_overlay_color": "#000000",
+        "gradient_overlay_opacity": 0,
+        "image_desktop": "shopify://shop_images/About_us_-_Banner_3.jpg",
+        "image_mobile": "shopify://shop_images/About_us_-_Banner_3_5651f348-0f05-4b33-ac3a-698879cc3d89.jpg",
+        "heading": "",
+        "text1": "",
+        "button_text": "",
+        "button_link": "",
+        "button_new_tab": false,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "subtext_link": "",
+        "open_new_tab": false,
+        "direction": "vertical",
+        "alignment": "center",
+        "position": "center",
+        "space_between_alignment": "center",
+        "gap": 0,
+        "mobile_direction": "vertical",
+        "mobile_alignment": "center",
+        "mobile_position": "center",
+        "mobile_space_between_alignment": "center",
+        "mobile_gap": 16,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "custom_header_para_Vib83e": {
+      "type": "custom-header-para",
+      "name": "custom-text-para",
+      "settings": {
+        "heading": "IT STARTS WITH A SPARK",
+        "description": "<br>At Lafoli, we know handbags are more than accessories. They are your reward, your treat yourself, the star of your closet and the piece that ties your outfit together. It’s a little luxury that sparks joy. <br>\n<br>We design remembering that feeling, following that spark wherever it leads, no questions asked. Mix that with considered aesthetic, immense attention to craftsmanship, and a touch of madness.\n<br><br>And you get Lafoli.\n Welcome to it.",
+        "heading_font_size": 43,
+        "heading_font_size_mobile": 25,
+        "text_font_size": 14,
+        "text_font_size_mobile": 11,
+        "heading_paragraph_gap": 16,
+        "heading_paragraph_gap_mobile": 12,
+        "padding_top": 36,
+        "padding_bottom": 30,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "paragraph_max_width": 600,
+        "paragraph_max_width_mobile": 600
+      }
+    },
+    "text_heading_7FpGmH": {
+      "type": "text-heading",
+      "disabled": true,
+      "name": "Heading Text",
+      "settings": {
+        "heading": "LAFOLI - A STORY FOR NOW",
+        "text": "<p>Founded with a vision to redefine modern luxury, LAFOLI is a contemporary brand born online.</p><p></p><p>Driven by a commitment to thoughtful design and conscious creation, we craft timeless pieces without middlemen, letting quality lead while keeping our prices fair. We don’t overproduce, run constant sales, or let anything go to waste. Instead, we launch our pieces in limited quantities to ensure our footprint.</p>",
+        "vertical_alignment": "top",
+        "padding_top_desktop": 70,
+        "padding_bottom_desktop": 90,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
+    "hero_hfbGyk": {
+      "type": "hero",
+      "disabled": true,
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-5",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "image_with_text_new_iKDVtc": {
+      "type": "image-with-text-new",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 767px) {h4 {font-size: 18px; line-height: 24px; }}"
+      ],
+      "name": "Image with text new",
+      "settings": {
+        "image": "shopify://shop_images/image_261.png",
+        "mobile_image": "shopify://shop_images/image_261_2.png",
+        "image_border_radius": 0,
+        "heading": "WHY LAFOLI FOR INDIA",
+        "heading_tag": "h4",
+        "text": "<p>LAFOLI is all about effortless luxury—crafted for women who want their bags to do more than just look good. With timeless styles, quality you can feel, and a design that fits right into your everyday, LAFOLI brings a global touch to the way India carries fashion.</p>",
+        "text_padding_left": 96,
+        "text_padding_right": 98,
+        "txt_mob_padding_left": 20,
+        "txt_mob_padding_right": 20,
+        "button_text": "Learn more",
+        "button_link": "",
+        "desktop_layout": "image-first",
+        "desktop_text_alignment": "left",
+        "mobile_layout": "text-first",
+        "mobile_text_alignment": "center",
+        "content_gap": 10,
+        "mobile_content_gap": 25,
+        "desktop_padding_top": 24,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 24,
+        "heading_size": 24,
+        "mobile_heading_size": 24,
+        "text_size": 14,
+        "mobile_text_size": 14,
+        "heading_margin_bottom": 16,
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background_color": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_font_size": 16,
+        "mobile_button_font_size": 14,
+        "button_padding_vertical": 12,
+        "button_padding_horizontal": 24,
+        "button_border_radius": 6,
+        "button_margin_top": 20
+      }
+    },
+    "image_and_text_dFiB4g": {
+      "type": "image-and-text",
+      "disabled": true,
+      "name": "Image & Content",
+      "settings": {
+        "section_image": "shopify://shop_images/image_261_efecc5a7-4acf-489b-bc1d-5513086c1e0b.png",
+        "mobile_image": "shopify://shop_images/image_261_2.png",
+        "heading": "WHY LAFOLI FOR INDIA",
+        "content": "LAFOLI is all about effortless luxury—crafted for women who want their bags to do more than just look good. With timeless styles, quality you can feel, and a design that fits right into your everyday, LAFOLI brings a global touch to the way India carries fashion.",
+        "image_position": "left",
+        "mobile_position": "content-first",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "media_grid_iRDtWY": {
+      "type": "media-grid",
+      "blocks": {
+        "image_CqbmCq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_262.png",
+            "link": "",
+            "alt_text": "",
+            "width": "50",
+            "row_span": "5"
+          }
+        },
+        "image_j8DjAW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_45878.png",
+            "link": "",
+            "alt_text": "",
+            "width": "50",
+            "row_span": "3"
+          }
+        },
+        "image_RAkc9R": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_44e8c20c-5631-4b7a-9e95-36e5c7bff66d.png",
+            "link": "",
+            "alt_text": "",
+            "width": "50",
+            "row_span": "2"
+          }
+        }
+      },
+      "block_order": [
+        "image_CqbmCq",
+        "image_j8DjAW",
+        "image_RAkc9R"
+      ],
+      "disabled": true,
+      "name": "Media Grid",
+      "settings": {
+        "section_width": "full",
+        "heading": "",
+        "subheading": "",
+        "content": "",
+        "text_alignment": "center",
+        "gap": 10,
+        "row_height_desktop": 130,
+        "row_height_mobile": 30,
+        "padding_top_desktop": 20,
+        "padding_bottom_desktop": 20,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "hero_W8JjWG": {
+      "type": "hero",
+      "disabled": true,
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "shopify://shop_images/image_263.png",
+        "media_type_2": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "image_with_text_new_xJq6KV": {
+      "type": "image-with-text-new",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 767px) {h4 {font-size: 18px; line-height: 24px; }}"
+      ],
+      "name": "Image with text new",
+      "settings": {
+        "image": "shopify://shop_images/Vector_81a06f97-452d-4e65-b928-993022e2fabd.png",
+        "image_border_radius": 0,
+        "heading": "FOUNDER NOTE",
+        "heading_tag": "h2",
+        "text": "<p>LAFOLI began as a personal quest—to find a handbag that balanced luxury with everyday ease. Frustrated by the lack of options that felt both timeless and functional, our founder set out to create her own. What started as a passion project quickly grew into a brand built on thoughtful design, quality craftsmanship, and a deep love for details.</p>",
+        "text_padding_left": 90,
+        "text_padding_right": 92,
+        "txt_mob_padding_left": 20,
+        "txt_mob_padding_right": 20,
+        "button_text": "Learn more",
+        "button_link": "",
+        "desktop_layout": "text-first",
+        "desktop_text_alignment": "left",
+        "mobile_layout": "image-first",
+        "mobile_text_alignment": "center",
+        "content_gap": 10,
+        "mobile_content_gap": 10,
+        "desktop_padding_top": 24,
+        "desktop_padding_bottom": 0,
+        "mobile_padding_top": 24,
+        "mobile_padding_bottom": 0,
+        "heading_size": 24,
+        "mobile_heading_size": 24,
+        "text_size": 14,
+        "mobile_text_size": 14,
+        "heading_margin_bottom": 16,
+        "heading_color": "#000000",
+        "text_color": "#000000",
+        "button_background_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_hover_background_color": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_font_size": 16,
+        "mobile_button_font_size": 12,
+        "button_padding_vertical": 12,
+        "button_padding_horizontal": 24,
+        "button_border_radius": 6,
+        "button_margin_top": 20
+      }
+    },
+    "double_image_content_AiqQV6": {
+      "type": "double-image-content",
+      "disabled": true,
+      "name": "Double Image Content",
+      "settings": {
+        "section-heading": "who <br><span>we are</span>",
+        "left-image-desk": "shopify://shop_images/image_261_0727b901-d02e-4321-b973-d208f7ce2d39.png",
+        "left-image-mob": "shopify://shop_images/image_261_1d95de24-6952-48c8-b355-a5451b852205.png",
+        "right-first-content": "Wake up. Brush your teeth. Walk in a straight line. Do the smart thing.\nThat’s what we’re taught, isn’t it? To stay within the lines, take permission, and always play by the book.\n But the truth is, sanity never started a good story.",
+        "right-second-content": "For us, bags are a canvas to explore  this madness. All our products are designed to have a unique edge to them. Just like you do.<br> <br>  Let us be a reminder to choose the unexpected. To go a little mad sometimes. To step off the path, stay out too late, laugh too loudly. Don't wait, seize.\nBecause that’s when the magic happens. When ordinary becomes extraordinary.<br>\n<br>Life gets a lot more fun off-script.\n<br>Always own your madness.",
+        "right-image-desk": "shopify://shop_images/Vector_6ea4d276-e2d0-401e-a1fb-569bda1eaf05.png",
+        "right-image-mob": "shopify://shop_images/Vector_9202edc7-5478-4960-8625-a57dfabdd184.png",
+        "sec_bg_color": "",
+        "sec_hd_color": "#000000",
+        "sec_cnt_color": "#000000",
+        "padding_top": 90,
+        "padding_bottom": 80,
+        "padding_top_mob": 20,
+        "padding_bottom_mob": 24
+      }
+    },
+    "custom_hero_99mK6W": {
+      "type": "custom-hero",
+      "name": "Custom Hero",
+      "settings": {
+        "overlay_padding_bottom": 0,
+        "overlay_padding_bottom_mobile": 0,
+        "gradient_overlay_color": "#000000",
+        "gradient_overlay_opacity": 0,
+        "image_desktop": "shopify://shop_images/Listing_Banner.jpg",
+        "image_mobile": "shopify://shop_images/Lafoli_About_Us_Bags.jpg",
+        "heading": "",
+        "text1": "",
+        "button_text": "",
+        "button_link": "",
+        "button_new_tab": false,
+        "button_background": "#000000",
+        "button_text_color": "#ffffff",
+        "subtext_link": "",
+        "open_new_tab": false,
+        "direction": "vertical",
+        "alignment": "center",
+        "position": "center",
+        "space_between_alignment": "center",
+        "gap": 0,
+        "mobile_direction": "vertical",
+        "mobile_alignment": "center",
+        "mobile_position": "center",
+        "mobile_space_between_alignment": "center",
+        "mobile_gap": 16,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "custom_header_para_HVAfFA": {
+      "type": "custom-header-para",
+      "name": "custom-text-para",
+      "settings": {
+        "heading": "UNEXPECTED ALWAYS",
+        "description": "<br>We love stories that pull magic out of the mundane. We believe fun can sit at the table with elegance - after all, they make each other better. For us, handbags are just way to explore that magic, that fun. And let's be honest, that's what makes life more interesting!\n<br><br>\nLet us be your cue to welcome a surprise or two, and a reminder to always leave room for the unexpected, and a bit of beautiful chaos.\n<br><br>And what can be a better reminder than something you carry every day? :)",
+        "heading_font_size": 43,
+        "heading_font_size_mobile": 25,
+        "text_font_size": 14,
+        "text_font_size_mobile": 11,
+        "heading_paragraph_gap": 16,
+        "heading_paragraph_gap_mobile": 12,
+        "padding_top": 36,
+        "padding_bottom": 30,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "paragraph_max_width": 600,
+        "paragraph_max_width_mobile": 600
+      }
+    },
+    "custom_image_text_CtaWAJ": {
+      "type": "custom-image-text",
+      "disabled": true,
+      "name": "Custom Image Text",
+      "settings": {
+        "image__first": true,
+        "image": "shopify://shop_images/Lafoli_16-11-25-680_3.jpg",
+        "image_mob": "shopify://shop_images/Lafoli_16-11-25-680_2_2.png",
+        "heading": "FROM THE FOUNDERS",
+        "content": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_mob": 17,
+        "padding_bottom_mob": 17,
+        "bg_clr": "#ebebea",
+        "heading_clr": "#1c1c1c",
+        "content_clr": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_hero_4jBrtt",
+    "custom_header_para_Vib83e",
+    "text_heading_7FpGmH",
+    "hero_hfbGyk",
+    "image_with_text_new_iKDVtc",
+    "image_and_text_dFiB4g",
+    "media_grid_iRDtWY",
+    "hero_W8JjWG",
+    "image_with_text_new_xJq6KV",
+    "double_image_content_AiqQV6",
+    "custom_hero_99mK6W",
+    "custom_header_para_HVAfFA",
+    "custom_image_text_CtaWAJ"
+  ]
+}

@@ -1,0 +1,278 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer account section-{{ section.id }}-padding">
+  <div style="display:flex; flex-direction:row-reverse;">
+    <h1 class="customer__title" style="display:none">
+     {{ 'customer.account.title' | t }} 
+    </h1>
+    <a href="{{ routes.account_logout_url }}">
+      <span class="svg-wrapper">
+        {{- 'icon-account.svg' | inline_asset_content -}}
+      </span>
+      
+       {{ 'customer.log_out' | t }} 
+    </a>
+  </div>
+
+  <div class="account-continer"> 
+    <div>
+      <h2>
+        {% comment %} {{ 'customer.orders.title' | t }}  {% endcomment %}
+        {{ section.settings.head }}
+      </h2>
+
+      {% paginate customer.orders by 20 %}
+        {%- if customer.orders.size > 0 -%}
+          <table role="table" class="order-history">
+            <caption class="visually-hidden">
+              {% comment %} {{ 'customer.orders.title' | t }}  {% endcomment %}
+             My ORDER
+            </caption>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+                <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+                <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+                <th id="ColumnFulfillment" scope="col" role="columnheader">
+                  {{ 'customer.orders.fulfillment_status' | t }}
+                </th>
+                <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            {% comment %} <tbody role="rowgroup" class="overall-wrap">
+              {%- for order in customer.orders -%}
+              
+                <tr role="row" {{ forloop.index }}>
+                 {% for line_item in order.line_items %}
+                 
+                 <td class="order-item-image" role="cell">
+                    <a href="{{ order.customer_url }}">
+                      <img src="{{ line_item.image | img_url:'' }}" width="130" height="130" alt="{{ line_item.title }}" loading="lazy">
+                    </a>
+                  </td>
+                  <td
+                    id="RowOrder"
+                    role="cell"
+                    headers="ColumnOrder"
+                    data-label="{{ 'customer.orders.order_number' | t }}"
+                  >
+                  <p class="line-item-title">{{ line_item.title }}</p>
+                    <a
+                      href="{{ order.customer_url }}"
+                      aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
+                    >
+                      {{ order.name }}
+                    </a>
+                  </td>
+                  <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+                    {{ order.created_at | time_tag:  format: 'date' }}
+                  </td>
+                  <td
+                    headers="RowOrder ColumnPayment"
+                    role="cell"
+                    data-label="{{ 'customer.orders.payment_status' | t }}"
+                  >
+                    {{ order.financial_status_label }}
+                  </td>
+                  <td
+                    headers="RowOrder ColumnFulfillment"
+                    role="cell"
+                    data-label="{{ 'customer.orders.fulfillment_status' | t }}"
+                  >
+                    {{ order.fulfillment_status_label }}
+                  </td>
+                  <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+                    {{ order.total_net_amount | money_with_currency }}
+                  </td>
+                 
+                {%- endfor -%}
+                </tr>
+              
+              {%- endfor -%}
+            </tbody> {% endcomment %}
+            <tbody role="rowgroup" class="overall-wrap">
+  {%- for order in customer.orders -%}
+    {%- for line_item in order.line_items -%}
+      <tr role="row" id="order-{{ order.id }}-{{ forloop.index }}">
+        
+        <td class="order-item-image" role="cell">
+           <a href="{{ order.customer_url }}" class="order-url-link"> 
+            <img src="{{ line_item.image | img_url: '130x130' }}" width="130" height="130" alt="{{ line_item.title }}" loading="lazy">
+           </a> 
+        <div class="status-container">
+         <div headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
+          {{ order.financial_status_label }},
+        </div>
+        <div headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+          {{ order.fulfillment_status_label }}
+        </div>
+       </div>
+        </td>
+        
+     
+        <td class="content-wrap-details">
+        <div id="RowOrder" role="cell" headers="ColumnOrder" data-label="{{ 'customer.orders.order_number' | t }}">
+          <p class="line-item-title">{{ line_item.title }}</p>
+          <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+           ORDER ID:{{ order.name }}
+          </a>
+
+          <div class="qtn-price-wrap">
+          <div headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}" class="qty-num">
+            Qty:{{ line_item.quantity }}
+           </div>
+          <div headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+           {{ order.total_net_amount | money_with_currency | remove:'.00' | remove:',' }}
+           </div>
+          </div> 
+
+        </div>
+        
+        <div headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+          {% comment %} {{ order.created_at | time_tag: format: 'date' }} {% endcomment %}
+          <div class="order-track-btn">
+           
+            <a href="{{ section.settings.track-url }}" class="track-btn"> Track </a>
+            
+             {% unless line_item.product.tags contains 'gift_pdp' %}
+            <a href="{{ section.settings.return-url }}" class="return-btn"> Return </a>
+            {% endunless %}
+          </div>
+        </div>
+       
+       
+      </td>
+      </tr>
+    {%- endfor -%}
+  {%- endfor -%}
+</tbody>
+
+          </table>
+        {%- else -%}
+          {% comment %} <p>{{ 'customer.orders.none' | t }}</p> {% endcomment %}
+         <p class="empty-order-txt">No order History</p> 
+         <a href="https://wearlafoli.com/collections/all" class="empty-order-link"> Shop Now </a>
+        {%- endif -%}
+
+        {%- if paginate.pages > 1 -%}
+          {%- if paginate.parts.size > 0 -%}
+            <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+              <ul role="list">
+                {%- if paginate.previous -%}
+                  <li>
+                    <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+                      <span class="svg-wrapper">
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                      </span>
+                    </a>
+                  </li>
+                {%- endif -%}
+
+                {%- for part in paginate.parts -%}
+                  <li>
+                    {%- if part.is_link -%}
+                      <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                        {{- part.title -}}
+                      </a>
+                    {%- else -%}
+                      {%- if part.title == paginate.current_page -%}
+                        <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                          {{- part.title -}}
+                        </span>
+                      {%- else -%}
+                        <span>{{ part.title }}</span>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+
+                {%- if paginate.next -%}
+                  <li>
+                    <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+                      <span class="svg-wrapper">
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                      </span>
+                    </a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            </nav>
+          {%- endif -%}
+        {%- endif -%}
+      {% endpaginate %}
+    </div>
+
+    <div style="display:none">
+      <h2>{{ 'customer.account.details' | t }}</h2>
+
+      {{ customer.default_address | format_address }}
+
+      <a href="{{ routes.account_addresses_url }}">
+        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "section padding "
+    },
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading",
+      "default":"order history"
+
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "padding padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "padding padding bottom",
+      "default": 36
+    },
+    {
+      "type": "url",
+      "id": "track-url",
+      "label": "Track link"
+    },
+    {
+      "type": "url",
+      "id": "return-url",
+      "label": "Return link"
+    },
+  ]
+}
+{% endschema %}

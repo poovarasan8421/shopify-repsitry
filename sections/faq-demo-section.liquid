@@ -1,0 +1,85 @@
+
+<div class="container-style">
+<div class="custom-section-nested1">
+  <h1>{{ section.settings.head }}</h1>
+</div>
+</div>
+
+<div class="faq-tab-buttons">
+ {% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+{{ children }}
+</div>
+
+
+
+<style>
+  #shopify-section-{{ section.id }} .container-style{
+   padding: 20px 50px
+  }
+#shopify-section-{{ section.id }} .custom-section-nested1{
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+#shopify-section-{{ section.id }} h1 {
+  font-size: 20px;
+  font-family: outfit;
+  text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .faq-tab-buttons{
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 35px;
+  }
+
+</style>
+{% schema %}
+{
+  "name": "custom-section-nested",
+  "class": "section-wrapper",
+  "blocks": [
+    {
+      "type": "_faq-block-test"
+    },
+    {
+        "type": "@theme"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "head",
+      "label": "Heading"
+    },
+    {
+    "type": "range",
+    "id": "padding_top",
+    "label": "Padding Top (px)",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom",
+    "label": "Padding Bottom (px)",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "default": 20
+  }  
+  ],
+  "presets": [
+    {
+        "name": "custom-section-nested"
+    }
+  ]
+}
+{% endschema %}

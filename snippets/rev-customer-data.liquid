@@ -1,0 +1,196 @@
+<script data-section-id="{{section.id}}" type="application/json" id="reverto-customer-data">
+  {
+    "id": "{{customer.id}}",
+    "customer_id": "{{customer.id}}",
+    "email": "{{customer.email}}",
+    "customer_email": "{{customer.email}}",
+    "accepts_marketing" : {{customer.accepts_marketing}},
+    "created_at" : "{{customer.created_at}}",
+    "updated_at" : "{{customer.updated_at}}",
+    "default_address" : {{customer.default_address | json}},
+    "first_name": {{customer.first_name | json}},
+    "last_name": {{customer.last_name | json}},
+    "orders_count": "{{customer.orders_count}}",
+    "state" : "{{customer.state}}",
+    "total_spent" : "{{customer.total_spent}}",
+    "last_order_id" :"{{customer.last_order_id}}",
+    "note" : "{{customer.note}}",
+    "verified_email" :"{{customer.verified_email}}",
+    "multipass_identifier" :"{{customer.multipass_identifier}}",
+    "tax_exempt" :{{customer.tax_exempt}},
+    "tags" :"{{customer.tags}}",
+    "last_order_name" :"{{customer.last_order_name}}",
+    "money_with_currency_format" :{{shop.money_with_currency_format | json}},
+    "phone" :"{{customer.phone}}",
+    "meta_data": {% if shop.metafields.reverto_app.customer_schema %}
+      {{ shop.metafields.reverto_app.customer_schema }}
+    {% else %}
+      {}
+    {% endif %},
+    {% paginate customer.orders by 5 %}
+    "pages": "{{paginate.pages}}",
+    "previousPage":{% if paginate.previous.url %}"{{paginate.previous.url}}&section_id={{section.id}}"{% else %} "" {% endif %},
+    "currentPage":{{paginate.current_page | json}},
+    "nextPage": {% if paginate.next.url %}"{{paginate.next.url}}&section_id={{section.id}}"{% else %} "" {% endif %},
+    "orders":[
+      {% for order in customer.orders %}
+        {
+          "tags":{{ order.tags |json }},
+          "money_with_currency_format" :{{shop.money_with_currency_format | json}},
+          "total_refunded_amount_centes":{{order.total_refunded_amount}},
+          "total_refunded_amount":{{order.total_refunded_amount | money | json}},
+          "attributes": {{order.attributes | json }},
+          "billing_address": {{order.billing_address | json}},
+          "cancel_reason": {{order.cancel_reason | json }},
+          "cancel_reason_label": {{order.cancel_reason_label | json}},
+          "cancelled": {{order.cancelled | json}},
+          "order_cancelled_at": "{{order.cancelled_at}}",
+          "cart_level_discount_applications": [
+            {% for item in order.cart_level_discount_applications %}
+            {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "confirmation_number": {{order.confirmation_number | json}},
+          "order_created_at": "{{order.created_at}}",
+          "customer": {{order.customer | json}},
+          "customer_order_url": {{order.customer_order_url | json}},
+          "order_id": "{{order.customer_url |  replace:shop.url,"" |  replace:'/account/orders/',"" }}",
+          "customer_url": {{order.customer_order_url |  json }},
+          "discount_applications": [
+            {% for item in order.discount_applications %}
+            {
+              "target_selection":{{ item.target_selection | json }},
+              "title":{{ item.title | json }},
+              "value":{{ item.value | json }},
+              "type":{{ item.type | json }},
+              "value_type":{{ item.value_type | json }},
+              "total_allocated_amount":"{{ item.total_allocated_amount  | money }}"
+            }{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "email": {{order.email | json}},
+          "financial_status": {{order.financial_status | json}},
+          "financial_status_label": {{order.financial_status_label | json}},
+          "fulfillment_status": {{order.fulfillment_status |  json}},
+          "fulfillment_status_label": {{order.fulfillment_status_label | json}},
+          "id": {{order.id | json}},
+          "order_id": {{order.id}},
+          "item_count": {{order.item_count | json}},
+          "line_items": [
+             {% for item in order.line_items %}
+            {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "line_items_discounts":[
+              {% assign count = 0 %}
+              {% for item in order.line_items %}
+                {% for discount in item.discount_allocations %}
+                  {% unless count == 0 %},{% endunless%}
+                  {
+                  "line_id": "{{ item.id }}",
+                  "amount":"{{ discount.amount | money }}",
+                  "discount_application": {
+                            "target_selection":"{{ discount.discount_application.target_selection }}",
+                          "title":"{{ discount.discount_application.title }}",
+                          "value":"{{ discount.discount_application.value }}",
+                          "type":"{{ discount.discount_application.type }}",
+                          "value_type":"{{ discount.discount_application.value_type}}",
+                          "discount_application_index":{{ forloop.index0 }}
+                  },
+                  "total_allocated_amount":"{{ discount.total_allocated_amount }}"
+                }
+                  {% assign count = count | plus:1 %}
+        
+                {% endfor %}
+        
+            {% endfor %}
+          ],
+          "line_items_subtotal_price": {{order.line_items_subtotal_price |  json}},
+          "metafields": "{{order.metafields}}",
+          "order_name": {{order.name | json}},
+          "customer_name": {{order.customer.name | json}},
+          "note": {{order.note | json}},
+          "domain": "{{shop.domain}}",
+          "order_number": {{order.order_number | json}},
+          "order_status_url": {{order.order_status_url | json}},
+          "phone": {{order.phone | json}},
+          "pickup_in_store?": {{order.pickup_in_store | json}},
+          "shipping_address": {{order.shipping_address | json}},
+          "shipping_methods": [
+            {% for item in order.shipping_methods %}
+            {
+              "title":"{{item.title}}",
+              "handle":"{{item.handle}}",
+              "id":"{{item.id}}",
+              "price":{{item.price | money | json}},
+              "original_price":{{item.original_price | money | json}},
+              "discount_allocations":"{{item.discount_allocations | json}}",
+              "tax_lines":{{item.tax_lines | json}}
+            }{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "shipping_price": {{order.shipping_price |  money | json}},
+          "subtotal_line_items": [
+            {% for item in order.subtotal_line_items %}
+            {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "subtotal_price": {{order.subtotal_price | money | json}},
+          "tags": [
+            {% for item in order.tags %}
+            {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "tax_lines": [
+            {% for item in order.tax_lines %}
+            {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ],
+          "tax_price": {{order.tax_price |  money | json}},
+          "total_discounts": {{order.total_discounts | money | json}},
+          "total_duties": "{{order.total_duties |  json}}",
+          "total_net_amount": {{order.total_net_amount | money | json}},
+          "price": {{order.total_price | money | json}},
+          "total_price": {{order.total_price | money | json}},
+          "total_refunded_amount": {{order.total_refunded_amount | money | json}},
+          "transactions": [
+            {% for item in order.transactions %}
+              {{item | json}}{% unless forloop.last %},{% endunless%}
+            {% endfor %}
+          ]
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+    {% endpaginate %},
+    "addresses":[
+      {% for addresses in customer.addresses %}
+      {{addresses | json}}{% unless forloop.last %},{% endunless%}
+      {% endfor %}
+    ],
+    "accepts_marketing_updated_at" :"{{customer.accepts_marketing_updated_at}}",
+    "marketing_opt_in_level" :"{{customer.marketing_opt_in_level}}",
+     "tax_exemptions":[
+      {% for tax_exemptions in customer.tax_exemptions %}
+      {{tax_exemptions | json}}{% unless forloop.last %},{% endunless%}
+      {% endfor %}
+    ],
+    "sms_marketing_consent" : "{{customer.sms_marketing_consent}}",
+    "admin_graphql_api_id" : "{{customer.admin_graphql_api_id}}"
+  }
+</script>
+<script>
+  const customerMetafields = [];
+ 
+  {% for edit_meta in shop.metafields.reverto_app.customer_schema.value.editable_metafields %}
+    {% assign cus_meta = customer.metafields[edit_meta.namespace][edit_meta.key] %}
+    
+    {% if cus_meta.type != null %}
+     customerMetafields.push({
+        namespace: {{ edit_meta.namespace | json }},
+        key: {{ edit_meta.key | json }},
+        type: {{ cus_meta.type | json }},
+        value: {{ cus_meta.value | json }}
+      });
+    {% endif %}
+  {% endfor %}
+</script>

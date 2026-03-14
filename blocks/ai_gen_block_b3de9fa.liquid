@@ -1,0 +1,850 @@
+{% doc %}
+  @prompt
+    i  want accourdin 
+    1.like one heading 
+    2.four tab when the tab click show the accourdion okay. dont add border and hover only one do which tab is active that tab under line and that tab hlight other dim, i want max width accourdin 900px and tab also 900px and mobile reponsive match please, 1.here dont want tab near scrol button 
+    2.i want max-width:900px 
+    3.accourdin i want +, your doing same mistak i i want this section 900px only, 1. i want mobile responsive tab horizondal, please correctly
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-accordion-container-{{ ai_gen_id }} {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.container_padding }}px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-accordion-heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.heading_alignment }};
+    margin: 0 0 {{ block.settings.heading_bottom_spacing }}px 0;
+    color: {{ block.settings.heading_color }};
+    font-size: {{ block.settings.heading_size }}px;
+  }
+
+  .ai-accordion-tabs-wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    margin-bottom: {{ block.settings.tabs_bottom_spacing }}px;
+    border-bottom: 1px solid {{ block.settings.tab_border_color }};
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ai-accordion-tabs-wrapper-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-accordion-tabs-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.tab_spacing }}px;
+    min-width: max-content;
+  }
+
+  .ai-accordion-tab-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    padding: {{ block.settings.tab_padding }}px 0;
+    cursor: pointer;
+    font-size: {{ block.settings.tab_font_size }}px;
+    color: {{ block.settings.inactive_tab_color }};
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .ai-accordion-tab-{{ ai_gen_id }}.active {
+    color: {{ block.settings.active_tab_color }};
+    opacity: 1;
+  }
+
+  .ai-accordion-tab-{{ ai_gen_id }}.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: {{ block.settings.underline_thickness }}px;
+    background-color: {{ block.settings.active_tab_color }};
+  }
+
+  .ai-accordion-content-{{ ai_gen_id }} {
+    background-color: {{ block.settings.content_background_color }};
+    border-radius: {{ block.settings.content_border_radius }}px;
+    padding: {{ block.settings.content_padding }}px;
+  }
+
+  .ai-accordion-panel-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-accordion-panel-{{ ai_gen_id }}.active {
+    display: block;
+    animation: ai-accordion-fade-in-{{ ai_gen_id }} 0.3s ease-in-out;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.item_spacing }}px;
+    border-bottom: 1px solid {{ block.settings.accordion_border_color }};
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .ai-accordion-item-header-{{ ai_gen_id }} {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: {{ block.settings.accordion_item_padding }}px 0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: {{ block.settings.accordion_title_size }}px;
+    color: {{ block.settings.accordion_title_color }};
+    font-weight: 600;
+  }
+
+  .ai-accordion-item-icon-{{ ai_gen_id }} {
+    transition: transform 0.3s ease;
+    color: {{ block.settings.accordion_icon_color }};
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }}.open .ai-accordion-item-icon-{{ ai_gen_id }} {
+    transform: rotate(45deg);
+  }
+
+  .ai-accordion-item-content-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    color: {{ block.settings.accordion_content_color }};
+    font-size: {{ block.settings.accordion_content_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-accordion-item-{{ ai_gen_id }}.open .ai-accordion-item-content-{{ ai_gen_id }} {
+    max-height: 500px;
+    padding-bottom: {{ block.settings.accordion_content_padding }}px;
+  }
+
+  @keyframes ai-accordion-fade-in-{{ ai_gen_id }} {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .ai-accordion-container-{{ ai_gen_id }} {
+      max-width: 100%;
+      padding: {{ block.settings.container_padding | divided_by: 2 }}px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-accordion-tabs-{{ ai_gen_id }} {
+      gap: {{ block.settings.tab_spacing | divided_by: 2 }}px;
+    }
+
+    .ai-accordion-tab-{{ ai_gen_id }} {
+      font-size: {{ block.settings.tab_font_size | minus: 1 }}px;
+      padding: {{ block.settings.tab_padding | minus: 2 }}px {{ block.settings.tab_padding | minus: 4 }}px;
+      min-width: 100px;
+    }
+
+    .ai-accordion-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+      margin-bottom: {{ block.settings.heading_bottom_spacing | divided_by: 2 }}px;
+    }
+
+    .ai-accordion-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.content_padding | divided_by: 2 }}px;
+    }
+
+    .ai-accordion-item-header-{{ ai_gen_id }} {
+      font-size: {{ block.settings.accordion_title_size | minus: 2 }}px;
+      padding: {{ block.settings.accordion_item_padding | minus: 4 }}px 0;
+    }
+
+    .ai-accordion-item-content-{{ ai_gen_id }} {
+      font-size: {{ block.settings.accordion_content_size | minus: 1 }}px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .ai-accordion-tab-{{ ai_gen_id }} {
+      font-size: {{ block.settings.tab_font_size | minus: 2 }}px;
+      padding: {{ block.settings.tab_padding | minus: 4 }}px {{ block.settings.tab_padding | minus: 6 }}px;
+      min-width: 80px;
+    }
+
+    .ai-accordion-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+    }
+
+    .ai-accordion-item-header-{{ ai_gen_id }} {
+      font-size: {{ block.settings.accordion_title_size | minus: 3 }}px;
+    }
+
+    .ai-accordion-item-content-{{ ai_gen_id }} {
+      font-size: {{ block.settings.accordion_content_size | minus: 2 }}px;
+    }
+  }
+{% endstyle %}
+
+<accordion-tabs-{{ ai_gen_id }} class="ai-accordion-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.main_heading != blank %}
+    <h2 class="ai-accordion-heading-{{ ai_gen_id }}">{{ block.settings.main_heading }}</h2>
+  {% endif %}<div class="ai-accordion-tabs-wrapper-{{ ai_gen_id }}">
+    <div class="ai-accordion-tabs-{{ ai_gen_id }}">
+      {% for i in (1..4) %}
+        {% assign tab_title_key = 'tab_' | append: i | append: '_title' %}
+        {% assign tab_title = block.settings[tab_title_key] %}
+        {% if tab_title != blank %}
+          <button 
+            class="ai-accordion-tab-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}" 
+            data-tab="{{ i }}"
+          >
+            {{ tab_title }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="ai-accordion-content-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% assign tab_title_key = 'tab_' | append: i | append: '_title' %}
+      {% assign tab_title = block.settings[tab_title_key] %}
+      {% if tab_title != blank %}
+        <div class="ai-accordion-panel-{{ ai_gen_id }}{% if forloop.first %} active{% endif %}" data-panel="{{ i }}">
+          {% for j in (1..5) %}
+            {% assign item_title_key = 'tab_' | append: i | append: '_item_' | append: j | append: '_title' %}
+            {% assign item_content_key = 'tab_' | append: i | append: '_item_' | append: j | append: '_content' %}
+            {% assign item_title = block.settings[item_title_key] %}
+            {% assign item_content = block.settings[item_content_key] %}
+            {% if item_title != blank %}
+              <div class="ai-accordion-item-{{ ai_gen_id }}">
+                <button class="ai-accordion-item-header-{{ ai_gen_id }}">
+                  <span>{{ item_title }}</span>
+                  <svg class="ai-accordion-item-icon-{{ ai_gen_id }}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+                <div class="ai-accordion-item-content-{{ ai_gen_id }}">
+                  {% if item_content != blank %}
+                    {{ item_content }}
+                  {% else %}
+                    <p>Add content for this accordion item.</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</accordion-tabs-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class AccordionTabs{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.tabs = this.querySelectorAll('.ai-accordion-tab-{{ ai_gen_id }}');
+      this.panels = this.querySelectorAll('.ai-accordion-panel-{{ ai_gen_id }}');
+      this.accordionItems = this.querySelectorAll('.ai-accordion-item-{{ ai_gen_id }}');
+      
+      this.setupTabListeners();
+      this.setupAccordionListeners();
+    }
+
+    setupTabListeners() {
+      this.tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabNumber = tab.dataset.tab;
+          
+          this.tabs.forEach(t => t.classList.remove('active'));
+          this.panels.forEach(p => p.classList.remove('active'));
+          
+          tab.classList.add('active');
+          const targetPanel = this.querySelector(`[data-panel="${tabNumber}"]`);
+          if (targetPanel) {
+            targetPanel.classList.add('active');
+            this.accordionItems.forEach(item => {
+              if (targetPanel.contains(item)) {
+                item.classList.remove('open');
+              }
+            });
+          }
+        });
+      });
+    }
+
+    setupAccordionListeners() {
+      this.accordionItems.forEach(item => {
+        const header = item.querySelector('.ai-accordion-item-header-{{ ai_gen_id }}');
+        
+        header.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          
+          if (isOpen) {
+            item.classList.remove('open');
+          } else {
+            item.classList.add('open');
+          }
+        });
+      });
+    }
+  }
+
+  customElements.define('accordion-tabs-{{ ai_gen_id }}', AccordionTabs{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Tabbed accordion",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main heading"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Tab title",
+      "default": "General"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_item_1_title",
+      "label": "Item 1 title",
+      "default": "What is your return policy?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_item_1_content",
+      "label": "Item 1 content",
+      "default": "<p>We offer a 30-day return policy on all items.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_item_2_title",
+      "label": "Item 2 title",
+      "default": "How long does shipping take?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_item_2_content",
+      "label": "Item 2 content",
+      "default": "<p>Standard shipping takes 3-5 business days.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_item_3_title",
+      "label": "Item 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_item_3_content",
+      "label": "Item 3 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_item_4_title",
+      "label": "Item 4 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_item_4_content",
+      "label": "Item 4 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_item_5_title",
+      "label": "Item 5 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_item_5_content",
+      "label": "Item 5 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Tab title",
+      "default": "Shipping"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_item_1_title",
+      "label": "Item 1 title",
+      "default": "Do you ship internationally?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_item_1_content",
+      "label": "Item 1 content",
+      "default": "<p>Yes, we ship to most countries worldwide.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_item_2_title",
+      "label": "Item 2 title",
+      "default": "What are the shipping costs?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_item_2_content",
+      "label": "Item 2 content",
+      "default": "<p>Shipping costs vary by location and order size.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_item_3_title",
+      "label": "Item 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_item_3_content",
+      "label": "Item 3 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_item_4_title",
+      "label": "Item 4 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_item_4_content",
+      "label": "Item 4 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_item_5_title",
+      "label": "Item 5 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_item_5_content",
+      "label": "Item 5 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Tab title",
+      "default": "Returns"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_item_1_title",
+      "label": "Item 1 title",
+      "default": "How do I return an item?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_item_1_content",
+      "label": "Item 1 content",
+      "default": "<p>Contact our support team to initiate a return.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_item_2_title",
+      "label": "Item 2 title",
+      "default": "Who pays for return shipping?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_item_2_content",
+      "label": "Item 2 content",
+      "default": "<p>Return shipping is free for defective items.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_item_3_title",
+      "label": "Item 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_item_3_content",
+      "label": "Item 3 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_item_4_title",
+      "label": "Item 4 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_item_4_content",
+      "label": "Item 4 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_item_5_title",
+      "label": "Item 5 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_item_5_content",
+      "label": "Item 5 content"
+    },
+    {
+      "type": "header",
+      "content": "Tab 4"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_title",
+      "label": "Tab title",
+      "default": "Support"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_item_1_title",
+      "label": "Item 1 title",
+      "default": "How can I contact support?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_item_1_content",
+      "label": "Item 1 content",
+      "default": "<p>You can reach us via email or live chat.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_item_2_title",
+      "label": "Item 2 title",
+      "default": "What are your support hours?"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_item_2_content",
+      "label": "Item 2 content",
+      "default": "<p>We're available Monday-Friday, 9AM-6PM EST.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_item_3_title",
+      "label": "Item 3 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_item_3_content",
+      "label": "Item 3 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_item_4_title",
+      "label": "Item 4 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_item_4_content",
+      "label": "Item 4 content"
+    },
+    {
+      "type": "text",
+      "id": "tab_4_item_5_title",
+      "label": "Item 5 title"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_4_item_5_content",
+      "label": "Item 5 content"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "content_background_color",
+      "label": "Content background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "active_tab_color",
+      "label": "Active tab color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "inactive_tab_color",
+      "label": "Inactive tab color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Tab border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "accordion_title_color",
+      "label": "Accordion title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accordion_content_color",
+      "label": "Accordion content color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accordion_icon_color",
+      "label": "Accordion icon color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "accordion_border_color",
+      "label": "Accordion border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Container padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_bottom_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading bottom spacing",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "tabs_bottom_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Tabs bottom spacing",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "tab_spacing",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Tab spacing",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "tab_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Tab padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Content padding",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "label": "Accordion item spacing",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "accordion_item_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Accordion item padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "accordion_content_padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Accordion content padding",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tab font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "accordion_title_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Accordion title size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "accordion_content_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Accordion content size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Content border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "underline_thickness",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Active tab underline thickness",
+      "default": 2
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabbed accordion"
+    }
+  ]
+}
+{% endschema %}

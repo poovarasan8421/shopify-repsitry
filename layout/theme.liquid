@@ -1,0 +1,208 @@
+<!doctype html>
+<html
+  class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}"
+  lang="{{ request.locale.iso_code }}"
+>
+
+  <head>
+     <!--  Prefetch Start-->
+  {% comment %} <script>
+    var lazy_css=[],lazy_js=[];function _debounce(e,t=300){let a;return(...n)=>{clearTimeout(a),a=setTimeout(()=>e.apply(this,n),t)}}window.___mnag="userA"+(window.___mnag1||"")+"gent",window.___plt="plat"+(window.___mnag1||"")+"form";try{var e=navigator[window.___mnag],t=navigator[window.___plt];function a(e){return Object.keys(r[e]).sort().reduce(function(t,a){return t+r[e][a]},"")}window.__isPSA=t.indexOf("Linux x86")>-1&&0>e.indexOf("CrOS"),window.___mnag="!1",r=null}catch(n){window.__isPSA=!1;var r=null;window.___mnag="!1"}if(window.__isPSA=__isPSA,__isPSA)var uLTS=new MutationObserver(e=>{e.forEach(({addedNodes:e})=>{e.forEach(e=>{1===e.nodeType&&"FRAME"===e.tagName&&(e.setAttribute("loading","lazy"),e.setAttribute("data-src",e.src),e.removeAttribute("src")),1===e.nodeType&&"IMG"===e.tagName&&++imageCount>lazyImages&&e.setAttribute("loading","lazy"),1===e.nodeType&&"LINK"===e.tagName&&lazy_css.length&&lazy_css.forEach(t=>{e.href.includes(t)&&(e.setAttribute("data-href",e.href),e.removeAttribute("href"))}),1===e.nodeType&&"SCRIPT"===e.tagName&&(e.setAttribute("data-src",e.src),e.removeAttribute("src"),e.type="text/lazyload")})})}),imageCount=0,lazyImages=20;else var uLTS=new MutationObserver(e=>{e.forEach(({addedNodes:e})=>{e.forEach(e=>{1===e.nodeType&&"FRAME"===e.tagName&&(e.setAttribute("loading","lazy"),e.setAttribute("data-src",e.src),e.removeAttribute("src")),1===e.nodeType&&"IMG"===e.tagName&&++imageCount>lazyImages&&e.setAttribute("loading","lazy"),1===e.nodeType&&"LINK"===e.tagName&&lazy_css.length&&lazy_css.forEach(t=>{e.href.includes(t)&&(e.setAttribute("data-href",e.href),e.removeAttribute("href"))}),1===e.nodeType&&"SCRIPTS"===e.tagName&&(lazy_js.length&&lazy_js.forEach(t=>{e.src.includes(t)&&(e.setAttribute("data-src",e.src),e.removeAttribute("src"))}),e.innerHTML.includes("asyncLoad")&&(e.innerHTML=e.innerHTML.replace("if(window.attachEvent)","document.addEventListener('asyncLazyLoad',function(event){asyncLoad();});if(window.attachEvent)").replaceAll(", asyncLoad",", function(){}")),(e.innerHTML.includes("PreviewBarInjector")||e.innerHTML.includes("adminBarInjector"))&&(e.innerHTML=e.innerHTML.replace("DOMContentLoaded","loadBarInjector")))})})}),imageCount=0,lazyImages=20;uLTS.observe(document.documentElement,{childList:!0,subtree:!0});
+  </script> {% endcomment %}
+  <!--  Prefetch End-->
+  
+ <style>
+html.loading body {
+  {% comment %} opacity: 0; {% endcomment %}
+  pointer-events: none; /* prevent clicking while hidden */
+   overflow: hidden;
+}
+  html.loading body {
+    visibility: hidden;
+  }
+
+  html.loading #loader {
+    visibility: visible;
+  }
+
+
+
+html #loader {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0; /* top:0, bottom:0, left:0, right:0 */
+  z-index: 2147483647 !important;
+  display: none;
+}
+
+html.loading #loader {
+  display: flex;
+}
+
+/* Hide specific elements depending on screen */
+@media screen and (min-width: 750px){
+  body .loader-animation .hide-min-750 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px){
+  body .loader-animation .hide-max-749 {
+    display: none;
+  }
+}
+
+  
+
+  
+ {% comment %} body .loader-animation {
+    z-index: 99999999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  } {% endcomment %}
+   {% comment %}
+  .loader-animation .icon {
+    height: 5rem;
+    width: 5rem;
+    animation: spin 1s linear infinite;
+    stroke: rgba(107, 114, 128, 1);
+  }
+  
+  .loader-animation .loading-text {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    color: rgba(107, 114, 128, 1);
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  {% endcomment %} 
+</style> 
+
+    {%- render 'stylesheets' -%}
+
+    {%- if settings.favicon != blank -%}
+   
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+   {% if settings.loader-gif-img-mob != blank and settings.loader-gif-img-desktop != blank %} 
+     <script>
+     document.documentElement.classList.add('loading');
+   </script> 
+   {% endif %}
+   {% if settings.loader-gif-img-mob != blank and settings.loader-gif-img-desktop != blank %} 
+     {%- render 'loading-animation' -%}  
+    {% endif %}  
+    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
+    <link
+      rel="expect"
+      href="#MainContent"
+      blocking="render"
+      id="view-transition-render-blocker"
+    >
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   {% comment %} <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">   {% endcomment %}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-schemes' -%}
+
+  
+
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    {{ content_for_header }}
+   
+  <meta name="google-site-verification" content="SKz2TEfQVTeRXZslJHnwMdcPFRyD5ppUhXz6XrVhjW8" />
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELXBXXY26L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ELXBXXY26L');
+  </script>
+
+ <meta name="description" content="{{ shop.description | escape }}">
+ 
+  </head>
+
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }} page-{{ page.handle }}"> 
+   
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+    <div id="header-group">
+      {% sections 'header-group' %}
+    </div>
+     {% render 'kwikpass-add-button' %}
+    <main
+      id="MainContent"
+      {% comment %} class="content-for-layout" {% endcomment %}
+      role="main"
+      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
+      data-product-transition="{{ settings.transition_to_main_product }}"
+      data-template="{{ template }}"
+    >
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+   
+    {% # theme-check-disable ParserBlockingScript %}
+    {% comment %} <script src="{{ 'loader.js' | asset_url }}"></script> {% endcomment %}
+    <script src="{{ 'critical.js' | asset_url }}"></script>
+    
+    {% # theme-check-enable ParserBlockingScript %}
+    <script async src="https://returns.saara.io/static/scripts/return_portal.js" data-api-key="b818bc94-6d46-45d2-858f-6ba9836618da" data-width="1000" data-height="800" defer></script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.6/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11.2.6/swiper-bundle.min.css" rel="stylesheet">
+    {% render 'search-modal' %}
+
+    {% if settings.quick_add or settings.mobile_quick_add %}
+      {% render 'quick-add-modal' %}
+    {% endif %}
+    <!-- OTP Login App -->
+     {% comment %} {% section 'otp-section' %}  {% endcomment %}
+  {% if settings.loader-gif-img-mob != blank and settings.loader-gif-img-desktop != blank %} 
+    <script>
+      window.addEventListener("load", function () {
+        document.documentElement.classList.remove('loading');
+        {% comment %} document.getElementById('loader').style.display = 'none';  {% endcomment %}
+      });
+     </script> 
+    {% endif %}
+    {% comment %} {% render 'kwikpass' %} {% endcomment %}
+  </body>
+</html>

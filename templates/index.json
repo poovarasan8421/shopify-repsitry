@@ -1,0 +1,626 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "new_custom_hero_9mETDx": {
+      "type": "new-custom-hero",
+      "blocks": {
+        "slide_tGNh4V": {
+          "type": "slide",
+          "settings": {
+            "overlay_padding_top": 60,
+            "overlay_padding_bottom": 25,
+            "overlay_padding_top_mobile": 60,
+            "overlay_padding_bottom_mobile": 15,
+            "gradient_overlay_color": "rgba(0,0,0,0)",
+            "gradient_overlay_opacity": 45,
+            "image_desktop": "shopify://shop_images/Frame_70_3.jpg",
+            "image_mobile": "shopify://shop_images/home_new_mobile_banner.jpg",
+            "heading": "ONE GREAT THING AFTER  ANOTHER",
+            "head-color": "#000000",
+            "heading_mobile": "POUR THE PLAYFUL",
+            "mob-head-color": "#ffffff",
+            "text1": "DELIGHT IN PROGRESSION",
+            "txt-color": "#000000",
+            "mob-text1": "LET THE FUN OVERFLOW",
+            "mob-txt-color": "#ffffff",
+            "button_text": "DISCOVER THE SWING",
+            "button_text_mobile": "DISCOVER ALL BAGS",
+            "button_link": "https://wearlafoli.com/collections/swing",
+            "button_new_tab": false,
+            "button_background": "#8a1d41",
+            "button_text_color": "#ffffff",
+            "mob_button_background": "#8a1d41",
+            "mob_button_text_color": "#ffffff",
+            "subtext_link": "",
+            "open_new_tab": false,
+            "alignment": "left",
+            "position": "middle-left",
+            "gap": 7,
+            "mobile_alignment": "center",
+            "mobile_position": "top-center",
+            "mobile_gap": 0
+          }
+        },
+        "slide_LTFcWB": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "overlay_padding_top": 60,
+            "overlay_padding_bottom": 25,
+            "overlay_padding_top_mobile": 60,
+            "overlay_padding_bottom_mobile": 15,
+            "gradient_overlay_color": "rgba(0,0,0,0)",
+            "gradient_overlay_opacity": 45,
+            "image_desktop": "shopify://shop_images/Frame_70_3.jpg",
+            "image_mobile": "shopify://shop_images/About_Us_4.jpg",
+            "heading": "ONE GREAT THING AFTER  ANOTHER",
+            "head-color": "#000000",
+            "heading_mobile": "POUR THE PLAYFUL",
+            "mob-head-color": "#ffffff",
+            "text1": "DELIGHT IN PROGRESSION",
+            "txt-color": "#000000",
+            "mob-text1": "LET THE FUN OVERFLOW",
+            "mob-txt-color": "#ffffff",
+            "button_text": "DISCOVER THE SWING",
+            "button_text_mobile": "DISCOVER ALL BAGS",
+            "button_link": "https://wearlafoli.com/collections/swing",
+            "button_new_tab": false,
+            "button_background": "#8a1d41",
+            "button_text_color": "#ffffff",
+            "mob_button_background": "#8a1d41",
+            "mob_button_text_color": "#ffffff",
+            "subtext_link": "https://wearlafoli.com/collections/swing",
+            "open_new_tab": false,
+            "alignment": "left",
+            "position": "middle-left",
+            "gap": 7,
+            "mobile_alignment": "center",
+            "mobile_position": "top-center",
+            "mobile_gap": 0
+          }
+        },
+        "slide_aVp8MQ": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "overlay_padding_top": 25,
+            "overlay_padding_bottom": 25,
+            "overlay_padding_top_mobile": 15,
+            "overlay_padding_bottom_mobile": 15,
+            "gradient_overlay_color": "#000000",
+            "gradient_overlay_opacity": 45,
+            "image_desktop": "shopify://shop_images/Lafoli_Packaging_Desktop.jpg",
+            "image_mobile": "shopify://shop_images/About_Us_4.jpg",
+            "heading": "“NEW COLLECTION”",
+            "head-color": "",
+            "heading_mobile": "“NEW COLLECTION mob”",
+            "mob-head-color": "",
+            "text1": "“NEW COLLECTION desk”",
+            "txt-color": "",
+            "mob-text1": "“NEW COLLECTION mob”",
+            "mob-txt-color": "",
+            "button_text": "DISCOVER NOW",
+            "button_text_mobile": "",
+            "button_link": "",
+            "button_new_tab": false,
+            "button_background": "#000000",
+            "button_text_color": "#ffffff",
+            "mob_button_background": "#000000",
+            "mob_button_text_color": "#ffffff",
+            "subtext_link": "",
+            "open_new_tab": false,
+            "alignment": "center",
+            "position": "bottom-center",
+            "gap": 16,
+            "mobile_alignment": "center",
+            "mobile_position": "middle-center",
+            "mobile_gap": 16
+          }
+        }
+      },
+      "block_order": [
+        "slide_tGNh4V",
+        "slide_LTFcWB",
+        "slide_aVp8MQ"
+      ],
+      "name": "New Custom Hero",
+      "settings": {
+        "arrow": false,
+        "dots": true,
+        "autoplay": false,
+        "loop": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "disabled": true,
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 22,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.products_grid",
+      "settings": {
+        "collection": "home-page",
+        "view-btn": false,
+        "view-btn-txt": "SHOP NOW",
+        "btn-bg": "",
+        "btn-color": "",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 4,
+        "rows_gap": 5,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 10,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 6,
+        "padding-block-end": 8,
+        "padding-mobile": 4,
+        "padding-bottom-mobile": 4
+      }
+    },
+    "custom_two_image_RiDV9c": {
+      "type": "custom-two-image",
+      "blocks": {
+        "image_block_dQgkRf": {
+          "type": "image_block",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Lafoli_Home_Page.jpg",
+            "mobile_image": "shopify://shop_images/Lafoli_Home_Page_1.jpg",
+            "heading": "PERFECTLY BALANCED",
+            "head-color": "#ffffff",
+            "text": "BETWEEN STATEMENT <br> AND EASE",
+            "text-color": "#ffffff",
+            "url": "shopify://collections/swing",
+            "url-name": "SHOP THE COLLECTION",
+            "url-color": "#ffffff",
+            "text_gap": 0,
+            "alignment": "left",
+            "position": "top-left",
+            "padding_left": 0,
+            "padding_bottom": 0,
+            "mobile_padding_left": 0,
+            "mobile_padding_bottom": 0
+          }
+        },
+        "image_block_Nyy4z4": {
+          "type": "image_block",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Lafoli_Home_Page_2.jpg",
+            "mobile_image": "shopify://shop_images/Lafoli_Home_Page_3.jpg",
+            "heading": "POUR THE PLAYFUL",
+            "head-color": "#ffffff",
+            "text": "LET THE FUN <br> OVERFLOW",
+            "text-color": "#ffffff",
+            "url": "shopify://products/swing-limoncello",
+            "url-name": "SHOP LIMONCELLO",
+            "url-color": "#ffffff",
+            "text_gap": 0,
+            "alignment": "right",
+            "position": "bottom-right",
+            "padding_left": 62,
+            "padding_bottom": 66,
+            "mobile_padding_left": 30,
+            "mobile_padding_bottom": 30
+          }
+        }
+      },
+      "block_order": [
+        "image_block_dQgkRf",
+        "image_block_Nyy4z4"
+      ],
+      "name": "custom two image",
+      "settings": {
+        "padding_desk_top": 0,
+        "padding_desk_bottom": 0,
+        "padding-mob-top": 0,
+        "padding-mob-bottom": 0
+      }
+    },
+    "new_custom_hero_mwHtcT": {
+      "type": "new-custom-hero",
+      "blocks": {
+        "slide_aKp3XF": {
+          "type": "slide",
+          "settings": {
+            "overlay_padding_top": 25,
+            "overlay_padding_bottom": 25,
+            "overlay_padding_top_mobile": 15,
+            "overlay_padding_bottom_mobile": 15,
+            "gradient_overlay_color": "rgba(0,0,0,0)",
+            "gradient_overlay_opacity": 0,
+            "image_desktop": "shopify://shop_images/Lafoli_Packaging_Desktop.jpg",
+            "image_mobile": "shopify://shop_images/3.jpg",
+            "heading": "WE KNOW HOW TO MAKE <br>AN ENTRANCE",
+            "head-color": "#000000",
+            "heading_mobile": "WRAPPED IN LAFOLI CHEER!",
+            "mob-head-color": "#ffffff",
+            "text1": "IN OUR SIGNATURE PACKAGING, FROM OUR HANDS TO YOURS.",
+            "txt-color": "#000000",
+            "mob-text1": "ORDERS WILL BE DELIVERED IN OUR SPECIAL CHRISTMAS PACKAGING",
+            "mob-txt-color": "#eef1ea",
+            "button_text": "",
+            "button_text_mobile": "",
+            "button_link": "https://wearlafoli.com/collections/swing",
+            "button_new_tab": false,
+            "button_background": "#8a1d41",
+            "button_text_color": "#ffffff",
+            "mob_button_background": "#000000",
+            "mob_button_text_color": "#ffffff",
+            "subtext_link": "",
+            "open_new_tab": false,
+            "alignment": "left",
+            "position": "middle-left",
+            "gap": 7,
+            "mobile_alignment": "center",
+            "mobile_position": "top-center",
+            "mobile_gap": 0
+          }
+        }
+      },
+      "block_order": [
+        "slide_aKp3XF"
+      ],
+      "name": "New Custom Hero",
+      "settings": {
+        "arrow": false,
+        "dots": false,
+        "autoplay": false,
+        "loop": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "customers_testimonials_erkaXV": {
+      "type": "customers-testimonials",
+      "blocks": {
+        "heading_cwXPiG": {
+          "type": "heading",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000004569.jpg",
+            "mob-image": "shopify://shop_images/Frame_1000004568.jpg",
+            "rating": 5,
+            "heading": "\"ALWAYS GETS THE ATTENTION!\"",
+            "review-content": "I'm constantly asked where I got this from! It's really well made, super spacious and the tiny charm is the cutest.",
+            "review-name": "PURNIMA SACHDEVA   VISUAL DESIGNER, BOMBAY"
+          }
+        },
+        "heading_GKKaq4": {
+          "type": "heading",
+          "settings": {
+            "image": "shopify://shop_images/d1b8d2da-e2df-44fe-85ea-8e6080ed9df1_1_2.jpg",
+            "mob-image": "shopify://shop_images/Frame_1000004583.jpg",
+            "rating": 4.5,
+            "heading": "\"SPACIOUS AND SLEEK!\"",
+            "review-content": "Instantly upgrades my whole look! The finish and feel is amazing. It holds so much (I carry two phones) without looking bulky or losing shape. Love it!",
+            "review-name": "AKANKSHA SINGH MARKETING MANAGER, DELHI"
+          }
+        },
+        "heading_4kfrbt": {
+          "type": "heading",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000004575.jpg",
+            "mob-image": "shopify://shop_images/Frame_1000004574.jpg",
+            "rating": 5,
+            "heading": "\"FITS EVERYTHING AND LOOKS GREAT!\"",
+            "review-content": "Wear my Swing bag everywhere - from cafes to running errands. Holds so much, easy to style, and the quality feels so luxe!",
+            "review-name": "KUSHA SHAKYA   PRODUCT MANAGER, BANGALORE"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cwXPiG",
+        "heading_GKKaq4",
+        "heading_4kfrbt"
+      ],
+      "name": "customers testimonials",
+      "settings": {
+        "head": "✨ YOU CARRY US BEST ✨",
+        "bg_clr": "#ffffff",
+        "border_clr": "#8a1d41",
+        "txt_clr": "#000000",
+        "background_image_desktop": "shopify://shop_images/Frame_1000004567_1.jpg",
+        "background_image_mobile": "shopify://shop_images/artboard_1_720.jpg",
+        "loop": true,
+        "autoplay": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mob": 0,
+        "padding_bottom_mob": 0
+      }
+    },
+    "new_custom_hero_TLUqM3": {
+      "type": "new-custom-hero",
+      "blocks": {
+        "slide_raQp4f": {
+          "type": "slide",
+          "settings": {
+            "overlay_padding_top": 25,
+            "overlay_padding_bottom": 25,
+            "overlay_padding_top_mobile": 15,
+            "overlay_padding_bottom_mobile": 15,
+            "gradient_overlay_color": "rgba(0,0,0,0)",
+            "gradient_overlay_opacity": 0,
+            "image_desktop": "shopify://shop_images/About_us_-_Home_3.jpg",
+            "image_mobile": "shopify://shop_images/About_us_-_Home_2.jpg",
+            "heading": "WELCOME TO OUR WORLD",
+            "head-color": "",
+            "heading_mobile": "WELCOME TO OUR WORLD",
+            "mob-head-color": "",
+            "text1": "We’re a brand born from a little madness, held together by craft, and fueled by feeling.",
+            "txt-color": "#1c1c1c",
+            "mob-text1": "We’re a brand born from a little madness, held together by craft, and fuelled by feeling. <br>",
+            "mob-txt-color": "#000000",
+            "button_text": "ABOUT US",
+            "button_text_mobile": "ABOUT US",
+            "button_link": "shopify://pages/about-us",
+            "button_new_tab": false,
+            "button_background": "#8a1d41",
+            "button_text_color": "#ffffff",
+            "mob_button_background": "#000000",
+            "mob_button_text_color": "#ffffff",
+            "subtext_link": "",
+            "open_new_tab": false,
+            "alignment": "center",
+            "position": "top-center",
+            "gap": 16,
+            "mobile_alignment": "center",
+            "mobile_position": "top-center",
+            "mobile_gap": 15
+          }
+        }
+      },
+      "block_order": [
+        "slide_raQp4f"
+      ],
+      "name": "New Custom Hero",
+      "settings": {
+        "arrow": false,
+        "dots": false,
+        "autoplay": false,
+        "loop": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "policy_faq_acc_xqCB6w": {
+      "type": "policy-faq-acc",
+      "blocks": {
+        "faq_DNrwXD": {
+          "type": "faq",
+          "settings": {
+            "ques": "Where are Lafoli products designed?",
+            "ans": "Every Lafoli begins its journey in our HQ, where ideas are sketched, shaped, and fussed over (just a little). After that, we team up with global manufacturers to make sure every piece meets our standards of beauty and craftsmanship."
+          }
+        },
+        "faq_EjAJWP": {
+          "type": "faq",
+          "settings": {
+            "ques": "How do I take care of my Lafoli products?",
+            "ans": "A little love goes a long way in keeping your Lafoli looking its best! When not in use, store it in the provided Lafoli dust bag. After a day out, wipe gently with a soft, dry cloth."
+          }
+        },
+        "faq_BTT3jx": {
+          "type": "faq",
+          "settings": {
+            "ques": "How long does delivery take?",
+            "ans": "Your Lafoli piece typically arrives within 3–5 working days, ready to slip effortlessly into your life."
+          }
+        }
+      },
+      "block_order": [
+        "faq_DNrwXD",
+        "faq_EjAJWP",
+        "faq_BTT3jx"
+      ],
+      "name": "Policy faq",
+      "settings": {
+        "enable-cover-image": false,
+        "main-head": "QUESTIONS? Happy to help",
+        "desk-img": "shopify://shop_images/faq_desktop_42bc2d0c-7da3-48d2-8a64-e5fb2f6944bc.jpg",
+        "mob-img": "shopify://shop_images/imgi_1_lafoli_faq_mb-min.jpg",
+        "text-align": "left",
+        "bg__clr": "",
+        "heading__clr": "#000000",
+        "acc_text__clr": "#000000",
+        "acc_cnt__clr": "#000000",
+        "img1": "shopify://shop_images/delivery.png",
+        "text1": "Free <br> Shipping",
+        "img2": "shopify://shop_images/cash.png",
+        "text2": "Cash oN <br> DELIVERY",
+        "img3": "shopify://shop_images/returns.png",
+        "text3": "7 day <br> return",
+        "img4": "shopify://shop_images/mike.png",
+        "text4": "Quick <br> assistance",
+        "desktop-padding-top": 0,
+        "desktop-padding-bottom": 0,
+        "mobile-padding-top": 0,
+        "mobile-padding-bottom": 0
+      }
+    }
+  },
+  "order": [
+    "new_custom_hero_9mETDx",
+    "product_list_fa6P9H",
+    "custom_two_image_RiDV9c",
+    "new_custom_hero_mwHtcT",
+    "customers_testimonials_erkaXV",
+    "new_custom_hero_TLUqM3",
+    "policy_faq_acc_xqCB6w"
+  ]
+}

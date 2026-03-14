@@ -1,0 +1,58 @@
+{%- doc -%}
+  Renders the search action button.
+
+  @param {string} [style] - The style of the search action.
+  @param {string} [class] - Additional classes for the search action.
+
+  @example
+  {% render 'search', style: 'default', class: 'custom-class' %}
+{%- enddoc -%}
+
+{% unless style == 'none' %}
+  <search-button class="search-action{% if class != blank %} {{ class | strip }}{% endif %}">
+    <button
+      on:click="#search-modal/showDialog"
+      class="button button-unstyled search-modal__button header-actions__action"
+      aria-label="{{ 'accessibility.open_search_modal' | t }}"
+    >
+      <span
+        aria-hidden="true"
+        class="svg-wrapper"
+      >
+       {% comment %} {{ 'icon-search.svg' | inline_asset_content }} {% endcomment %}
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M10.6069 5.79618C10.6068 3.13978 8.45351 0.986339 5.79695 0.98619C3.14026 0.98619 0.98633 3.13969 0.98619 5.79618C0.98619 8.45278 3.14017 10.6069 5.79695 10.6069C8.4536 10.6068 10.6069 8.45269 10.6069 5.79618ZM11.5931 5.79618C11.5931 8.99739 8.99821 11.593 5.79695 11.5931C2.59555 11.5931 0 8.99748 0 5.79618C0.000140164 2.59499 2.59564 0 5.79695 0C8.99813 0.000149296 11.593 2.59508 11.5931 5.79618Z" fill="black"/>
+        <path d="M13.8594 13.1622C14.0518 13.3548 14.0519 13.667 13.8594 13.8594C13.667 14.0518 13.3547 14.0517 13.1622 13.8594L13.8594 13.1622ZM9.30448 9.30448C9.4729 9.13606 9.73332 9.11511 9.9247 9.2413L10.0025 9.30448L13.8594 13.1622L13.5104 13.5104L13.1622 13.8594L9.30448 10.0025L9.2413 9.9247C9.11511 9.73333 9.13606 9.47291 9.30448 9.30448Z" fill="black"/>
+       </svg>
+
+      </span>
+    </button>
+  </search-button>
+{% endunless %}
+
+{% stylesheet %}
+  .search-action {
+    --search-border-radius: var(--style-border-radius-inputs);
+    --search-border-width: var(--style-border-width-inputs);
+
+    display: flex;
+  }
+
+  .header__column--center .search-action {
+    width: auto;
+    flex-grow: 1;
+  }
+
+  :is(.header__column--left, .header__column--center) .search-action {
+    @media screen and (min-width: 750px) {
+      margin-inline: calc(var(--padding-lg) * -1);
+    }
+  }
+
+  .header__column--right .search-action {
+    @media screen and (min-width: 750px) {
+      margin-inline: calc(var(--gap-md) * -1) calc(var(--gap-xs) * -1);
+    }
+  }
+{% endstylesheet %}

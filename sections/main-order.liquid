@@ -1,0 +1,600 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="customer order section-{{ section.id }}-padding">
+  <div>
+    {% comment %} <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1> {% endcomment %}
+    <a href="{{ routes.account_url }}" class="account-details">
+      {% comment %} {{ 'customer.account.return' | t }} {% endcomment %}
+      <span> <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.5 10.7071L0.5 5.70711L5.5 0.707108" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+     </svg></span>
+     <span>
+     Back
+     </span>
+    </a>
+  </div>
+
+  <div class="overall-wrap-details">
+    <div>
+      <h2 class="main-title" style="text-align:center">
+        {% comment %} {{ 'customer.order.title' | t: name: order.name }} {% endcomment %}
+       My order
+      </h2>
+      {% comment %} {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
+      <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
+      {%- if order.cancelled -%}
+        {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
+        <p>{{ 'customer.order.cancelled_html' | t: date: cancelled_at }}</p>
+        <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}</p>
+      {%- endif -%} {% endcomment %}
+
+      <table role="table" class="order-details">
+        <caption class="visually-hidden">
+          {{ 'customer.order.title' | t: name: order.name }}
+        </caption>
+        {% comment %} <thead role="rowgroup">
+          <tr role="row">
+            <th id="ColumnProduct" scope="col" role="columnheader">{{ 'customer.order.product' | t }}</th>
+            <th id="ColumnSku" scope="col" role="columnheader">{{ 'customer.order.sku' | t }}</th>
+            <th id="ColumnPrice" scope="col" role="columnheader">{{ 'customer.order.price' | t }}</th>
+            <th id="ColumnQuantity" scope="col" role="columnheader">{{ 'customer.order.quantity' | t }}</th>
+            <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead> {% endcomment %}
+        <tbody role="rowgroup">
+          {%- for line_item in order.line_items -%}
+            <tr role="row" class="order-items">
+               {% if line_item.image != blank %}
+              <td id={{ line_item.image }} class="order-img-wrap">
+                <img src="{{ line_item.image | image_url }}"> 
+             </td>
+              {% endif %}
+              <td
+                id="Row{{ line_item.key }} RowOrder"
+                headers="ColumnProduct"
+                role="rowheader"
+                scope="row"
+                data-label="{{ 'customer.order.product' | t }}"
+                class="order-product-title"
+              >
+                <div class="order-title-share-btn">
+                  {%- if line_item.url != blank -%}
+                    <a href="{{ line_item.url }}" class="order-pdp-title line-item-title">{{ line_item.title | escape }}</a>
+                  {%- else -%}
+                    <p>{{ line_item.title | escape }}</p>
+                  {%- endif -%}
+                  <p class="shar-btn"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M7.9987 3.33464V9.0013M9.9987 4.66797L7.9987 2.66797L5.9987 4.66797M3.33203 8.0013V11.3346C3.33203 11.6883 3.47251 12.0274 3.72256 12.2774C3.9726 12.5275 4.31174 12.668 4.66536 12.668H11.332C11.6857 12.668 12.0248 12.5275 12.2748 12.2774C12.5249 12.0274 12.6654 11.6883 12.6654 11.3346V8.0013" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></span></p>
+                  {%- assign property_size = line_item.properties | size -%}
+                  {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+                    <div class="properties">
+                      {%- unless line_item.product.has_only_default_variant -%}
+                        <span>
+                          {{ line_item.variant.title | escape }}
+                        </span>
+                      {%- endunless -%}
+                      {%- unless line_item.selling_plan_allocation == null -%}
+                        <span>
+                          {{ line_item.selling_plan_allocation.selling_plan.name }}
+                        </span>
+                      {%- endunless -%}
+                      {%- if property_size != 0 -%}
+                        {%- for property in line_item.properties -%}
+                          {% assign property_first_char = property.first | slice: 0 %}
+                          {%- if property.last != blank and property_first_char != '_' -%}
+                            <span>{{ property.first }}:</span>
+                            <span>
+                              {%- if property.last contains '/uploads/' -%}
+                                <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                              {%- else -%}
+                                {{ property.last }}
+                              {%- endif -%}
+                            </span>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                    </div>
+                  {%- endunless -%}
+
+                  {%- if line_item.line_level_discount_allocations != blank -%}
+                    <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                      {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                        <li>
+                          <span class="svg-wrapper">
+                            {{- 'icon-discount.svg' | inline_asset_content -}}
+                          </span>
+                          {{- discount_allocation.discount_application.title | escape }} (-
+                          {{- discount_allocation.amount | money -}}
+                          )
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                  {% comment %} {%- if line_item.fulfillment -%}
+                    <div class="fulfillment">
+                      {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                      <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+
+                      {%- if line_item.fulfillment.tracking_url -%}
+                        <a href="{{ line_item.fulfillment.tracking_url }}">
+                          {{ 'customer.order.track_shipment' | t }}
+                        </a>
+                      {%- endif -%}
+                      <span>
+                        {{ line_item.fulfillment.tracking_company }}
+                        {%- if line_item.fulfillment.tracking_number -%}
+                          #{{ line_item.fulfillment.tracking_number }}
+                        {%- endif -%}
+                      </span>
+                    </div>
+                  {%- endif -%} {% endcomment %}
+                {% unless line_item.product.tags contains 'gift_pdp' %}
+                <a href="https://lafoli.ecoreturns.ai/apps/ecoreturnsai" class="return-option-link">Return</a>
+                {% endunless %}
+                </div>
+              </td>
+              {% comment %} <td
+                headers="Row{{ line_item.key }} ColumnSku"
+                role="cell"
+                data-label="{{ 'customer.order.sku' | t }}"
+              >
+                {{ line_item.sku }}
+              </td> {% endcomment %}
+              {% comment %} <td
+                headers="Row{{ line_item.key }} ColumnPrice"
+                role="cell"
+                data-label="{{ 'customer.order.price' | t }}"
+              >
+                {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
+                  <dl>
+                    {%- if line_item.original_price != line_item.final_price -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                      </dt>
+                      <dd class="regular-price">
+                        <s>{{ line_item.original_price | money }}</s>
+                      </dd>
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                      </dt>
+                      <dd>
+                        <span>{{ line_item.final_price | money }}</span>
+                      </dd>
+                    {%- else -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                      </dt>
+                      <dd>
+                        {{ line_item.original_price | money }}
+                      </dd>
+                    {%- endif -%}
+                    {%- if line_item.unit_price_measurement -%}
+                      <dt>
+                        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                      </dt>
+                      <dd class="unit-price">
+                        {% render 'unit-price', price: line_item.unit_price, measurement: line_item.unit_price_measurement, hide_accessibility_label: true %}
+                      </dd>
+                    {%- endif -%}
+                  </dl>
+                {%- else -%}
+                  <span>{{ line_item.final_price | money }}</span>
+                {%- endif -%}
+              </td>
+              <td
+                headers="Row{{ line_item.key }} ColumnQuantity"
+                role="cell"
+                data-label="{{ 'customer.order.quantity' | t }}"
+              >
+                {{ line_item.quantity }}
+              </td>
+              <td
+                headers="Row{{ line_item.key }} ColumnTotal"
+                role="cell"
+                data-label="{{ 'customer.order.total' | t }}"
+              >
+                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                  <dl>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                    </dt>
+                    <dd class="regular-price">
+                      <s>{{ line_item.original_line_price | money }}</s>
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <span>{{ line_item.final_line_price | money }}</span>
+                    </dd>
+                  </dl>
+                {%- else -%}
+                  {{ line_item.original_line_price | money }}
+                {%- endif -%}
+              </td> {% endcomment %}
+              
+            </tr>
+            <td class="buy-it-again">
+            <a href="{{ line_item.url }}">
+            <span> Buy it again </span>
+            <span><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.25 7.5L18.75 15L11.25 22.5" stroke="black" stroke-linecap="square" stroke-linejoin="round"></path>
+          </svg></span> 
+            </a>
+          </td>
+          {%- endfor -%}
+        </tbody>
+        {% comment %} <tfoot role="rowgroup">
+           <div class="accordion-content-wrap">
+             <h2 class="accordion-item-header">order info</h2>
+          <div class="content-wrap">    
+          <tr role="row">
+            <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
+              {{ 'customer.order.subtotal' | t }}
+            </td>
+            <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
+              {{ order.line_items_subtotal_price | money }}
+            </td>
+          </tr>
+          {%- if order.cart_level_discount_applications != blank -%}
+            <tr role="row">
+              {%- for discount_application in order.cart_level_discount_applications -%}
+                <td id="RowDiscount" role="rowheader" scope="row" colspan="4">
+                  {{ 'customer.order.discount' | t }}
+                  <span class="cart-discount">
+                    <span class="svg-wrapper">
+                      {{- 'icon-discount.svg' | inline_asset_content -}}
+                    </span>
+                    {{- discount_application.title | escape -}}
+                  </span>
+                </td>
+                <td headers="RowDiscount" role="cell" data-label="{{ 'customer.order.discount' | t }}">
+                  <div>
+                    <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                    <span class="cart-discount">
+                      <span class="svg-wrapper">
+                        {{- 'icon-discount.svg' | inline_asset_content -}}
+                      </span>
+                      {{- discount_application.title | escape -}}
+                    </span>
+                  </div>
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endif -%}
+          {%- for shipping_method in order.shipping_methods -%}
+            <tr role="row">
+              <td id="RowShipping" role="rowheader" scope="row" colspan="4">
+                {{ 'customer.order.shipping' | t }} ({{ shipping_method.title | escape }})
+              </td>
+              <td
+                headers="RowShipping"
+                role="cell"
+                data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title | escape }})"
+              >
+                {{ shipping_method.price | money }}
+              </td>
+            </tr>
+          {%- endfor -%}
+          {%- for tax_line in order.tax_lines -%}
+            <tr role="row">
+              <td id="RowTax" role="rowheader" scope="row" colspan="4">
+                {{ 'customer.order.tax' | t }} ({{ tax_line.title | escape }}
+                {{ tax_line.rate | times: 100 }}%)
+              </td>
+              <td
+                headers="RowTax"
+                role="cell"
+                data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title | escape }} {{ tax_line.rate | times: 100 }}%)"
+              >
+                {{ tax_line.price | money }}
+              </td>
+            </tr>
+          {%- endfor -%}
+          {%- if order.total_duties -%}
+            <tr role="row">
+              <td id="RowDuties" role="rowheader" scope="row" colspan="4">{{ 'customer.order.total_duties' | t }}</td>
+              <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
+                {{ order.total_duties | money }}
+              </td>
+            </tr>
+          {%- endif -%}
+          {%- if order.total_refunded_amount > 0 -%}
+            <tr role="row">
+              <td id="RowTotalRefund" role="rowheader" scope="row" colspan="3">
+                {{ 'customer.order.total_refunded' | t }}
+              </td>
+              <td
+                headers="RowTotalRefund"
+                role="cell"
+                colspan="2"
+                data-label="{{ 'customer.order.total_refunded' | t }}"
+              >
+                -{{ order.total_refunded_amount | money_with_currency }}
+              </td>
+            </tr>
+          {%- endif -%}
+          <tr role="row">
+            <td id="RowTotal" role="rowheader" scope="row" colspan="3">{{ 'customer.order.total' | t }}</td>
+            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
+              {{ order.total_net_amount | money_with_currency }}
+            </td>
+          </tr>
+           </div>
+          </div>
+        </tfoot> {% endcomment %}
+
+
+ 
+
+      </table>
+    </div>
+    
+    <div class="accordion-wrap">
+      <div class="customer-address">
+        <div class="accordion-content-wrap">
+        <h2 class="accordion-item-header">{{ 'customer.order.billing_address' | t }}
+          <span><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.25 7.5L18.75 15L11.25 22.5" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+          </svg>
+       </span>  
+        </h2>
+        <div class="content-wrap">
+        <p>
+          <strong>{{ 'customer.order.payment_status' | t }}:</strong>
+          {{ order.financial_status_label }}
+        </p>
+        {{ order.billing_address | format_address }}
+      </div>
+      </div>
+      </div>
+
+      <div>
+        <div class="accordion-content-wrap">
+        <h2 class="accordion-item-header">
+          {% comment %} {{ 'customer.order.shipping_address' | t }}  {% endcomment %}
+           Delivered to
+        <span><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.25 7.5L18.75 15L11.25 22.5" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+          </svg>
+       </span>   
+        </h2>
+        <div class="content-wrap">
+        <p>
+          <strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>
+          {{ order.fulfillment_status_label }}
+        </p>
+        {{ order.shipping_address | format_address }}
+        </div>
+        </div>
+      </div>
+     <div class="order-details">
+  <div class="accordion-content-wrap">
+    <h2 class="accordion-item-header">
+      Order Info
+      <span>
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.25 7.5L18.75 15L11.25 22.5" stroke="black" stroke-linecap="square" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </h2>
+
+    <div class="content-wrap">
+      <div class="order-info">
+
+        <div class="order-info-row">
+          <div class="order-info-label" id="RowSubtotal">
+            {{ 'customer.order.subtotal' | t }}
+          </div>
+          <div class="order-info-value">
+            {{ order.line_items_subtotal_price | money }}
+          </div>
+        </div>
+
+        {%- if order.cart_level_discount_applications != blank -%}
+          {%- for discount_application in order.cart_level_discount_applications -%}
+            <div class="order-info-row">
+              <div class="order-info-label">
+                {{ 'customer.order.discount' | t }}
+              </div>
+              <div class="order-info-value">
+                -{{ discount_application.total_allocated_amount | money }}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- for shipping_method in order.shipping_methods -%}
+          <div class="order-info-row">
+            <div class="order-info-label">
+              {{ 'customer.order.shipping' | t }} ({{ shipping_method.title | escape }})
+            </div>
+            <div class="order-info-value">
+              {{ shipping_method.price | money }}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- for tax_line in order.tax_lines -%}
+          <div class="order-info-row">
+            <div class="order-info-label">
+              {{ 'customer.order.tax' | t }} ({{ tax_line.title | escape }} {{ tax_line.rate | times: 100 }}%)
+            </div>
+            <div class="order-info-value">
+              {{ tax_line.price | money }}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div class="order-info-row total">
+          <div class="order-info-label">
+            {{ 'customer.order.total' | t }}
+          </div>
+          <div class="order-info-value">
+            {{ order.total_net_amount | money_with_currency }}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function nativeShare() {
+  navigator.share({
+    title: document.title,
+    text: 'Check out this link',
+    url: location.href,
+  })
+  .then(() => console.log('Successful share'))
+  .catch((error) => console.log('Error sharing', error));
+}
+
+/**
+ * Create share button and bind click handler
+**/
+if (navigator.share) {  
+  // Create button
+  const shareBtn = document.createElement('button');
+ btn_append = document.querySelector('.shar-btn');
+  shareBtn.appendChild(document.createTextNode('Share This item'));
+  // Add button to DOM
+  btn_append.appendChild(shareBtn);
+  
+  // Click listener for our share button
+  shareBtn.addEventListener('click', () => {
+    // Share it natively
+    nativeShare();
+  });
+// If the device does not support native share, display a message
+} else {
+  // Add unsupported message
+  unsupportedMessage();
+}
+
+/**
+ * If the device is not supported, display a friendly message
+**/
+function unsupportedMessage() {
+  const message = document.createElement('p');
+  message.appendChild(document.createTextNode('Native sharing is not supported by your browser/device.'));
+  // Add button to DOM
+  document.body.appendChild(message);
+}
+
+
+{% comment %} const faqItems = document.querySelectorAll(".accordion-content-wrap");
+
+faqItems.forEach(item => {
+  const btn = item.querySelector(".accordion-item-header");
+  const content = item.querySelector(".content-wrap");
+  {% comment %} const icon = item.querySelector(".icon"); {% endcomment %}
+
+  btn.addEventListener("click", () => {
+    // Close all other items
+    faqItems.forEach(i => {
+      const innerContent = i.querySelector(".content-wrap");
+      {% comment %} const innerIcon = i.querySelector(".icon"); {% endcomment %}
+
+      if (i !== item) {
+        i.classList.remove("active");
+        innerContent.style.height = "0px";
+        {% comment %} innerIcon.textContent = "+"; {% endcomment %}
+      }
+    });
+
+    // Toggle current item
+    const isActive = item.classList.toggle("active");
+
+    if (isActive) {
+      // Set dynamic height
+      content.style.height = content.scrollHeight + "px";
+      {% comment %} icon.textContent = "–"; {% endcomment %}
+    } else {
+      // Collapse
+      content.style.height = "0px";
+      {% comment %} icon.textContent = "+"; {% endcomment %}
+    }
+  });
+}); {% endcomment %}
+const headers = document.querySelectorAll('.accordion-item-header');
+
+headers.forEach(header => {
+  header.addEventListener('click', () => {
+    const body = header.nextElementSibling;
+    const isOpen = body.style.maxHeight && body.style.maxHeight !== "0px";
+
+    // Close all other accordion bodies
+    document.querySelectorAll('.accordion-body').forEach(b => {
+      if (b !== body) {
+        b.style.maxHeight = null;
+        b.previousElementSibling.classList.remove('active');
+      }
+    });
+
+    // Toggle current one
+    if (isOpen) {
+      body.style.maxHeight = null;
+      header.classList.remove('active');
+    } else {
+      body.style.maxHeight = body.scrollHeight + "px";
+      header.classList.add('active');
+    }
+  });
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "Order",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

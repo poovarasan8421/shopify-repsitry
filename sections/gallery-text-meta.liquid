@@ -1,0 +1,354 @@
+{% if product.metafields.custom.gallery_main_image_desktop != blank and product.metafields.custom.gallery_main_image_mobile != blank %}
+<div class="section section--page-width spacing-style section-{{ section.id }}-padding" style= "background: {{ section.settings.bg__clr }}";>
+  <div class="double__image_content">
+    <div class="double__image_container">
+        <div class="image__box">
+            {% assign desktop_image = product.metafields.custom.gallery_main_image_desktop %}
+            {% assign mobile_image = product.metafields.custom.gallery_main_image_mobile %}
+
+            {% if desktop_image != blank %}
+             {{
+              desktop_image
+              | image_url: width: 750
+              | image_tag:
+                width: desktop_image.width,
+                height: desktop_image.height,
+                class: 'cust_bg_img desktop-img',
+                alt: desktop_image.alt
+              }}
+            {% endif %}
+            {% if mobile_image != blank %}
+             {{
+              mobile_image
+              | image_url: width: 750
+              | image_tag:
+                width: mobile_image.width,
+                height: mobile_image.height,
+                class: 'cust_bg_img mobile-img',
+                alt: mobile_image.alt
+              }}
+            {% endif %}
+        </div>
+        <div class="contnt__box">
+          <div class="contnt__inner">
+            <div class="contentyz">
+            {% if product.metafields.custom.gallery_title != blank %}
+            <h2 class="heading">{{ product.metafields.custom.gallery_title }}</h2>
+            {% endif %}
+            {% if product.metafields.custom.gallery_content != blank %}
+            <p class="contentz">{{ product.metafields.custom.gallery_content }}</p>
+            {% endif %}
+            </div>
+
+            <div class="bottom__container">
+            {% assign image1 = product.metafields.custom.gallery_image1 %}
+            {% assign image2 = product.metafields.custom.gallery_image2 %}
+
+              {% if image1 != blank %}
+              <div class="bg__img bg__img1">
+              {{
+                image1
+                | image_url: width: 450
+                | image_tag:
+                  width: image1.width,
+                  height: image1.height,
+                  class: 'cust_bg_img',
+                  alt: image1.alt
+                }}
+              </div>
+              {% endif %}
+              {% if image2 != blank %}
+              <div class="bg__img bg__img2">
+              {{
+                image2
+                | image_url: width: 450
+                | image_tag:
+                  width: image2.width,
+                  height: image2.height,
+                  class: 'cust_bg_img',
+                  alt: image2.alt
+                }}
+              </div>
+              {% endif %}
+            </div>
+
+          </div>
+            
+        </div>
+    </div>
+    </div>
+
+</div>
+ {% endif %}    
+
+<style>
+
+.section-{{ section.id }}-padding {
+  margin-top: {{ section.settings.desktop-padding-top }}px;
+  margin-bottom: {{ section.settings.desktop-padding-bottom }}px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+    position: relative;
+    {% comment %} z-index: 1; {% endcomment %}
+}
+#shopify-section-{{ section.id }} .double__image_content{
+  margin: 0 auto;
+  max-width: 95%;
+}
+#shopify-section-{{ section.id }} .double__image_container {
+    display: flex;
+    flex-wrap: wrap;
+    {% if section.settings.enable-cover-image %}
+    {% else %}
+    align-items: center;
+    {% endif %}
+    {% if section.settings.img_first %}
+    {% else %}
+    flex-direction: row-reverse;
+    {% endif %}
+}
+#shopify-section-{{ section.id }} .double__image_container .image__box {
+    display: flex;
+    width: 48%;
+    line-height: 0;
+    {% comment %} padding-left:2rem; {% endcomment %}
+}
+#shopify-section-{{ section.id }} .double__image_container .contnt__box {
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#shopify-section-{{ section.id }} .image__box .banner__img {
+    width: 50%;
+    line-height: 0;
+}
+#shopify-section-{{ section.id }} img {
+    width: 100%;    
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+#shopify-section-{{ section.id }} .contnt__box .contnt__inner { 
+    width: 100%;
+    margin: auto;
+    padding: 70px 40px 0;
+    text-align: {{ section.settings.text-align }};
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#shopify-section-{{ section.id }} .heading {
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+    padding: 0;
+    text-transform: uppercase;
+    color: {{ section.settings.heading__clr }};
+}
+#shopify-section-{{ section.id }} .contentz {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0;
+    color: {{ section.settings.cnt__clr }};
+}
+#shopify-section-{{ section.id }} .bottom__container {
+    display: flex;
+    justify-content: end;
+    gap: 5%;
+}
+#shopify-section-{{ section.id }} .bottom__container .bg__img {
+    max-width: 170px;
+}
+#shopify-section-{{ section.id }} .contentyz {
+    max-width: 495px;
+    margin: 0 0 14px;
+}
+
+@media only screen and (max-width: 999px) {
+#shopify-section-{{ section.id }} .contnt__box .contnt__inner {
+    padding: 25px 20px 0;
+}
+}
+
+@media only screen and (max-width: 750px) {
+.section-{{ section.id }}-padding {
+  margin-top: {{ section.settings.mobile-padding-top }}px;
+  margin-bottom: {{ section.settings.mobile-padding-bottom }}px;
+  padding: 0;
+}
+#shopify-section-{{ section.id }} .section{
+  --full-page-grid-with-margins:0;
+}
+#shopify-section-{{ section.id }} .double__image_content{
+  max-width:100%;
+}
+#shopify-section-{{ section.id }} .section__container {
+    grid-template-columns: unset;
+}
+#shopify-section-{{ section.id }} .double__image_container .image__box{
+    padding-left:0;
+}
+#shopify-section-{{ section.id }} .double__image_container .image__box,
+#shopify-section-{{ section.id }} .double__image_container .contnt__box {
+    width: 100%;
+}
+#shopify-section-{{ section.id }} .contnt__box .contnt__inner { 
+    max-width: 100%;
+    padding: 24px 20px 0;
+}
+
+#shopify-section-{{ section.id }} .heading {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0 0 12px;
+}
+#shopify-section-{{ section.id }} .contentz {
+    font-size: 12px;
+    line-height: 18px;
+}
+#shopify-section-{{ section.id }} .desktop-img {
+    display: none;
+}
+#shopify-section-{{ section.id }} .contentyz {
+    max-width: 100%;
+    margin: 0 0 22px;
+}
+}
+
+@media only screen and (max-width: 450px) {
+#shopify-section-{{ section.id }} .bottom__container {
+    gap: 0;
+}
+#shopify-section-{{ section.id }} .bottom__container .bg__img {
+    max-width: 100%;
+}
+}
+
+@media screen and (min-width: 751px) {
+#shopify-section-{{ section.id }} .mobile-img {
+    display: none;
+}
+}
+</style>
+{% schema %}
+  {
+    "name": "Gallery Text Meta",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "img_first",
+        "label": "Image First",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable-cover-image",
+        "label": "Enable Cover Image"
+      },
+      {
+        "type": "header",
+        "content": "Content Alignment"
+      },
+      {
+        "type": "select",
+        "id": "text-align",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left",
+        "label": "Text Alignment",
+      },
+      {
+        "type": "header",
+        "content": "Section Colour"
+      },
+      {
+        "type": "color",
+        "id": "bg__clr",
+        "label": "Background Colour",
+        "default": "#F3F3F3"
+      },
+      {
+        "type": "color",
+        "id": "heading__clr",
+        "label": "Heading Colour",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "cnt__clr",
+        "label": "Content Colour",
+        "default": "#050505"
+      },
+      {
+        "type": "header",
+        "content": "Desktop Section Padding"
+      },
+      {
+        "type": "range",
+        "id": "desktop-padding-top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "desktop-padding-bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Mobile Section Padding"
+      },
+      {
+        "type": "range",
+        "id": "mobile-padding-top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mobile-padding-bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin Bottom",
+        "default": 0
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gallery Text Meta"
+      }
+    ]
+  }
+{% endschema %}

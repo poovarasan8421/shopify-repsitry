@@ -1,0 +1,268 @@
+
+{{ 'static-page.css' | asset_url | stylesheet_tag }}
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="section page-width-content color-{{ section.settings.color_scheme }}">
+  <div
+    class="
+      spacing-style
+      layout-panel-flex
+      layout-panel-flex--column
+      section-content-wrapper
+      mobile-column
+    "
+    style="
+      {% render 'layout-panel-style', settings: section.settings %}
+      {% render 'spacing-style', settings: section.settings %}
+    "
+  >
+    {% content_for 'blocks' %}
+  </div>
+</div>
+<style>
+ #shopify-section-{{ section.id }} .page-width-content {
+    --page-content-width: 100rem;
+    --page-width: 100rem ;
+      padding: 0 34px;
+}
+#shopify-section-{{ section.id }} h6 {
+    margin: 0px ;
+    padding-bottom: 10px;
+    font-size: 15px;
+    
+}
+}
+@media screen and (min-width: 1550px) and (max-width: 2560px) {
+  #shopify-section-{{ section.id }} .page-width-content {
+    --page-content-width: 100rem;
+    --page-width: 95rem;
+    padding: 0 34px;
+  }
+}
+#shopify-section-{{ section.id }} h1{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 22px;
+    font-family: 'Outfit';
+    letter-spacing: 0.5px;
+    margin:0 0 35px !important;
+}
+ #shopify-section-{{ section.id }} h2 {
+    font-size: 18px !important;
+    line-height: 22px !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 400 !important;
+    font-family:'Outfit'!important;
+    margin:25px 0px 15px!important ;
+ }
+
+{% comment %} #shopify-section-{{ section.id }} h3 {
+    font-size: 24px !important;
+    line-height: 5% !important;
+    letter-spacing: .5px !important;
+    font-weight: 600 !important;
+     {% comment %} letter-spacing: normal !important; {% endcomment %}
+    line-height: 1.2 !important;
+    {% comment %} word-break: break-word !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important; {% endcomment %}
+
+} {% endcomment %}
+
+
+#shopify-section-{{ section.id }} p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-family:'Helvetica-Neue';
+}
+#shopify-section-{{ section.id }} ul {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin:0;
+    margin:0;
+    font-family:'Helvetica-Neue'; 
+   }
+  #shopify-section-{{ section.id }}  li {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin:0;
+    padding:0;
+    font-family:'Helvetica-Neue';
+}
+
+#shopify-section-{{ section.id }} ol {
+     font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    color: #000000;
+    margin-top: 0px;
+    margin-bottom: 7px;
+    font-family:'Helvetica-Neue';
+}
+
+  #shopify-section-{{ section.id }} .mobile-column{
+    max-width:1050px;
+    margin:0 auto;
+    padding-top:40px;
+    padding-bottom:40px;
+    {% comment %} max-height: 520px; {% endcomment %}
+  }
+
+ @media screen and (max-width:768px){
+  #shopify-section-{{ section.id }} .page-width-content {
+      padding: 0 10px !important;
+}
+#shopify-section-{{ section.id }} h2 {
+    font-size: 16px !important ;
+    margin:20px 0px 10px!important ;
+    line-height: 20px!important;
+
+}
+#shopify-section-{{ section.id }} p {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 16px!important;
+    font-weight: 300;
+  }
+
+ #shopify-section-{{ section.id }} ul {
+    {% comment %} margin: 10px 0px 10px 20px ; {% endcomment %}
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 16px!important;
+    font-weight: 300;
+}
+#shopify-section-{{ section.id }} h1{
+     font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 16px!important;
+    font-weight: 300;
+}
+#shopify-section-{{ section.id }} li{
+     font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 16px!important;
+    font-weight: 300;
+}
+#shopify-section-{{ section.id }} ol{
+     font-size: 11px;
+    letter-spacing: 0.5px;
+    line-height: 16px!important;
+    font-weight: 300;
+}
+ #shopify-section-{{ section.id }} h1{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    font-family: 'Outfit';
+    letter-spacing: 0.5px;
+    margin:0 0 18px !important;
+}
+#shopify-section-{{ section.id }} .mobile-column{
+    padding-top:30px !important;
+    padding-bottom:30px !important;
+  }
+}
+
+{% comment %} @media screen and (max-width:321px){
+  #shopify-section-{{ section.id }} .page-width-content {
+      padding: 0 10px !important;
+}
+#shopify-section-{{ section.id }} h2 {
+    font-size: 15px !important;
+}
+#shopify-section-{{ section.id }} p {
+    font-size: 12px;
+}
+} {% endcomment %}
+</style>
+{% schema %}
+{
+  "name": "t:names.page",
+  "class": "section-wrapper",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_divider"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_direction",
+      "label": "t:settings.direction",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:options.vertical"
+        }
+      ],
+      "default": "column",
+      "visible_if": "{{ section.settings.gap < 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

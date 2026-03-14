@@ -1,0 +1,156 @@
+<!-- Tooltip Menu Start -->
+    <ul class="login-list-menus {% if customer %}is-customer{% endif %}">
+      {%- if customer -%}
+          {%- for memberToolMenu in settings.member-tool-menu.links -%}
+            <li>
+                <a href="{{ memberToolMenu.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if memberToolMenu.current %} list-menu__item--active{% endif %}"{% if memberToolMenu.current %} aria-current="page"{% endif %}>
+                  {{ memberToolMenu.title | escape }} <span>
+                    {% comment %} {% render 'up-arrow' %} {% endcomment %}
+                </span>
+                </a>
+            </li>
+          {%- endfor -%}
+            {% comment %} <li>
+                <a href="/account/logout" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if memberToolMenu.current %} list-menu__item--active{% endif %}"{% if memberToolMenu.current %} aria-current="page"{% endif %}>
+                Logout <span>
+                    {% comment %} {% render 'up-arrow' %} {% endcomment %}
+                </span>
+                </a>
+          </li> {% endcomment %}
+      {%- else -%}
+          <div class="login-container">
+              {%- if settings.tooptip-content  -%}
+                <p>{{ settings.tooptip-content }}</p>
+              {%- endif -%}
+                <a href="javascript:void(0);" onclick="kpHandleLogin('/account');" 
+                  class="login-holder" 
+                  style="background: {{ settings.login-btn-bg-color }}; color: {{ settings.login-btn-color }}">
+                  {{ settings.tooptip-btn-text }}
+                </a>
+          </div>
+        
+          {%- for toolMenu in settings.tool-menu.links -%}
+            <li>
+                <a href="{{ toolMenu.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if toolMenu.current %} list-menu__item--active{% endif %}"{% if toolMenu.current %} aria-current="page"{% endif %}>
+                    {{ toolMenu.title | escape }}
+                </a>
+            </li>
+          {%- endfor -%}
+    {%- endif -%}
+    </ul>
+<style>
+{% comment %} account-popover:hover .account-popover__summary .login-list-menus{
+  opacity: 1;
+  visibility: visible;
+} {% endcomment %}
+{% comment %} .login-and-toolmenu:hover .login-list-menus {
+    opacity: 1;
+    visibility: visible;
+} {% endcomment %}
+{% comment %} .account-popover{
+--account-popover-transition-opacity: 1 !important;
+--account-popover-transition-transform: translateY(0) !important;
+--account-popover-transition-visibility: visible !important;
+} {% endcomment %}
+
+header .login-list-menus {
+    position: absolute;
+    top: 52px;
+    background: #fff;
+    {% comment %} padding: 25px 2.4rem; {% endcomment %}
+    padding:25px 20px;
+    max-width: 350px;
+    width: 350px;
+    overflow: hidden;
+    box-shadow: 4px 4px 25px 0px #0000001A;
+    margin: 0;
+    list-style: none;
+    right: -45px; 
+    opacity:1;
+    transition: .5s ease;
+    visibility: visible;
+    z-index:5;
+}
+.login-container{
+    border-bottom: 1px solid rgb(31 31 31 / 16%);
+    padding-bottom: 20px;
+    margin-bottom: 15px;
+}
+.login-container p b{
+    font-family: Outfit;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing:0.05em;
+    text-transform: uppercase;
+}
+.login-container p {
+    font-family: Helvetica-Neue;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.05em;
+}
+.login-container .login-holder{
+    background: #8a1d41;
+    color: #ffffff;
+    padding: 10px;
+    font-family: Outfit;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing:0.05em;
+    display: block;
+    text-align: center;
+    width: fit-content;
+}
+.login-list-menus li{
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000000;
+    padding-bottom:24px;
+}
+.login-list-menus li a{
+    color: #000000;
+}
+.login-list-menus li:last-child{
+    padding-bottom:0;
+}
+@media (max-width:749px){
+.login-list-menus {
+    max-width:300px;
+    width:300px;
+}
+.login-container p b{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.login-container p{
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 16px;
+}
+.login-container .login-holder{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+}
+.login-list-menus li{
+   font-size: 14px;
+   line-height: 16px;
+}
+}
+@media (max-width:390px){
+    header .login-list-menus{
+        max-width:280px;
+        width:280px;
+    }
+}
+</style>

@@ -1,0 +1,344 @@
+{%- assign main_heading = product.metafields.custom.slider_main_heading.value -%}
+
+{% if product.metafields.custom.slider_image != blank %}
+<div class="section section--page-width spacing-style">
+<div id="id-{{ section.id }}">
+<div class="image-text-slider-section">
+  <div class="swiper image-text-slider-main">
+    {%- if main_heading != blank -%}
+      <h2 class="main_heading" style="color:{{ section.settings.main_heading-color }};">{{ main_heading }}</h2>
+    {%- endif -%}
+    <div class="swiper-wrapper image-text-slider">
+    {%- assign images = product.metafields.custom.slider_image.value -%}
+    {%- assign headings = product.metafields.custom.slider_heading.value -%}
+    {%- assign subtexts = product.metafields.custom.slider_subtext.value -%}
+    {%- assign content_texts = product.metafields.custom.slider_content_text.value -%}
+    {%- for image in images -%}
+        {%- assign index = forloop.index0 -%}
+       {%- assign heading = headings[index] -%}
+       {%- assign subtext = subtexts[index] -%}
+       {%- assign content = content_texts[index] -%}
+         <div class="swiper-slide slider-main-block">
+            <div class="slider-image">
+            {%- if image != blank -%}
+              {{ image | image_url: width: 1000 | image_tag:
+                class: 'image',
+                loading: 'lazy',
+                widths: '400, 500, 600, 800, 1000, 2000',
+                sizes: '25vw',
+                alt: "slide product images"
+              }}
+              {%- endif -%}
+            </div>
+           {%- if heading != blank or subtext != blank or content != blank -%}
+            <div class="slider-text" style="text-align:{{ section.settings.heading_alignment }}">
+              {%- if heading != blank -%}
+                <h4 class="heading" style="color:{{ section.settings.heading-color }};">{{ heading }}</h4>
+              {%- endif -%}
+              {%- if subtext != blank -%}
+                <p class="sub-heading" style="color:{{ section.settings.sub-heading-color }};">{{ subtext }}</p>
+              {%- endif -%}
+              {%- if content != blank -%}
+                <p class="content" style="color:{{ section.settings.content-color }};">{{ content }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+    </div> 
+  </div>
+    {%- if section.settings.dots != blank -%}
+       <div class="swiper-pagination"></div> 
+    {%- endif -%}
+</div>
+</div>
+</div>
+{% endif %}
+
+{% style %}
+#shopify-section-{{ section.id }} #id-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section {
+  width:100%;
+  margin: 0 auto;
+  max-width: 95%; 
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .swiper{
+  z-index:0;
+}
+#shopify-section-{{ section.id }} .image-text-slider-main {
+  padding-bottom: 20px;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .image-text-slider {
+  display:flex;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .slider-text {
+  padding:15px;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .heading {
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  font-weight:500;
+  text-transform: uppercase;
+  margin: 0px;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .main_heading {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+  margin:0px;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .sub-heading {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 1px;
+  font-weight:700;
+  font-family: Providence Sans Bold;
+  text-transform: uppercase;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .content {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  font-weight:400;
+  font-family:'Helvetica-Neue';
+  max-width:80%;
+  margin:0 auto;
+  /* margin: 0px; */
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .swiper-pagination-bullet-active {
+  background: gray;
+  opacity: 1;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section {
+  position: relative;
+}
+#shopify-section-{{ section.id }} .image-text-slider-section .swiper-pagination {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}  
+@media only screen and (max-width: 767px) {
+  #shopify-section-{{ section.id }} #id-{{ section.id }}{
+    padding-top: {{ section.settings.padding_top_mob }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mob }}px;
+  }
+  #shopify-section-{{ section.id }} .image-text-slider-main { 
+    margin-right:0px;
+    max-width: 100%; 
+  }
+  #shopify-section-{{ section.id }} .image-text-slider-section {
+    max-width: 100%; 
+  }
+  #shopify-section-{{ section.id }} .image-text-slider-section .content { 
+    font-size: 11px;
+    line-height: 16px;
+    font-weight:300;
+  }
+  #shopify-section-{{ section.id }} .image-text-slider-section .main_heading {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500;
+    margin: 0px;
+    padding-top: 0;
+  }
+}
+@media only screen and (max-width: 773px) {
+   #shopify-section-{{ section.id }} .image-text-slider-section .content { 
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+{% endstyle %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper("#shopify-section-{{ section.id }} .swiper", {
+      loop: {{section.settings.loop}},
+      spaceBetween: 30,
+      watchOverflow: true,
+      pagination: {
+        el: "#shopify-section-{{ section.id }} .swiper-pagination",
+        clickable: true,
+      },
+      {%- if section.settings.autoplay -%}
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false
+      },
+      {%- endif -%}
+      breakpoints: {
+        0: {
+          slidesPerView: 1.1,
+          spaceBetween: 20,
+        },
+        640: {
+          slidesPerView: 2.1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView:2.1,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 2.1,
+          spaceBetween: 30,
+        },
+        1280: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1536: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1920: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Image Text Slider",
+    "settings": [
+    {
+     "type":"header",
+     "content":"Layout"
+   },
+  {
+    "type": "checkbox",
+    "id": "dots",
+    "label": "Enable Dots",
+    "default": false
+   },
+   {
+    "type": "checkbox",
+    "id": "autoplay",
+    "label": "Enable Autoplay",
+    "default": false
+   },
+   {
+    "type": "checkbox",
+    "id": "loop",
+    "label": "Enable Loop",
+    "default": false
+   },
+  {
+    "type": "select",
+    "id": "heading_alignment",
+    "label": "heading Alignment",
+    "options": [
+      {
+        "value": "left",
+        "label": "Left"
+      },
+      {
+        "value": "center",
+        "label": "Center"
+      },
+      {
+        "value": "right",
+        "label": "Right"
+      }
+    ],
+    "default": "center"
+   },
+   {
+    "type":"header",
+    "content":"Appearance"
+    },
+    {
+    "type": "color",
+    "id": "main_heading-color",
+    "label": "Main Heading Color",
+    "default": "#000000"
+    },
+    {
+    "type": "color",
+    "id": "heading-color",
+    "label": "Heading Color",
+    "default": "#000000"
+    },
+    {
+    "type": "color",
+    "id": "sub-heading-color",
+    "label": "Sub Heading Color",
+    "default": "#000000"
+    },
+    {
+    "type": "color",
+    "id": "content-color",
+    "label": "Content Color",
+    "default": "#000000"
+     },
+     {
+     "type":"header",
+     "content":"Desktop Padding"
+     },
+     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+     },
+     {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+     },
+     {
+      "type":"header",
+      "content":"Mobile Padding"
+     },
+     {
+      "type": "range",
+      "id": "padding_top_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+     },
+     {
+      "type": "range",
+      "id": "padding_bottom_mob",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+     }
+    ],
+    
+    "presets": [
+      {
+      "name":"Image Text Slider"
+      }
+    ]
+  }
+{% endschema %}

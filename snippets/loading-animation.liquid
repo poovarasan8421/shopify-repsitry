@@ -1,0 +1,50 @@
+
+<div aria-label="Loading..." role="status" class="loader-animation" id="loader">
+  {% comment %} {% if settings.loader-gif-img-desktop  != blank %} 
+    <img class="hide-max-749"src="{{ settings.loader-gif-img-desktop | img_url:'2000x' }}" width="2000" height="auto">
+  {% endif %}
+  {% if settings.loader-gif-img-mob != blank %} 
+   <img class="hide-min-750"src="{{ settings.loader-gif-img-mob | img_url:'800x' }}" width="800" height="auto">
+  {% endif %}  {% endcomment %}
+
+  <picture>
+  {% if settings.loader-gif-img-mob != blank %}
+    <source
+      media="(max-width: 749px)"
+      srcset="{{ settings.loader-gif-img-mob | image_url: width: 720 }}"
+      sizes="50vw"
+    >
+  {% endif %}
+
+  <img
+    src="{{ settings.loader-gif-img-desktop | image_url: width: 2000 }}"
+    srcset="
+      {{ settings.loader-gif-img-desktop | image_url: width: 2000 }} 2000w,
+      {{ settings.loader-gif-img-desktop | image_url: width: 1500 }} 1500w,
+      {{ settings.loader-gif-img-desktop | image_url: width: 800 }} 800w
+    "
+    sizes="2000px"
+    width="{{ settings.loader-gif-img-desktop.width }}"
+    height="{{ settings.loader-gif-img-desktop.height }}"
+    alt="Loading"
+    decoding="async" fetchpriority="high"
+  >
+</picture>
+
+  {% comment %}
+    <svg class="icon" viewBox="0 0 256 256">
+      <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="224" y1="128" x2="192" y2="128" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="195.9" y1="195.9" x2="173.3" y2="173.3" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="128" y1="224" x2="128" y2="192" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="60.1" y1="195.9" x2="82.7" y2="173.3" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="32" y1="128" x2="64" y2="128" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+      <line x1="60.1" y1="60.1" x2="82.7" y2="82.7" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+    </svg>
+  {% endcomment %}
+  
+</div>
+
+
+

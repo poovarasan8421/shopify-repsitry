@@ -1,0 +1,200 @@
+<section class="care-section">
+  <div class="page-width">
+    <h2 class="care-heading">{{ section.settings.section_heading }}</h2>
+    <div class="care-section__inner">
+      {% for block in section.blocks %}
+        <div class="care-step">
+          {% if block.settings.step_image != blank %}
+            <img src="{{ block.settings.step_image | img_url: '600x' }}" alt="{{ block.settings.step_title }}">
+          {% endif %}
+          <h3 class="title-text">{{ block.settings.step_title }}</h3>
+          <p>{{ block.settings.step_text }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<style>
+#shopify-section-{{ section.id }} .care-section {
+  text-align: center;
+  padding-top:{{ section.settings.padding_top_desktop }}px;
+  padding-bottom:{{ section.settings.padding_bottom_desktop }}px
+}
+#shopify-section-{{ section.id }} h2.care-heading {
+  font-family: 'Outfit';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  padding-bottom: 38px;
+  margin-bottom: 0;
+}
+#shopify-section-{{ section.id }} .care-section__inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 0px 40px;
+}
+
+#shopify-section-{{ section.id }} .care-step img {
+  width: 100%;
+  height: auto;
+  padding-bottom: 17px;
+}
+
+#shopify-section-{{ section.id }}  h3.title-text {
+  font-family:'Outfit';
+    font-size: 18px ! important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+}
+
+#shopify-section-{{ section.id }} .care-step p {
+    font-family: 'Helvetica-Neue';
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    color: #000000;
+    padding: 0 20px;
+    margin-bottom:0;
+    max-width:85%;
+    margin:0 auto;
+}
+
+@media (max-width: 768px) {
+  #shopify-section-{{ section.id }} .care-section {
+    padding-top: {{ section.settings.padding_top_mobile }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
+  }
+
+  #shopify-section-{{ section.id }} .care-section__inner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 0px 0px;
+  }
+
+  #shopify-section-{{ section.id }} .care-step p {
+    padding: 11px 15px 10px 15px;
+    margin:0 auto;
+    font-size: 11px !important;
+    font-weight: 300 !important;
+    line-height: 16px;
+  }
+
+  #shopify-section-{{ section.id }} h3.title-text {
+    font-size: 14px !important;
+    margin: 0px !important;
+  }
+#shopify-section-{{ section.id }} h2.care-heading {
+    padding-top: 25px;
+    font-size: 18px;
+    padding-bottom: 17px;
+    line-height: 20px;
+}
+#shopify-section-{{ section.id }} .care-section__inner {
+  gap: 15px;
+}
+}
+  </style>
+
+{% schema %}
+{
+  "name": "Care custom page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "HOW TO CARE FOR YOUR LAFOLI"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (Desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "care_step",
+      "name": "Care custom page",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "step_image",
+          "label": "Step Image"
+        },
+        {
+          "type": "text",
+          "id": "step_title",
+          "label": "Step Title",
+          "default": "Wipe Clean Gently"
+        },
+        {
+          "type": "textarea",
+          "id": "step_text",
+          "label": "Step Description",
+          "default": "Gently clean your Lafoli bag with a soft, damp cloth to remove dust, dirt, or light surface stains—no harsh scrubbing needed."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Care custom page",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "care_step"
+        },
+        {
+          "type": "care_step"
+        },
+        {
+          "type": "care_step"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+  

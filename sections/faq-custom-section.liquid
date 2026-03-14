@@ -1,0 +1,805 @@
+<div class="s-overalldev">
+<div class="faq-tabs">
+  <h2>{{ section.settings.head }}</h2>
+
+<div class="faq-tab-buttons-wrapper">
+  <div class="faq-tab-buttons">
+    <div class="faq-tab-button active" data-tab="orders_shipping">Orders & Shipping</div>
+    <div class="faq-tab-button" data-tab="sizing_fit">Sizing & Fit</div>
+    <div class="faq-tab-button" data-tab="exchanges_giftcard">Exchanges & Giftcard</div>
+    <div class="faq-tab-button" data-tab="products">Products</div>
+  </div>
+</div>
+
+
+  <!-- Tab Content -->
+  {% assign tab_types = "orders_shipping,sizing_fit,exchanges_giftcard,products" | split: ',' %}
+  {% for type in tab_types %}
+    <div class="faq-tab-content {% if forloop.first %}active{% endif %}" id="{{ type }}">
+      {% for block in section.blocks %}
+        {% if block.type == type %}
+          {% for i in (0..10) %}
+            {% if i == 0 %}
+              {% assign q_key = "question" %}
+              {% assign a_key = "answer" %}
+            {% else %}
+              {% assign q_key = "question" | append: i %}
+              {% assign a_key = "answer" | append: i %}
+            {% endif %}
+            {% if block.settings[q_key] and block.settings[q_key] != "" %}
+              <div class="faq-item">
+                <div class="faq-question">
+                  <span>{{ block.settings[q_key] }}</span>
+                  <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                  {{ block.settings[a_key] }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+</div>
+
+
+<style>
+#shopify-section-{{ section.id }} .s-overalldev {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
+#shopify-section-{{ section.id }} .faq-tabs {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Outfit', sans-serif;
+}
+#shopify-section-{{ section.id }} h2 {
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 40px 0 30px 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  text-align: center;
+}
+#shopify-section-{{ section.id }} .faq-tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 35px;
+  border-bottom: 1px solid #eee;
+}
+#shopify-section-{{ section.id }} .faq-tab-button {
+  padding: 5px 5px 0px 5px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  transition: border 0.3s;
+  letter-spacing: 0.05em;
+  line-height: 22px;
+}
+#shopify-section-{{ section.id }} .faq-tab-button.active {
+  border-bottom: 2px solid black;
+}
+#shopify-section-{{ section.id }} .faq-tab-content {
+  display: none;
+}
+#shopify-section-{{ section.id }} .faq-tab-content.active {
+  display: block;
+}
+#shopify-section-{{ section.id }} .faq-item {
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    padding: 20px 0px;
+    font-family: 'Helvetica-Neue';
+    color: #000000;
+}
+#shopify-section-{{ section.id }} .faq-question {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#shopify-section-{{ section.id }} .faq-question span:last-child {
+    font-weight: 100;
+  font-size: 30px;
+  transition: transform 0.3s;
+}
+#shopify-section-{{ section.id }} .faq-question.open span:last-child {
+  transform: rotate(0deg);
+}
+#shopify-section-{{ section.id }} .faq-answer {
+  display: none;
+  margin-top: 0.5rem;
+}
+#shopify-section-{{ section.id }} .faq-tab-button.dimmed {
+  {% comment %} opacity: 0.4; {% endcomment %}
+  color: #808080;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+#shopify-section-{{ section.id }} .faq-tab-button.dimmed:not(.active) {
+   {% comment %} opacity: 5 !important; {% endcomment %}
+  color: #808080 !important;
+  border-bottom: 2px solid transparent !important;
+  {% comment %} color: #000000; {% endcomment %}
+  {% comment %} opacity: 0.5; {% endcomment %}
+}
+@media screen and (max-width: 840px) {
+  #shopify-section-{{ section.id }} .faq-tab-button{
+  font-size: 18px ! important;
+  line-height:20px ! important;
+
+  }
+  #shopify-section-{{ section.id }} h2 {
+    font-size:20px !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  #shopify-section-{{ section.id }} .faq-tab-button{
+  font-size: 14px !important;
+  line-height:16px !important;
+  }
+  #shopify-section-{{ section.id }} .s-overalldev {
+    padding-top: {{ section.settings.mobile_padding_top }}px !important;
+    padding-bottom: {{ section.settings.mobile_padding_bottom }}px !important;
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+  }
+  #shopify-section-{{ section.id }} .faq-tab-buttons {
+  padding-bottom: 25px;
+}
+ #shopify-section-{{ section.id }} h2 {
+    font-size:18px !important;
+    padding: 25px 0 15px 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #shopify-section-{{ section.id }} .faq-tab-buttons-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  #shopify-section-{{ section.id }} .faq-tab-buttons-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  #shopify-section-{{ section.id }} .faq-tab-buttons {
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .faq-tab-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-right: 8px;
+  }
+}
+
+@media screen and (max-width: 391px) {
+  {% comment %} #shopify-section-{{ section.id }} .faq-tab-button{
+  font-size: 14px !important;
+  } {% endcomment %}
+  #shopify-section-{{ section.id }} .s-overalldev {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  #shopify-section-{{ section.id }} h2 {
+    padding: 20px 0 10px 0 !important;
+  }
+  #shopify-section-{{ section.id }} .faq-item {
+    padding: 15px 0px !important;
+    font-size: 12px !important;
+  }
+  }
+
+
+</style>
+
+<!-- JS remains the same -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tabButtons = document.querySelectorAll(".faq-tab-button");
+  const tabContents = document.querySelectorAll(".faq-tab-content");
+
+  tabButtons.forEach(btn => {
+    if (!btn.classList.contains("active")) {
+      btn.classList.add("dimmed");
+    }
+  });
+
+  tabButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const target = button.getAttribute("data-tab");
+
+      tabButtons.forEach(btn => {
+        btn.classList.remove("active");
+        btn.classList.add("dimmed");
+      });
+      button.classList.add("active");
+      button.classList.remove("dimmed");
+
+      tabContents.forEach(tab => {
+        tab.classList.remove("active");
+        if (tab.id === target) {
+          tab.classList.add("active");
+
+          const questions = tab.querySelectorAll(".faq-question");
+          questions.forEach(q => {
+            q.classList.remove("open");
+            q.nextElementSibling.style.display = "none";
+            q.querySelector(".toggle-icon").innerText = "+";
+          });
+
+          setupAccordion(tab);
+        }
+      });
+    });
+  });
+
+  function setupAccordion(tabContent) {
+    const questions = tabContent.querySelectorAll(".faq-question");
+    questions.forEach(question => {
+      question.onclick = function () {
+        const isOpen = question.classList.contains("open");
+
+        questions.forEach(q => {
+          q.classList.remove("open");
+          q.nextElementSibling.style.display = "none";
+          q.querySelector(".toggle-icon").innerText = "+";
+        });
+
+        if (!isOpen) {
+          question.classList.add("open");
+          question.nextElementSibling.style.display = "block";
+          question.querySelector(".toggle-icon").innerText = "–";
+        }
+      };
+    });
+  }
+
+  const activeTab = document.querySelector(".faq-tab-content.active");
+  if (activeTab) {
+    setupAccordion(activeTab);
+  }
+});
+</script>
+
+
+{% schema %}
+{
+  "name": "Custom Faq Tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "head",
+      "label": "heading",
+      "default":"FREQUENTLY ASKED QUESTIONS"
+    },
+   {
+    "type": "range",
+    "id": "padding_top",
+    "label": "Padding Top (px)",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "padding_bottom",
+    "label": "Padding Bottom (px)",
+    "min": 0,
+    "max": 100,
+    "step": 4,
+    "default": 20
+  }  ,
+    {
+  "type": "range",
+  "id": "mobile_padding_top",
+  "label": "Padding Top (px)",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "default": 20
+},
+{
+  "type": "range",
+  "id": "mobile_padding_bottom",
+  "label": "Padding Bottom (px)",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "default": 20
+}
+
+  ],
+  "blocks": [
+    
+    {
+      "type": "orders_shipping",
+      "name": "Orders & Shipping ",
+      "settings": [
+      
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "text",
+          "id": "question1",
+          "label": "Question 1"
+        },
+        {
+          "type": "textarea",
+          "id": "answer1",
+          "label": "Answer 1"
+        },
+        {
+          "type": "text",
+          "id": "question2",
+          "label": "Question 2"
+        },
+        {
+          "type": "textarea",
+          "id": "answer2",
+          "label": "Answer 2"
+        },
+        {
+          "type": "text",
+          "id": "question3",
+          "label": "Question 3"
+        },
+        {
+          "type": "textarea",
+          "id": "answer3",
+          "label": "Answer 3"
+        },
+        {
+          "type": "text",
+          "id": "question4",
+          "label": "Question 4"
+        },
+        {
+          "type": "textarea",
+          "id": "answer4",
+          "label": "Answer 4"
+        },
+        {
+          "type": "text",
+          "id": "question5",
+          "label": "Question 5"
+        },
+        {
+          "type": "textarea",
+          "id": "answer5",
+          "label": "Answer 5"
+        },
+        {
+          "type": "text",
+          "id": "question6",
+          "label": "Question 6"
+        },
+        {
+          "type": "textarea",
+          "id": "answer6",
+          "label": "Answer 6"
+        },
+        {
+          "type": "text",
+          "id": "question7",
+          "label": "Question 7"
+        },
+        {
+          "type": "textarea",
+          "id": "answer7",
+          "label": "Answer 7"
+        },
+        {
+          "type": "text",
+          "id": "question8",
+          "label": "Question 8"
+        },
+        {
+          "type": "textarea",
+          "id": "answer8",
+          "label": "Answer 8"
+        },
+        {
+          "type": "text",
+          "id": "question9",
+          "label": "Question 9"
+        },
+        {
+          "type": "textarea",
+          "id": "answer9",
+          "label": "Answer 9"
+        },
+        {
+          "type": "text",
+          "id": "question10",
+          "label": "Question 10"
+        },
+        {
+          "type": "textarea",
+          "id": "answer10",
+          "label": "Answer 10"
+        }
+      ]
+    },
+    {
+      "type": "sizing_fit",
+      "name": "Sizing & Fit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        },{
+          "type": "text",
+          "id": "question1",
+          "label": "Question 1"
+        },
+        {
+          "type": "textarea",
+          "id": "answer1",
+          "label": "Answer 1"
+        },
+        {
+          "type": "text",
+          "id": "question2",
+          "label": "Question 2"
+        },
+        {
+          "type": "textarea",
+          "id": "answer2",
+          "label": "Answer 2"
+        },
+        {
+          "type": "text",
+          "id": "question3",
+          "label": "Question 3"
+        },
+        {
+          "type": "textarea",
+          "id": "answer3",
+          "label": "Answer 3"
+        },
+        {
+          "type": "text",
+          "id": "question4",
+          "label": "Question 4"
+        },
+        {
+          "type": "textarea",
+          "id": "answer4",
+          "label": "Answer 4"
+        },
+        {
+          "type": "text",
+          "id": "question5",
+          "label": "Question 5"
+        },
+        {
+          "type": "textarea",
+          "id": "answer5",
+          "label": "Answer 5"
+        },
+        {
+          "type": "text",
+          "id": "question6",
+          "label": "Question 6"
+        },
+        {
+          "type": "textarea",
+          "id": "answer6",
+          "label": "Answer 6"
+        },
+        {
+          "type": "text",
+          "id": "question7",
+          "label": "Question 7"
+        },
+        {
+          "type": "textarea",
+          "id": "answer7",
+          "label": "Answer 7"
+        },
+        {
+          "type": "text",
+          "id": "question8",
+          "label": "Question 8"
+        },
+        {
+          "type": "textarea",
+          "id": "answer8",
+          "label": "Answer 8"
+        },
+        {
+          "type": "text",
+          "id": "question9",
+          "label": "Question 9"
+        },
+        {
+          "type": "textarea",
+          "id": "answer9",
+          "label": "Answer 9"
+        },
+        {
+          "type": "text",
+          "id": "question10",
+          "label": "Question 10"
+        },
+        {
+          "type": "textarea",
+          "id": "answer10",
+          "label": "Answer 10"
+        }
+      ]
+    },
+    {
+      "type": "exchanges_giftcard",
+      "name": "Exchanges & Giftcard",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "text",
+          "id": "question1",
+          "label": "Question 1"
+        },
+        {
+          "type": "textarea",
+          "id": "answer1",
+          "label": "Answer 1"
+        },
+        {
+          "type": "text",
+          "id": "question2",
+          "label": "Question 2"
+        },
+        {
+          "type": "textarea",
+          "id": "answer2",
+          "label": "Answer 2"
+        },
+        {
+          "type": "text",
+          "id": "question3",
+          "label": "Question 3"
+        },
+        {
+          "type": "textarea",
+          "id": "answer3",
+          "label": "Answer 3"
+        },
+        {
+          "type": "text",
+          "id": "question4",
+          "label": "Question 4"
+        },
+        {
+          "type": "textarea",
+          "id": "answer4",
+          "label": "Answer 4"
+        },
+        {
+          "type": "text",
+          "id": "question5",
+          "label": "Question 5"
+        },
+        {
+          "type": "textarea",
+          "id": "answer5",
+          "label": "Answer 5"
+        },
+        {
+          "type": "text",
+          "id": "question6",
+          "label": "Question 6"
+        },
+        {
+          "type": "textarea",
+          "id": "answer6",
+          "label": "Answer 6"
+        },
+        {
+          "type": "text",
+          "id": "question7",
+          "label": "Question 7"
+        },
+        {
+          "type": "textarea",
+          "id": "answer7",
+          "label": "Answer 7"
+        },
+        {
+          "type": "text",
+          "id": "question8",
+          "label": "Question 8"
+        },
+        {
+          "type": "textarea",
+          "id": "answer8",
+          "label": "Answer 8"
+        },
+        {
+          "type": "text",
+          "id": "question9",
+          "label": "Question 9"
+        },
+        {
+          "type": "textarea",
+          "id": "answer9",
+          "label": "Answer 9"
+        },
+        {
+          "type": "text",
+          "id": "question10",
+          "label": "Question 10"
+        },
+        {
+          "type": "textarea",
+          "id": "answer10",
+          "label": "Answer 10"
+        }
+      ]
+    },
+    {
+      "type": "products",
+      "name": "Products Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "text",
+          "id": "question1",
+          "label": "Question 1"
+        },
+        {
+          "type": "textarea",
+          "id": "answer1",
+          "label": "Answer 1"
+        },
+        {
+          "type": "text",
+          "id": "question2",
+          "label": "Question 2"
+        },
+        {
+          "type": "textarea",
+          "id": "answer2",
+          "label": "Answer 2"
+        },
+        {
+          "type": "text",
+          "id": "question3",
+          "label": "Question 3"
+        },
+        {
+          "type": "textarea",
+          "id": "answer3",
+          "label": "Answer 3"
+        },
+        {
+          "type": "text",
+          "id": "question4",
+          "label": "Question 4"
+        },
+        {
+          "type": "textarea",
+          "id": "answer4",
+          "label": "Answer 4"
+        },
+        {
+          "type": "text",
+          "id": "question5",
+          "label": "Question 5"
+        },
+        {
+          "type": "textarea",
+          "id": "answer5",
+          "label": "Answer 5"
+        },
+        {
+          "type": "text",
+          "id": "question6",
+          "label": "Question 6"
+        },
+        {
+          "type": "textarea",
+          "id": "answer6",
+          "label": "Answer 6"
+        },
+        {
+          "type": "text",
+          "id": "question7",
+          "label": "Question 7"
+        },
+        {
+          "type": "textarea",
+          "id": "answer7",
+          "label": "Answer 7"
+        },
+        {
+          "type": "text",
+          "id": "question8",
+          "label": "Question 8"
+        },
+        {
+          "type": "textarea",
+          "id": "answer8",
+          "label": "Answer 8"
+        },
+        {
+          "type": "text",
+          "id": "question9",
+          "label": "Question 9"
+        },
+        {
+          "type": "textarea",
+          "id": "answer9",
+          "label": "Answer 9"
+        },
+        {
+          "type": "text",
+          "id": "question10",
+          "label": "Question 10"
+        },
+        {
+          "type": "textarea",
+          "id": "answer10",
+          "label": "Answer 10"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Faq Tabs",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

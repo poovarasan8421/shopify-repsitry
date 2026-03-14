@@ -1,0 +1,159 @@
+{% comment %}
+custom-banners.liquid
+Dynamic text slider banner section
+{% endcomment %}
+
+<section id="custom-banners-{{ section.id }}" class="custom-banners" style="background-color: {{ section.settings.background_color }}; min-height: {{ section.settings.section_height }}px;">
+  <div class="custom-banners__inner">
+    <div class="custom-banners__controls">
+      <button class="custom-banners__prev" aria-label="Previous banner">&lt;</button>
+      <button class="custom-banners__next" aria-label="Next banner">&gt;</button>
+    </div>
+
+    <div class="custom-banners__slider" data-slider-id="{{ section.id }}" data-autoplay="{{ section.settings.autoplay | json }}" data-autoplay-speed="{{ section.settings.autoplay_speed }}">
+      {% for block in section.blocks %}
+        <div class="custom-banners__slide {% if block.settings.text_position == 'center' %}custom-banners__slide--center{% elsif block.settings.text_position == 'right' %}custom-banners__slide--right{% else %}custom-banners__slide--left{% endif %}" data-slide-index="{{ forloop.index0 }}" style="background-color: {{ block.settings.slide_background }}; color: {{ block.settings.text_color }}; {% if block.settings.slide_image != blank %}background-image: url({{ block.settings.slide_image | img_url: '2048x2048' }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}">
+          <div class="custom-banners__overlay" style="background-color: {{ block.settings.overlay_color }}; opacity: {{ block.settings.overlay_opacity | divided_by: 100 }};"></div>
+          <div class="custom-banners__content">
+            {% if block.settings.title != blank %}
+              <h2 class="custom-banners__title">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <p class="custom-banners__subtitle">{{ block.settings.subtitle }}</p>
+            {% endif %}
+            {% if block.settings.button_text != blank and block.settings.button_url != blank %}
+              <a class="custom-banners__button" href="{{ block.settings.button_url }}" style="background-color: {{ block.settings.button_bg_color }}; color: {{ block.settings.button_text_color }};">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="custom-banners__pager" aria-label="Banner navigation">
+      {% for block in section.blocks %}
+        <button class="custom-banners__dot" data-dot-index="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .custom-banners { position: relative; overflow: hidden; padding: 40px 0; }
+  .custom-banners__inner { position: relative; max-width: 1200px; margin: 0 auto; }
+  .custom-banners__slider { display: grid; grid-template-columns: repeat({{ section.blocks | size }}, 100%); transition: transform 0.65s ease; will-change: transform; }
+  .custom-banners__slide { min-width: 100%; min-height: {{ section.settings.section_height }}px; position: relative; display: flex; align-items: center; justify-content: flex-start; padding: 60px 20px; box-sizing: border-box; }
+  .custom-banners__slide .custom-banners__overlay { position: absolute; inset: 0; z-index: 1; }
+  .custom-banners__slide--center .custom-banners__content { margin: 0 auto; text-align: center; }
+  .custom-banners__slide--right .custom-banners__content { margin-left: auto; text-align: right; }
+  .custom-banners__slide--left .custom-banners__content { margin-right: auto; text-align: left; }
+  .custom-banners__content { max-width: 560px; position: relative; z-index: 2; }
+  .custom-banners__title { font-size: 2.4rem; margin: 0 0 12px; }
+  .custom-banners__subtitle { font-size: 1.25rem; margin: 0 0 18px; }
+  .custom-banners__button { display: inline-block; padding: 0.8rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+  .custom-banners__controls { position: absolute; top: 50%; left: 0; right: 0; pointer-events: none; z-index: 2; display: flex; justify-content: space-between; transform: translateY(-50%); }
+  .custom-banners__controls button { pointer-events: auto; border: none; background: rgba(0,0,0,.45); color: #fff; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+  .custom-banners__pager { margin-top: 16px; display: flex; justify-content: center; gap: 10px; }
+  .custom-banners__dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #fff; background: rgba(255,255,255,.5); cursor: pointer; }
+  .custom-banners__dot.active { background: #fff; }
+
+  @media (max-width: 768px) {
+    .custom-banners__slide { min-height: {{ section.settings.mobile_height }}px; padding: 40px 12px; }
+    .custom-banners__title { font-size: 1.8rem; }
+    .custom-banners__subtitle { font-size: 1rem; }
+  }
+</style>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var root = document.querySelector('[data-slider-id="{{ section.id }}"]');
+    if (!root) return;
+
+    var slides = root.querySelectorAll('.custom-banners__slide');
+    var prevBtn = document.querySelector('#custom-banners-{{ section.id }} .custom-banners__prev');
+    var nextBtn = document.querySelector('#custom-banners-{{ section.id }} .custom-banners__next');
+    var dots = document.querySelectorAll('#custom-banners-{{ section.id }} .custom-banners__dot');
+    var currentIndex = 0;
+    var maxIndex = slides.length - 1;
+    var autoplay = root.getAttribute('data-autoplay') === 'true';
+    var autoplaySpeed = parseInt(root.getAttribute('data-autoplay-speed'), 10) || 5000;
+    var timer = null;
+
+    function updateSlider() {
+      root.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+      dots.forEach(function(dot, idx) { dot.classList.toggle('active', idx === currentIndex); });
+    }
+
+    function nextSlide() {
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+      updateSlider();
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', function() { nextSlide(); resetAuto(); });
+    if (prevBtn) prevBtn.addEventListener('click', function() { prevSlide(); resetAuto(); });
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        currentIndex = parseInt(dot.getAttribute('data-dot-index'), 10);
+        updateSlider();
+        resetAuto();
+      });
+    });
+
+    function startAuto() {
+      if (!autoplay) return;
+      timer = setInterval(nextSlide, autoplaySpeed);
+    }
+
+    function resetAuto() {
+      if (!autoplay) return;
+      clearInterval(timer);
+      startAuto();
+    }
+
+    updateSlider();
+    startAuto();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Banners",
+  "settings": [
+    {"type": "color", "id": "background_color", "label": "Section background", "default": "#111111"},
+    {"type": "checkbox", "id": "autoplay", "label": "Autoplay slides", "default": true},
+    {"type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000, "min": 2000, "max": 15000, "step": 500},
+    {"type": "number", "id": "section_height", "label": "Desktop slide min height (px)", "default": 420, "min": 200, "max": 1200, "step": 10},
+    {"type": "number", "id": "mobile_height", "label": "Mobile slide min height (px)", "default": 320, "min": 150, "max": 900, "step": 10}
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {"type": "text", "id": "title", "label": "Title", "default": "Big sale now"},
+        {"type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Up to 40% off on selected items."},
+        {"type": "url", "id": "button_url", "label": "Button URL", "default": "#"},
+        {"type": "text", "id": "button_text", "label": "Button text", "default": "Shop now"},
+        {"type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff"},
+        {"type": "color", "id": "slide_background", "label": "Slide background", "default": "#222222"},
+        {"type": "image_picker", "id": "slide_image", "label": "Slide image"},
+        {"type": "color", "id": "overlay_color", "label": "Overlay color", "default": "#000000"},
+        {"type": "number", "id": "overlay_opacity", "label": "Overlay opacity", "default": 30, "min": 0, "max": 100, "step": 5},
+        {"type": "select", "id": "text_position", "label": "Text position", "options": [{"value":"left","label":"Left"},{"value":"center","label":"Center"},{"value":"right","label":"Right"}], "default":"left"},
+        {"type": "header", "content": "Button style"},
+        {"type": "color", "id": "button_bg_color", "label": "Button background", "default": "#ffffff"},
+        {"type": "color", "id": "button_text_color", "label": "Button text color", "default": "#333333"}
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [{"name": "Custom Banner Slider", "category": "Hero"}]
+}
+{% endschema %}

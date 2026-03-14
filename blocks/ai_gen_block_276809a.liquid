@@ -1,0 +1,1389 @@
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-careers-section-{{ ai_gen_id }} {
+    padding: {{ block.settings.section_padding }}px0;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-careers-container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-careers-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .ai-careers-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;font-weight: 600;
+  }
+
+  .ai-careers-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .ai-careers-tabs-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    overflow-x: auto;
+    padding-bottom: 0;
+  }
+
+  .ai-careers-tab-{{ ai_gen_id }} {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .ai-careers-tab-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.primary_color }};
+  }
+
+  .ai-careers-tab-{{ ai_gen_id }}.active {
+    color: {{ block.settings.primary_color }};
+    border-bottom-color: {{ block.settings.primary_color }};
+  }
+
+  .ai-careers-listings-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-careers-listings-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-careers-job-{{ ai_gen_id }} {
+    padding: 32px 0;
+    border-bottom: 1px solid {{ block.settings.border_color }};display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .ai-careers-job-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-careers-job-content-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-careers-job-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.job_title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 00 12px;
+    font-weight: 600;
+  }
+
+  .ai-careers-job-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin-bottom: 16px;
+    opacity: 0.9;
+    flex: 1;
+  }
+
+  .ai-careers-job-meta-{{ ai_gen_id }} {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .ai-careers-job-meta-item-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ai-careers-job-actions-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+  }
+
+  .ai-careers-apply-button-{{ ai_gen_id }} {
+    background: none;
+    color: {{ block.settings.button_color }};
+    border: none;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .ai-careers-apply-button-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.button_hover_color }};
+    text-decoration-thickness: 2px;
+  }
+
+  .ai-careers-apply-button-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ai-careers-empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+  }
+
+  .ai-careers-popup-overlay-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .ai-careers-popup-overlay-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-careers-popup-{{ ai_gen_id }} {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: {{ block.settings.popup_bg_color }};
+    border-radius: {{ block.settings.popup_border_radius }}px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    max-width: {{ block.settings.popup_width }}px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-careers-popup-overlay-{{ ai_gen_id }}.active .ai-careers-popup-{{ ai_gen_id }} {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .ai-careers-popup-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 0;
+    border-bottom: 1px solid {{ block.settings.border_color }};
+    margin-bottom: 24px;
+  }
+
+  .ai-careers-popup-title-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-careers-popup-close-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .ai-careers-popup-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    background-color: {{ block.settings.border_color }};
+  }
+
+  .ai-careers-popup-content-{{ ai_gen_id }} {
+    padding: 0 24px 24px;
+  }
+
+  .ai-careers-popup-block-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-careers-popup-block-{{ ai_gen_id }}:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-careers-popup-heading-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+  }
+
+  .ai-careers-popup-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-careers-popup-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .ai-careers-popup-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 200px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-careers-popup-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  .ai-careers-popup-icon-{{ ai_gen_id }} {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .ai-careers-popup-form-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-careers-popup-form-field-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ai-careers-popup-form-label-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 500;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-careers-popup-form-input-{{ ai_gen_id }},
+  .ai-careers-popup-form-textarea-{{ ai_gen_id }} {
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+
+  .ai-careers-popup-form-input-{{ ai_gen_id }}:focus,
+  .ai-careers-popup-form-textarea-{{ ai_gen_id }}:focus {
+    outline: none;
+    border-color: {{ block.settings.primary_color }};
+  }
+
+  .ai-careers-popup-form-textarea-{{ ai_gen_id }} {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .ai-careers-popup-form-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-careers-popup-form-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-careers-job-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .ai-careers-job-actions-{{ ai_gen_id }} {
+      align-self: stretch;
+    }
+
+    .ai-careers-tabs-{{ ai_gen_id }} {
+      justify-content: flex-start;padding: 0 20px 0 0;
+    }
+
+    .ai-careers-job-meta-{{ ai_gen_id }} {
+      gap: 16px;
+    }
+
+    .ai-careers-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-careers-popup-{{ ai_gen_id }} {
+      width: 95%;
+      max-height: 85vh;
+    }
+
+    .ai-careers-popup-header-{{ ai_gen_id }},
+    .ai-careers-popup-content-{{ ai_gen_id }} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+{% endstyle %}<careers-section-{{ ai_gen_id }}
+  class="ai-careers-section-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-careers-container-{{ ai_gen_id }}">
+    {% if block.settings.title != blank or block.settings.subtitle != blank %}
+      <div class="ai-careers-header-{{ ai_gen_id }}">
+        {% if block.settings.title != blank %}
+          <h2 class="ai-careers-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+        {% endif %}
+        {% if block.settings.subtitle != blank %}
+          <p class="ai-careers-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-careers-tabs-{{ ai_gen_id }}">
+      <button class="ai-careers-tab-{{ ai_gen_id }} active" data-category="all">
+        VIEW ALL
+      </button>
+      <button class="ai-careers-tab-{{ ai_gen_id }}" data-category="development">
+        DEVELOPMENT
+      </button>
+      <button class="ai-careers-tab-{{ ai_gen_id }}" data-category="design">
+        DESIGN
+      </button>
+      <button class="ai-careers-tab-{{ ai_gen_id }}" data-category="marketing">
+        MARKETING
+      </button></div>
+
+    <div class="ai-careers-listings-{{ ai_gen_id }} active" data-category="all">
+      {% for i in (1..6) %}
+        {% liquid
+          assign job_title_key = 'job_' | append: i | append: '_title'
+          assign job_description_key = 'job_' | append: i | append: '_description'
+          assign job_category_key = 'job_' | append: i | append: '_category'
+          assign job_location_key = 'job_' | append: i | append: '_location'
+          assign job_type_key = 'job_' | append: i | append: '_type'
+          assign job_experience_key = 'job_' | append: i | append: '_experience'
+
+          assign job_title = block.settings[job_title_key]
+          assign job_description = block.settings[job_description_key]
+          assign job_category = block.settings[job_category_key]
+          assign job_location = block.settings[job_location_key]
+          assign job_type = block.settings[job_type_key]
+          assign job_experience = block.settings[job_experience_key]
+        %}
+
+        {% if job_title != blank %}
+          <div class="ai-careers-job-{{ ai_gen_id }}" data-category="{{ job_category }}">
+            <div class="ai-careers-job-content-{{ ai_gen_id }}">
+              <h3 class="ai-careers-job-title-{{ ai_gen_id }}">{{ job_title }}</h3>
+              {% if job_description != blank %}
+                <div class="ai-careers-job-description-{{ ai_gen_id }}">
+                  {{ job_description }}
+                </div>
+              {% endif %}
+              <div class="ai-careers-job-meta-{{ ai_gen_id }}">
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  📍 {{ job_location }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  💼 {{ job_type }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  ⭐ {{ job_experience }}
+                </span>
+              </div>
+            </div>
+            <div class="ai-careers-job-actions-{{ ai_gen_id }}">
+              <button
+                class="ai-careers-apply-button-{{ ai_gen_id }}"
+                data-job-title="{{ job_title }}"
+                data-job-index="{{ i }}"
+              >
+                APPLY
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% assign has_jobs = false %}
+      {% for i in (1..6) %}
+        {% liquid
+          assign job_title_key = 'job_' | append: i | append: '_title'
+          assign job_title = block.settings[job_title_key]
+        %}
+        {% if job_title != blank %}
+          {% assign has_jobs = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% unless has_jobs %}
+        <div class="ai-careers-empty-state-{{ ai_gen_id }}">
+          <p>No job listings available at the moment. Please check back later.</p>
+        </div>
+      {% endunless %}
+    </div>
+
+    <div class="ai-careers-listings-{{ ai_gen_id }}" data-category="development">
+      {% assign development_jobs = false %}
+      {% for i in (1..6) %}
+        {% liquid
+          assign job_title_key = 'job_' | append: i | append: '_title'
+          assign job_description_key = 'job_' | append: i | append: '_description'
+          assign job_category_key = 'job_' | append: i | append: '_category'
+          assign job_location_key = 'job_' | append: i | append: '_location'
+          assign job_type_key = 'job_' | append: i | append: '_type'
+          assign job_experience_key = 'job_' | append: i | append: '_experience'
+
+          assign job_title = block.settings[job_title_key]
+          assign job_description = block.settings[job_description_key]
+          assign job_category = block.settings[job_category_key]
+          assign job_location = block.settings[job_location_key]
+          assign job_type = block.settings[job_type_key]
+          assign job_experience = block.settings[job_experience_key]
+        %}
+
+        {% if job_title != blank and job_category == 'development' %}
+          {% assign development_jobs = true %}<div class="ai-careers-job-{{ ai_gen_id }}">
+            <div class="ai-careers-job-content-{{ ai_gen_id }}">
+              <h3 class="ai-careers-job-title-{{ ai_gen_id }}">{{ job_title }}</h3>
+              {% if job_description != blank %}
+                <div class="ai-careers-job-description-{{ ai_gen_id }}">
+                  {{ job_description }}
+                </div>
+              {% endif %}
+              <div class="ai-careers-job-meta-{{ ai_gen_id }}">
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  📍 {{ job_location }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  💼 {{ job_type }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  ⭐ {{ job_experience }}
+                </span>
+              </div>
+            </div>
+            <div class="ai-careers-job-actions-{{ ai_gen_id }}">
+              <button 
+                class="ai-careers-apply-button-{{ ai_gen_id }}"
+                data-job-title="{{ job_title }}"
+                data-job-index="{{ i }}"
+              >
+                APPLY
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless development_jobs %}
+        <div class="ai-careers-empty-state-{{ ai_gen_id }}">
+          <p>No development positions available at the moment.</p>
+        </div>
+      {% endunless %}
+    </div>
+
+    <div class="ai-careers-listings-{{ ai_gen_id }}" data-category="design">
+      {% assign design_jobs = false %}
+      {% for i in (1..6) %}
+        {% liquid
+          assign job_title_key = 'job_' | append: i | append: '_title'
+          assign job_description_key = 'job_' | append: i | append: '_description'
+          assign job_category_key = 'job_' | append: i | append: '_category'
+          assign job_location_key = 'job_' | append: i | append: '_location'
+          assign job_type_key = 'job_' | append: i | append: '_type'
+          assign job_experience_key = 'job_' | append: i | append: '_experience'
+
+          assign job_title = block.settings[job_title_key]
+          assign job_description = block.settings[job_description_key]
+          assign job_category = block.settings[job_category_key]
+          assign job_location = block.settings[job_location_key]
+          assign job_type = block.settings[job_type_key]
+          assign job_experience = block.settings[job_experience_key]
+        %}
+
+        {% if job_title != blank and job_category == 'design' %}
+          {% assign design_jobs = true %}
+          <div class="ai-careers-job-{{ ai_gen_id }}">
+            <div class="ai-careers-job-content-{{ ai_gen_id }}">
+              <h3 class="ai-careers-job-title-{{ ai_gen_id }}">{{ job_title }}</h3>
+              {% if job_description != blank %}
+                <div class="ai-careers-job-description-{{ ai_gen_id }}">
+                  {{ job_description }}
+                </div>
+              {% endif %}
+              <div class="ai-careers-job-meta-{{ ai_gen_id }}">
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  📍 {{ job_location }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  💼 {{ job_type }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  ⭐ {{ job_experience }}
+                </span>
+              </div>
+            </div>
+            <div class="ai-careers-job-actions-{{ ai_gen_id }}">
+              <button 
+                class="ai-careers-apply-button-{{ ai_gen_id }}"
+                data-job-title="{{ job_title }}"
+                data-job-index="{{ i }}"
+              >
+                APPLY
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless design_jobs %}
+        <div class="ai-careers-empty-state-{{ ai_gen_id }}">
+          <p>No design positions available at the moment.</p>
+        </div>
+      {% endunless %}
+    </div>
+
+    <div class="ai-careers-listings-{{ ai_gen_id }}" data-category="marketing">
+      {% assign marketing_jobs = false %}
+      {% for i in (1..6) %}
+        {% liquid
+          assign job_title_key = 'job_' | append: i | append: '_title'
+          assign job_description_key = 'job_' | append: i | append: '_description'
+          assign job_category_key = 'job_' | append: i | append: '_category'
+          assign job_location_key = 'job_' | append: i | append: '_location'
+          assign job_type_key = 'job_' | append: i | append: '_type'
+          assign job_experience_key = 'job_' | append: i | append: '_experience'
+
+          assign job_title = block.settings[job_title_key]
+          assign job_description = block.settings[job_description_key]
+          assign job_category = block.settings[job_category_key]
+          assign job_location = block.settings[job_location_key]
+          assign job_type = block.settings[job_type_key]
+          assign job_experience = block.settings[job_experience_key]
+        %}
+
+        {% if job_title != blank and job_category == 'marketing' %}
+          {% assign marketing_jobs = true %}
+          <div class="ai-careers-job-{{ ai_gen_id }}">
+            <div class="ai-careers-job-content-{{ ai_gen_id }}">
+              <h3 class="ai-careers-job-title-{{ ai_gen_id }}">{{ job_title }}</h3>
+              {% if job_description != blank %}
+                <div class="ai-careers-job-description-{{ ai_gen_id }}">
+                  {{ job_description }}
+                </div>
+              {% endif %}
+              <div class="ai-careers-job-meta-{{ ai_gen_id }}">
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  📍 {{ job_location }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  💼 {{ job_type }}
+                </span>
+                <span class="ai-careers-job-meta-item-{{ ai_gen_id }}">
+                  ⭐ {{ job_experience }}
+                </span>
+              </div>
+            </div>
+            <div class="ai-careers-job-actions-{{ ai_gen_id }}">
+              <button 
+                class="ai-careers-apply-button-{{ ai_gen_id }}"
+                data-job-title="{{ job_title }}"
+                data-job-index="{{ i }}"
+              >
+                APPLY
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% unless marketing_jobs %}
+        <div class="ai-careers-empty-state-{{ ai_gen_id }}">
+          <p>No marketing positions available at the moment.</p>
+        </div>
+      {% endunless %}
+    </div>
+  </div>
+
+  <div class="ai-careers-popup-overlay-{{ ai_gen_id }}" id="popup-overlay-{{ ai_gen_id }}">
+    <div class="ai-careers-popup-{{ ai_gen_id }}">
+      <div class="ai-careers-popup-header-{{ ai_gen_id }}">
+        <h3 class="ai-careers-popup-title-{{ ai_gen_id }}" id="popup-title-{{ ai_gen_id }}">Apply for Position</h3>
+        <button class="ai-careers-popup-close-{{ ai_gen_id }}" id="popup-close-{{ ai_gen_id }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="ai-careers-popup-content-{{ ai_gen_id }}">
+        {% if block.settings.popup_heading != blank %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <h4 class="ai-careers-popup-heading-{{ ai_gen_id }}">{{ block.settings.popup_heading }}</h4>
+          </div>
+        {% endif %}
+
+        {% if block.settings.popup_text != blank %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <div class="ai-careers-popup-text-{{ ai_gen_id }}">{{ block.settings.popup_text }}</div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.popup_image %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <img 
+              src="{{ block.settings.popup_image | image_url: width: 600 }}" 
+              alt="{{ block.settings.popup_image.alt | escape }}"
+              class="ai-careers-popup-image-{{ ai_gen_id }}"
+              loading="lazy"
+            >
+          </div>
+        {% elsif block.settings.show_image_placeholder %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <div class="ai-careers-popup-image-placeholder-{{ ai_gen_id }}">
+              {{'image' | placeholder_svg_tag }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.popup_icon != blank %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <div class="ai-careers-popup-icon-{{ ai_gen_id }}">{{ block.settings.popup_icon }}</div>
+          </div>
+        {% endif %}
+
+        {% if block.settings.show_application_form %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            {%- form 'contact' -%}
+              <div class="ai-careers-popup-form-{{ ai_gen_id }}">
+                <input type="hidden" name="contact[job_application]" value="true">
+                <input type="hidden" name="contact[position]" value="" id="position-input-{{ ai_gen_id }}">
+                
+                <div class="ai-careers-popup-form-field-{{ ai_gen_id }}">
+                  <label class="ai-careers-popup-form-label-{{ ai_gen_id }}" for="name-{{ ai_gen_id }}">Full Name *</label>
+                  <input 
+                    type="text" 
+                    id="name-{{ ai_gen_id }}"
+                    name="contact[name]" 
+                    class="ai-careers-popup-form-input-{{ ai_gen_id }}"
+                    required
+                  >
+                </div>
+
+                <div class="ai-careers-popup-form-field-{{ ai_gen_id }}">
+                  <label class="ai-careers-popup-form-label-{{ ai_gen_id }}" for="email-{{ ai_gen_id }}">Email Address *</label>
+                  <input 
+                    type="email" 
+                    id="email-{{ ai_gen_id }}"
+                    name="contact[email]" 
+                    class="ai-careers-popup-form-input-{{ ai_gen_id }}"
+                    required
+                  >
+                </div>
+
+                <div class="ai-careers-popup-form-field-{{ ai_gen_id }}">
+                  <label class="ai-careers-popup-form-label-{{ ai_gen_id }}" for="phone-{{ ai_gen_id }}">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    id="phone-{{ ai_gen_id }}"
+                    name="contact[phone]" 
+                    class="ai-careers-popup-form-input-{{ ai_gen_id }}"
+                  >
+                </div>
+
+                <div class="ai-careers-popup-form-field-{{ ai_gen_id }}">
+                  <label class="ai-careers-popup-form-label-{{ ai_gen_id }}" for="message-{{ ai_gen_id }}">Cover Letter</label>
+                  <textarea 
+                    id="message-{{ ai_gen_id }}"
+                    name="contact[body]" 
+                    class="ai-careers-popup-form-textarea-{{ ai_gen_id }}"
+                    placeholder="Tell us why you're interested in this position..."
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="ai-careers-popup-form-button-{{ ai_gen_id }}">
+                  Submit Application
+                </button>
+
+                {%- if form.posted_successfully? -%}
+                  <div style="color: #008060; margin-top: 16px; padding: 12px; background-color: #f0f8f4; border-radius: 6px;">
+                    Thank you! Your application has been submitted successfully.
+                  </div>
+                {%- endif -%}
+
+                {%- if form.errors -%}
+                  <div style="color: #D82C0D; margin-top: 16px; padding: 12px; background-color: #fef2f2; border-radius: 6px;">
+                    Please check your form and try again.
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endform -%}
+          </div>
+        {% endif %}
+
+        {% if block.settings.popup_additional_text != blank %}
+          <div class="ai-careers-popup-block-{{ ai_gen_id }}">
+            <div class="ai-careers-popup-text-{{ ai_gen_id }}">{{ block.settings.popup_additional_text }}</div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</careers-section-{{ ai_gen_id }}>
+
+<script>
+(function() {
+  class CareersSection{{ ai_gen_id }} extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.tabs = this.querySelectorAll('.ai-careers-tab-{{ ai_gen_id }}');
+      this.listings = this.querySelectorAll('.ai-careers-listings-{{ ai_gen_id }}');
+      this.applyButtons = this.querySelectorAll('.ai-careers-apply-button-{{ ai_gen_id }}');
+      this.popupOverlay = this.querySelector('#popup-overlay-{{ ai_gen_id }}');
+      this.popupClose = this.querySelector('#popup-close-{{ ai_gen_id }}');
+      this.popupTitle = this.querySelector('#popup-title-{{ ai_gen_id }}');
+      this.positionInput = this.querySelector('#position-input-{{ ai_gen_id }}');
+      
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+      this.tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const category = tab.getAttribute('data-category');
+          this.switchTab(category);
+        });
+      });
+
+      this.applyButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const jobTitle = button.getAttribute('data-job-title');
+          this.openPopup(jobTitle);
+        });
+      });
+
+      this.popupClose.addEventListener('click', () => {
+        this.closePopup();
+      });
+
+      this.popupOverlay.addEventListener('click', (e) => {
+        if (e.target === this.popupOverlay) {
+          this.closePopup();
+        }
+      });document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.popupOverlay.classList.contains('active')) {
+          this.closePopup();
+        }
+      });
+    }
+
+    switchTab(category) {
+      this.tabs.forEach((tab) => {
+        tab.classList.remove('active');
+        if (tab.getAttribute('data-category') === category) {
+          tab.classList.add('active');
+        }
+      });
+
+      this.listings.forEach((listing) => {
+        listing.classList.remove('active');
+        if (listing.getAttribute('data-category') === category) {
+          listing.classList.add('active');
+        }
+      });
+    }
+
+    openPopup(jobTitle) {
+      this.popupTitle.textContent = `Apply for ${jobTitle}`;
+      if (this.positionInput) {
+        this.positionInput.value = jobTitle;
+      }
+      this.popupOverlay.classList.add('active');document.body.style.overflow = 'hidden';
+    }
+
+    closePopup() {
+      this.popupOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  customElements.define('careers-section-{{ ai_gen_id }}', CareersSection{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Careers section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join Our Team"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover exciting career opportunities and grow with us"
+    },
+    {
+      "type": "header",
+      "content": "Job listing1"
+    },
+    {
+      "type": "text",
+      "id": "job_1_title",
+      "label": "Job title",
+      "default": "Senior Frontend Developer"
+    },
+    {
+      "type": "textarea",
+      "id": "job_1_description",
+      "label": "Job description",
+      "default": "We're looking for a talented frontend developer to join our engineering team. You'll work on building beautiful, responsive user interfaces using modern web technologies."
+    },
+    {
+      "type": "select",
+      "id": "job_1_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "development"
+    },
+    {
+      "type": "text",
+      "id": "job_1_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_1_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_1_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Job listing 2"
+    },
+    {
+      "type": "text",
+      "id": "job_2_title",
+      "label": "Job title",
+      "default": "UX/UI Designer"
+    },
+    {
+      "type": "textarea",
+      "id": "job_2_description",
+      "label": "Job description",
+      "default": "Join our design team to create intuitive and engaging user experiences. You'll collaborate closely with product and engineering teams to bring ideas to life."
+    },
+    {
+      "type": "select",
+      "id": "job_2_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "design"
+    },
+    {
+      "type": "text",
+      "id": "job_2_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_2_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_2_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Job listing 3"
+    },
+    {
+      "type": "text",
+      "id": "job_3_title",
+      "label": "Job title",
+      "default": "Digital Marketing Specialist"
+    },
+    {
+      "type": "textarea",
+      "id": "job_3_description",
+      "label": "Job description",
+      "default": "Drive our digital marketing efforts across multiple channels. You'll develop and execute campaigns that increase brand awareness and drive customer acquisition."
+    },
+    {
+      "type": "select",
+      "id": "job_3_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "marketing"
+    },
+    {
+      "type": "text",
+      "id": "job_3_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_3_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_3_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Job listing 4"
+    },
+    {
+      "type": "text",
+      "id": "job_4_title",
+      "label": "Job title"
+    },
+    {
+      "type": "textarea",
+      "id": "job_4_description",
+      "label": "Job description"
+    },
+    {
+      "type": "select",
+      "id": "job_4_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "development"
+    },
+    {
+      "type": "text",
+      "id": "job_4_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_4_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_4_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Job listing 5"
+    },
+    {
+      "type": "text",
+      "id": "job_5_title",
+      "label": "Job title"
+    },
+    {
+      "type": "textarea",
+      "id": "job_5_description",
+      "label": "Job description"
+    },
+    {
+      "type": "select",
+      "id": "job_5_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "development"
+    },
+    {
+      "type": "text",
+      "id": "job_5_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_5_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_5_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Job listing 6"
+    },
+    {
+      "type": "text",
+      "id": "job_6_title",
+      "label": "Job title"
+    },
+    {
+      "type": "textarea",
+      "id": "job_6_description",
+      "label": "Job description"
+    },
+    {
+      "type": "select",
+      "id": "job_6_category",
+      "label": "Department",
+      "options": [
+        {
+          "value": "development",
+          "label": "Development"
+        },
+        {
+          "value": "design",
+          "label": "Design"
+        },
+        {
+          "value": "marketing",
+          "label": "Marketing"
+        }
+      ],
+      "default": "development"
+    },
+    {
+      "type": "text",
+      "id": "job_6_location",
+      "label": "Location",
+      "default": "100% Remote"
+    },
+    {
+      "type": "text",
+      "id": "job_6_type",
+      "label": "Employment type",
+      "default": "Full Time"
+    },
+    {
+      "type": "text",
+      "id": "job_6_experience",
+      "label": "Experience level",
+      "default": "3-4 years"
+    },
+    {
+      "type": "header",
+      "content": "Popup content"
+    },
+    {
+      "type": "text",
+      "id": "popup_heading",
+      "label": "Popup heading",
+      "default": "Ready to Join Our Team?"
+    },
+    {
+      "type": "richtext",
+      "id": "popup_text",
+      "label": "Popup description",
+      "default": "<p>We're excited to learn more about you! Please fill out the application form below and we'll get back to you soon.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_image",
+      "label": "Popup image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_placeholder",
+      "label": "Show image placeholder if no image selected",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "popup_icon",
+      "label": "Popup icon",
+      "info": "Add an emoji or icon character"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_application_form",
+      "label": "Show application form",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "popup_additional_text",
+      "label": "Additional popup text",
+      "info": "Text that appears after the form"
+    },
+    {
+      "type": "header",
+      "content": "Popup style"
+    },
+    {
+      "type": "range",
+      "id": "popup_width",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Popup width",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "popup_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Popup border radius",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "popup_bg_color",
+      "label": "Popup background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Style settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary color",
+      "default": "#000f9f"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "job_title_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Job title size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Careers section"
+    }
+  ]
+}
+{% endschema %}

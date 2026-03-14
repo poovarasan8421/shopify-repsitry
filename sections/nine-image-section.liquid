@@ -1,0 +1,251 @@
+<div class="image-grid-section">
+  {% if section.settings.title != blank %}
+    <h2 class="grid-title">{{ section.settings.title }}</h2>
+  {% endif %}
+
+  <div class="image-grid">
+    {% for block in section.blocks %}
+      <div class="grid-item">
+        {% if block.settings.desktop_image %}
+           {{ block.settings.desktop_image 
+              | image_url: width: 700 
+              | image_tag: class: 'desktop',
+                width: 800,
+                height: 800
+            }}
+        {% endif %}
+        {% if block.settings.mobile_image %}
+          {{ block.settings.mobile_image 
+              | image_url: width: 400 
+              | image_tag: class: 'mobile',
+                width: 400,
+                height: 800
+            }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.image-grid-section {
+  padding: {{ section.settings.padding_top_desktop }}px {{ section.settings.padding_right_desktop }}px {{ section.settings.padding_bottom_desktop }}px {{ section.settings.padding_left_desktop }}px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+  gap: {{ section.settings.row_gap_desktop }}px {{ section.settings.col_gap_desktop }}px;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.desktop { display: block; }
+.mobile { display: none; }
+
+@media screen and (max-width: 768px) {
+  .image-grid-section {
+    padding: {{ section.settings.padding_top_mobile }}px {{ section.settings.padding_right_mobile }}px {{ section.settings.padding_bottom_mobile }}px {{ section.settings.padding_left_mobile }}px;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    gap: {{ section.settings.row_gap_mobile }}px {{ section.settings.col_gap_mobile }}px;
+  }
+
+  .desktop { display: none; }
+  .mobile { display: block; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Image Grid Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Optional Section Title",
+      "default": "Image Grid"
+    },
+    {
+        "type": "header",
+        "content": "columns"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Mobile",
+      "min": 1,
+      "max":6,
+      "step": 1,
+      "default": 2
+    },
+    {
+        "type": "header",
+        "content": "row gap"
+    },
+    {
+      "type": "range",
+      "id": "row_gap_desktop",
+      "label": "desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "row_gap_mobile",
+      "label": "mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 20
+    },
+    {
+        "type": "header",
+        "content": "column gap"
+    },
+    {
+      "type": "range",
+      "id": "col_gap_desktop",
+      "label": "desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "col_gap_mobile",
+      "label": "mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "default": 20
+    },
+     {
+        "type": "header",
+        "content": "padding"
+    },   
+     {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "label": "left",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "label": "right",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 20
+    },
+      {
+        "type": "header",
+        "content": "padding mobile"
+    }, 
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "label": "left",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "label": "right",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "grid_image",
+      "name": "Grid Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Grid Section",
+      "blocks": [
+        { "type": "grid_image" },
+        { "type": "grid_image" },
+        { "type": "grid_image" }
+      ]
+    }
+  ]
+}
+{% endschema %}
