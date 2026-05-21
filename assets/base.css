@@ -81,6 +81,7 @@
   margin: 0 auto;
   padding: 0 1.5rem;
   backgroud:yellow;
+  background:green;
 }
 
 body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
