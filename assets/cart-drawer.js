@@ -26,6 +26,7 @@ class CartDrawer extends HTMLElement {
   }
 
   open(triggeredBy) {
+    console.log(triggeredBy, 'triggeredBy');
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
     if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
